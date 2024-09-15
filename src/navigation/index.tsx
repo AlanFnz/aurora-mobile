@@ -50,7 +50,7 @@ export default function Navigation() {
             options={{ title: 'Sign in', headerShown: false }}
           />
         ) : (
-          <Stack.Screen name="Home" component={HomeTabs} />
+          <Stack.Screen name="AuthStack" component={HomeTabs} />
         )}
       </Stack.Navigator>
     </NavigationContainer>
