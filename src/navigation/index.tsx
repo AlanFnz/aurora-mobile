@@ -4,15 +4,15 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 
 // screens
-import LoginScreen from '../screens/LoginScreen';
-import HomeScreen from '../screens/HomeScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+import LoginScreen from '@screens/LoginScreen';
+import HomeScreen from '@screens/HomeScreen';
+import SettingsScreen from '@screens/SettingsScreen';
 
 // store
 import { useSelector, useDispatch } from 'react-redux';
-import { AppDispatch, RootState } from '../store';
-import { bootstrapAsync } from '../store/authSlice';
-import { tabNavigatorStyles } from './tabNavigatorStyles';
+import { AppDispatch, RootState } from '@store/index';
+import { bootstrapAsync } from '@store/authSlice';
+import { tabNavigatorStyles } from '@navigation/tabNavigatorStyles';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();

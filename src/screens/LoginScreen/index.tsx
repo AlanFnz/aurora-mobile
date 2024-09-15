@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../../store';
-import { performSignIn } from '../../store/authSlice';
+import { AppDispatch } from '@store/index';
+import { performSignIn } from '@store/authSlice';
 import { Container, Input, SignInButton, SignInText, Title } from './styles';
 
 const LoginScreen: React.FC = () => {
