@@ -3,14 +3,13 @@ import styled from 'styled-components/native';
 const FolderContainer = styled.View`
   margin-bottom: 10px;
   padding: 10px;
-  background-color: #ffffff;
+  background-color: rgba(0, 0, 0, 0.2);
   border-radius: 5px;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 `;
 
 const FolderHeader = styled.TouchableOpacity`
   padding: 10px;
-  background-color: #fafafa;
   border-radius: 5px;
 `;
 

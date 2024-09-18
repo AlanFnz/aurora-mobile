@@ -1,11 +1,12 @@
 import React from 'react';
 import { Container } from './styles';
 import { Title } from 'react-native-paper';
+import FolderList from './components/FolderList';
 
 const HomeScreen: React.FC = () => {
   return (
     <Container>
-      <Title>Home Screen</Title>
+      <FolderList />
     </Container>
   );
 };
