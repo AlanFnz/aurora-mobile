@@ -27,3 +27,5 @@ const mockData: Folder[] = [
     ],
   },
 ];
+
+export default mockData
