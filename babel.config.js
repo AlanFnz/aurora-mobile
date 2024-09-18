@@ -9,6 +9,7 @@ module.exports = {
           '@store': './src/store',
           '@screens': './src/screens',
           '@navigation': './src/navigation',
+          '@root': './',
         },
       },
     ],

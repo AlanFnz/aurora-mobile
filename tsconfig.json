@@ -5,7 +5,8 @@
     "paths": {
       "@screens/*": ["src/screens/*"],
       "@store/*": ["src/store/*"],
-      "@navigation/*": ["src/navigation/*"]
+      "@navigation/*": ["src/navigation/*"],
+      "@root/*": ["./*"]
     }
   },
   "exclude": ["node_modules", "build", "dist"]
