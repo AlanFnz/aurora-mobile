@@ -1,4 +1,6 @@
-export default mockData = [
+import { Folder } from './components/Folder';
+
+const mockData: Folder[] = [
   {
     id: 1,
     folderName: 'Personal',
