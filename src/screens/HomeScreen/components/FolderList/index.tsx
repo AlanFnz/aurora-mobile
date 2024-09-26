@@ -20,6 +20,8 @@ const FolderList: React.FC = () => {
 };
 
 const FolderListContainer = styled.View`
+  flex: 1;
+  padding: 10px;
   width: 100%;
 `;
 
