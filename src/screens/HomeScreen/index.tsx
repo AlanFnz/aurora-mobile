@@ -1,11 +1,13 @@
 import React from 'react';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Container } from './styles';
-import { Title } from 'react-native-paper';
 import FolderList from './components/FolderList';
 
 const HomeScreen: React.FC = () => {
+  const insets = useSafeAreaInsets();
+
   return (
-    <Container>
+    <Container insets={insets}>
       <FolderList />
     </Container>
   );
