@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import BackgroundLayers from '@root/src/components/BackgroundLayers';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '@store/index';
 import { performSignIn } from '@store/authSlice';
@@ -14,23 +15,26 @@ const LoginScreen: React.FC = () => {
   };
 
   return (
-    <Container>
-      <Title>Login Screen</Title>
-      <Input
-        placeholder="Username"
-        value={username}
-        onChangeText={setUsername}
-      />
-      <Input
-        placeholder="Password"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-      />
-      <SignInButton onPress={handleSignIn}>
-        <SignInText>Sign In</SignInText>
-      </SignInButton>
-    </Container>
+    <>
+      <BackgroundLayers />
+      <Container>
+        <Title>Login Screen</Title>
+        <Input
+          placeholder="Username"
+          value={username}
+          onChangeText={setUsername}
+        />
+        <Input
+          placeholder="Password"
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry
+        />
+        <SignInButton onPress={handleSignIn}>
+          <SignInText>Sign In</SignInText>
+        </SignInButton>
+      </Container>
+    </>
   );
 };
 
