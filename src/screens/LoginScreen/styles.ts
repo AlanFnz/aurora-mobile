@@ -4,28 +4,28 @@ const Container = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
-  background-color: #e2dbd0;
   padding: 0 6%;
 `;
 
 const Title = styled.Text`
   font-size: 18px;
   font-weight: bold;
-  color: #1f1b24;
+  color: #f6f6f6;
   margin-bottom: 20px;
   text-transform: uppercase;
   letter-spacing: 2px;
 `;
 
 const Input = styled.TextInput.attrs({
-  placeholderTextColor: '#54565b',
+  placeholderTextColor: 'rgba(255, 255, 255, 0.6)',
   autoCapitalize: 'none',
 })`
   height: 40px;
-  background-color: #e2dbd0;
-  border-color: #22262e;
-  border-radius: 2px;
-  border-width: 2px;
+  color: #f6f6f6;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
+  border-radius: 5px;
+  border-width: 0.5px;
   margin-bottom: 12px;
   padding: 0 10px;
   width: 100%;
@@ -33,12 +33,12 @@ const Input = styled.TextInput.attrs({
 
 const SignInButton = styled.TouchableOpacity`
   width: 100%;
-  background-color: #22262e;
+  background-color: rgba(0, 0, 0, 0.2);
   margin-top: 18px;
   padding-vertical: 10px;
   border-radius: 2px;
   border-width: 1px;
-  border-color: #2e2b36;
+  border-color: rgba(255, 255, 255, 0.3);
   justify-content: center;
   align-items: center;
 `;

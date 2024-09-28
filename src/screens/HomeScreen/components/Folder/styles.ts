@@ -1,33 +1,44 @@
 import styled from 'styled-components/native';
 
-const FolderContainer = styled.View`
+const MainContainer = styled.View`
+  border-radius: 10px;
   margin-bottom: 10px;
+  overflow: hidden;
+`;
+
+const FolderContainer = styled.View`
   padding: 10px;
-  background-color: rgba(0, 0, 0, 0.2);
-  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.08);
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 `;
 
 const FolderHeader = styled.TouchableOpacity`
-  padding: 10px;
-  border-radius: 5px;
+  padding: 5px 10px;
 `;
 
 const FolderTitle = styled.Text`
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
+  color: #f6f6f6;
 `;
 
 const NoteItem = styled.View`
   margin-top: 5px;
   padding: 8px;
-  background-color: #e0e0e0;
+  background-color: rgba(0, 0, 0, 0.2);
   border-radius: 3px;
 `;
 
 const NoteText = styled.Text`
   font-size: 16px;
-  color: #333;
+  color: #f6f6f6;
 `;
 
-export { FolderContainer, FolderHeader, FolderTitle, NoteItem, NoteText };
+export {
+  MainContainer,
+  FolderContainer,
+  FolderHeader,
+  FolderTitle,
+  NoteItem,
+  NoteText,
+};
