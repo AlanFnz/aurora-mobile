@@ -5,8 +5,6 @@ const Container = styled.View<{
 }>`
   flex: 1;
   justify-content: center;
-  align-items: center;
-  background-color: #e2dbd0;
   padding-top: ${props => props.insets.top}px;
   padding-left: ${props => props.insets.left}px;
   padding-right: ${props => props.insets.right}px;
