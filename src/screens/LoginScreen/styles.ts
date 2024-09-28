@@ -17,10 +17,11 @@ const Title = styled.Text`
 `;
 
 const Input = styled.TextInput.attrs({
-  placeholderTextColor: '#f6f6f6',
+  placeholderTextColor: 'rgba(255, 255, 255, 0.6)',
   autoCapitalize: 'none',
 })`
   height: 40px;
+  color: #f6f6f6;
   background-color: rgba(255, 255, 255, 0.2);
   border-color: rgba(255, 255, 255, 0.3);
   border-radius: 5px;

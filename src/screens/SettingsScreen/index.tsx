@@ -1,9 +1,9 @@
 import React from 'react';
+import BackgroundLayers from '@root/src/components/BackgroundLayers';
 import { performSignOut } from '../../store/authSlice';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../store';
-import { Container, SignOutButton, SignOutText } from './styles';
-import { Title } from 'react-native-paper';
+import { Container, SignOutButton, SignOutText, Title } from './styles';
 
 const SettingsScreen: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -13,12 +13,15 @@ const SettingsScreen: React.FC = () => {
   };
 
   return (
-    <Container>
-      <Title>Settings</Title>
-      <SignOutButton onPress={handleSignOut}>
-        <SignOutText>Sign Out</SignOutText>
-      </SignOutButton>
-    </Container>
+    <>
+      <BackgroundLayers />
+      <Container>
+        <Title>Settings</Title>
+        <SignOutButton onPress={handleSignOut}>
+          <SignOutText>Sign Out</SignOutText>
+        </SignOutButton>
+      </Container>
+    </>
   );
 };
 
