@@ -4,7 +4,7 @@ import { Image, StyleSheet } from 'react-native';
 const NoiseLayer: React.FC = () => (
   <Image
     source={require('@assets/noise.png')}
-    style={[styles.noiseImage, { opacity: 0.08 }]}
+    style={[styles.noiseImage, { opacity: 0.05 }]}
     resizeMode="repeat"
   />
 );
