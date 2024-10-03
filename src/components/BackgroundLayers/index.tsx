@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { BlurView } from '@react-native-community/blur';
 import { Defs, LinearGradient, Rect, Stop, Svg } from 'react-native-svg';
+import NoiseLayer from '../NoiseLayer';
 
 const FROM_COLOR = 'rgb(39,36,37)';
 const TO_COLOR = 'rgb(134,50,92)';
@@ -25,6 +26,8 @@ const BackgroundLayers: React.FC = () => {
         blurAmount={10}
         reducedTransparencyFallbackColor="black"
       />
+
+      <NoiseLayer />
     </>
   );
 };
