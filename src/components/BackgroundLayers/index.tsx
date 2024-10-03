@@ -27,7 +27,7 @@ const BackgroundLayers: React.FC = () => {
         reducedTransparencyFallbackColor="black"
       />
 
-      <NoiseLayer />
+      <NoiseLayer opacity={0.05} />
     </>
   );
 };
