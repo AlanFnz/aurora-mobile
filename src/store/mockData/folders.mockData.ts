@@ -1,6 +1,6 @@
-import { Folder } from './components/Folder';
+import { Folder } from '../../screens/HomeScreen/components/Folder';
 
-const mockData: Folder[] = [
+const foldersMockData: Folder[] = [
   {
     id: 1,
     folderName: 'Personal',
@@ -28,4 +28,4 @@ const mockData: Folder[] = [
   },
 ];
 
-export default mockData
+export default foldersMockData
