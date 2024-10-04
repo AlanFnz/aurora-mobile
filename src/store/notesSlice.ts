@@ -27,7 +27,7 @@ const notesSlice = createSlice({
     },
     updateNote: (
       state,
-      action: PayloadAction<{ id: number; updates: Partial<Note> }>,
+      action: PayloadAction<{ id: number; updates: Omit<Partial<Note>, 'id'> }>,
     ) => {
       const { id, updates } = action.payload;
       const note = state.notes.find(n => n.id === id);
