@@ -35,6 +35,16 @@ const notesSlice = createSlice({
         Object.assign(note, updates);
       }
     },
+    changeNoteFolder: (
+      state,
+      action: PayloadAction<{ id: number; folderId: number }>,
+    ) => {
+      const { id, folderId } = action.payload;
+      const note = state.notes.find(n => n.id === id);
+      if (note) {
+        note.folderId = folderId;
+      }
+    },
     removeNote: (state, action: PayloadAction<number>) => {
       state.notes = state.notes.filter(note => note.id !== action.payload);
     },
@@ -49,6 +59,7 @@ export const {
   setNotes,
   addNote,
   updateNote,
+  changeNoteFolder,
   removeNote,
   removeNotesByFolder,
 } = notesSlice.actions;
