@@ -12,9 +12,9 @@ const BackgroundLayers: React.FC = () => {
     <>
       <Svg height="100%" width="100%" style={StyleSheet.absoluteFillObject}>
         <Defs>
-          <LinearGradient id="grad" x1="90%" y1="50%" x2="0%" y2="100%">
-            <Stop offset="0" stopColor={FROM_COLOR} />
-            <Stop offset="1" stopColor={TO_COLOR} />
+          <LinearGradient id="grad" x1="150%" y1="120%" x2="50%" y2="0%">
+            <Stop offset="0" stopColor={TO_COLOR} />
+            <Stop offset="1" stopColor={FROM_COLOR} />
           </LinearGradient>
         </Defs>
         <Rect width="100%" height="100%" fill="url(#grad)" />

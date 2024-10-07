@@ -1,7 +1,9 @@
 import styled from 'styled-components/native';
 
 const MainContainer = styled.View`
-  border-radius: 10px;
+  width: 95%;
+  margin-left: 2.5%;
+  border-radius: 12px;
   margin-bottom: 10px;
   overflow: hidden;
 `;
@@ -13,7 +15,8 @@ const FolderContainer = styled.View`
 `;
 
 const FolderHeader = styled.TouchableOpacity`
-  padding: 5px 10px;
+  padding: 0 10px;
+  margin-bottom: 12px;
 `;
 
 const FolderTitle = styled.Text`
@@ -25,7 +28,6 @@ const FolderTitle = styled.Text`
 const NoteItem = styled.View`
   margin-top: 5px;
   padding: 8px;
-  background-color: rgba(0, 0, 0, 0.2);
   border-radius: 3px;
 `;
 

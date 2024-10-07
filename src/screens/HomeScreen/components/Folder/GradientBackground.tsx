@@ -15,7 +15,7 @@ const GradientBackground: React.FC<GradientBackgroundProps> = ({
       key={expanded ? 'expanded' : 'collapsed'}
       style={{ position: 'absolute', borderRadius: 10 }}>
       <Defs>
-        <LinearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
+        <LinearGradient id="grad" x1="20%" y1="0%" x2="100%" y2="0%">
           <Stop offset="0%" stopColor="white" stopOpacity="0" />
           <Stop offset="100%" stopColor="white" stopOpacity=".1" />
         </LinearGradient>
