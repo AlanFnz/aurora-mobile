@@ -1,4 +1,4 @@
-import { Folder } from '../../screens/HomeScreen/components/Folder';
+import { Folder } from '@screens/HomeScreen/components/Folder/types';
 
 const foldersMockData: Folder[] = [
   {

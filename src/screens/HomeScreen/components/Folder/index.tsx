@@ -11,21 +11,7 @@ import {
 import GradientBackground from './GradientBackground';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Divider from '@root/src/components/Divider';
-
-export type Note = {
-  id: number;
-  title: string;
-};
-
-export type Folder = {
-  id: number;
-  folderName: string;
-  notes: Note[];
-};
-
-interface FolderProps {
-  folder: Folder;
-}
+import { FolderProps } from './types';
 
 const Folder: React.FC<FolderProps> = ({ folder }) => {
   const [expanded, setExpanded] = useState(false);
