@@ -1,14 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-export interface Note {
-  id: number;
-  title: string;
-}
+import { NoteListItem } from '@screens/HomeScreen/components/Folder/types';
 
 export interface Folder {
   id: number;
   folderName: string;
-  notes: Note[];
+  notes: NoteListItem[];
 }
 
 interface FoldersState {
@@ -31,7 +27,7 @@ const foldersSlice = createSlice({
     },
     addNoteToFolder: (
       state,
-      action: PayloadAction<{ folderId: number; note: Note }>,
+      action: PayloadAction<{ folderId: number; note: NoteListItem }>,
     ) => {
       const { folderId, note } = action.payload;
       const folder = state.folders.find(f => f.id === folderId);

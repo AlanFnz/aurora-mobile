@@ -1,6 +1,7 @@
 type NoteListItem = {
   id: number;
   title: string;
+  snippet: string;
 };
 
 type Folder = {
@@ -13,4 +14,4 @@ interface FolderProps {
   folder: Folder;
 }
 
-export { Folder, FolderProps };
+export { NoteListItem, Folder, FolderProps };
