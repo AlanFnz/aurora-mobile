@@ -1,10 +1,10 @@
 import styled from 'styled-components/native';
 
 const MainContainer = styled.View`
-  width: 95%;
-  margin-left: 2.5%;
+  width: 96%;
+  margin-left: 2%;
   border-radius: 12px;
-  margin-bottom: 10px;
+  margin-bottom: 16px;
   overflow: hidden;
 `;
 
@@ -15,6 +15,9 @@ const FolderContainer = styled.View`
 `;
 
 const FolderHeader = styled.TouchableOpacity`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   padding: 0 10px;
   margin-bottom: 12px;
 `;
