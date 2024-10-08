@@ -28,22 +28,4 @@ const FolderTitle = styled.Text`
   color: #f6f6f6;
 `;
 
-const NoteItem = styled.View`
-  margin-top: 5px;
-  padding: 8px;
-  border-radius: 3px;
-`;
-
-const NoteText = styled.Text`
-  font-size: 16px;
-  color: #f6f6f6;
-`;
-
-export {
-  MainContainer,
-  FolderContainer,
-  FolderHeader,
-  FolderTitle,
-  NoteItem,
-  NoteText,
-};
+export { MainContainer, FolderContainer, FolderHeader, FolderTitle };
