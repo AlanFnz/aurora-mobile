@@ -6,11 +6,11 @@ import {
   FolderTitle,
   MainContainer,
 } from './styles';
+import { FolderProps } from './types';
 import GradientBackground from './components/GradientBackground';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Divider from '@root/src/components/Divider';
-import { FolderProps } from './types';
-import NoteListItem from './components/NoteListItem';
+import NoteItem from './components/NoteItem';
 
 const Folder: React.FC<FolderProps> = ({ folder }) => {
   const [expanded, setExpanded] = useState(false);
@@ -34,7 +34,7 @@ const Folder: React.FC<FolderProps> = ({ folder }) => {
                 data={folder.notes}
                 keyExtractor={item => item.id.toString()}
                 renderItem={({ item, index }) => (
-                  <NoteListItem
+                  <NoteItem
                     index={index}
                     item={item}
                     notesLength={folder.notes.length}

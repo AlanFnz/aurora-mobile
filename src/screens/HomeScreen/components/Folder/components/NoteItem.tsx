@@ -1,17 +1,18 @@
 import Divider from '@root/src/components/Divider';
 import styled from 'styled-components/native';
+import { NoteListItem } from '../types';
 
 interface NoteProps {
   index: number;
   notesLength: number;
-  item: any;
+  item: NoteListItem;
 }
 
-const NoteListItem: React.FC<NoteProps> = ({ index, item, notesLength }) => {
+const NoteItem: React.FC<NoteProps> = ({ index, item, notesLength }) => {
   return (
     <>
       <NoteItemContainer>
-        <NoteText>{item?.title}</NoteText>
+        <NoteText>{`${item.title}${item.snippet && `: ${item.snippet}`}`}</NoteText>
       </NoteItemContainer>
       {index < notesLength - 1 && (
         <Divider
@@ -36,4 +37,4 @@ const NoteText = styled.Text`
   color: #f6f6f6;
 `;
 
-export default NoteListItem;
+export default NoteItem;
