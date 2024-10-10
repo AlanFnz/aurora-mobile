@@ -4,7 +4,7 @@ const MainContainer = styled.View`
   width: 96%;
   margin-left: 2%;
   border-radius: 12px;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
   overflow: hidden;
 `;
 

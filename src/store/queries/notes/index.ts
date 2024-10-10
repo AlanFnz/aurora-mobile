@@ -1,6 +1,25 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { Note } from '@store/activeNoteSlice';
+
 import notesMockData from '@store/mockData/notes.mockData';
+
+export interface Note {
+  id: number;
+  title: string;
+  content?: string;
+  folderId: number;
+}
+
+interface SelectedNoteState {
+  selectedNote: Note | null;
+  loading: boolean;
+  error: string | null;
+}
+
+const initialState: SelectedNoteState = {
+  selectedNote: null,
+  loading: false,
+  error: null,
+};
 
 export const noteApi = createApi({
   reducerPath: 'noteApi',
@@ -21,7 +40,24 @@ export const noteApi = createApi({
         }
       },
     }),
+    updateNote: builder.mutation<Note, Partial<Note> & { id: number }>({
+      queryFn: updatedNote => {
+        const index = notesMockData.findIndex(n => n.id === updatedNote.id);
+        if (index === -1) {
+          return {
+            error: {
+              status: 404,
+              data: { message: 'Note not found' },
+            },
+          };
+        }
+
+        notesMockData[index] = { ...notesMockData[index], ...updatedNote };
+
+        return { data: notesMockData[index] };
+      },
+    }),
   }),
 });
 
-export const { useFetchNoteDetailsQuery } = noteApi;
+export const { useFetchNoteDetailsQuery, useUpdateNoteMutation } = noteApi;

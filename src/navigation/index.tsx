@@ -7,20 +7,31 @@ import { createStackNavigator } from '@react-navigation/stack';
 import LoginScreen from '@screens/LoginScreen';
 import HomeScreen from '@screens/HomeScreen';
 import SettingsScreen from '@screens/SettingsScreen';
+import NoteDetailScreen from '@screens/NoteDetailScreen';
 
 // store
 import { useSelector, useDispatch } from 'react-redux';
 import { AppDispatch, RootState } from '@store/index';
 import { bootstrapAsync } from '@store/authSlice';
 import { tabNavigatorStyles } from '@navigation/tabNavigatorStyles';
+import { RootStackParamList } from './types';
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator<RootStackParamList>();
 const Tab = createBottomTabNavigator();
+
+function HomeStack() {
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="NoteDetail" component={NoteDetailScreen} />
+    </Stack.Navigator>
+  );
+}
 
 function HomeTabs() {
   return (
     <Tab.Navigator screenOptions={tabNavigatorStyles}>
-      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Home" component={HomeStack} />
       <Tab.Screen name="Settings" component={SettingsScreen} />
     </Tab.Navigator>
   );

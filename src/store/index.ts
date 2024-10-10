@@ -3,13 +3,11 @@ import { noteApi } from './queries/notes';
 import { configureStore } from '@reduxjs/toolkit';
 import authReducer from '@store/authSlice';
 import foldersReducer from '@store/foldersSlice';
-import activeNoteReducer from '@store/activeNoteSlice';
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
     folders: foldersReducer,
-    activeNote: activeNoteReducer,
     [foldersApi.reducerPath]: foldersApi.reducer,
     [noteApi.reducerPath]: noteApi.reducer,
   },

@@ -1,4 +1,5 @@
-import { Note } from '@store/activeNoteSlice';
+import { Note } from "@store/queries/notes";
+
 
 const notesMockData: Note[] = [
   {
@@ -11,7 +12,7 @@ const notesMockData: Note[] = [
   {
     id: 2,
     title: 'Shopping List',
-    content: 'Eggs, milk, bread, coffee, apples, bananas, spinach.',
+    content: '',
     folderId: 2,
   },
   {
