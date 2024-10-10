@@ -1,8 +1,10 @@
 import styled from 'styled-components/native';
 
 const MainContainer = styled.View`
-  border-radius: 10px;
-  margin-bottom: 10px;
+  width: 96%;
+  margin-left: 2%;
+  border-radius: 12px;
+  margin-bottom: 18px;
   overflow: hidden;
 `;
 
@@ -13,7 +15,11 @@ const FolderContainer = styled.View`
 `;
 
 const FolderHeader = styled.TouchableOpacity`
-  padding: 5px 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 10px;
+  margin-bottom: 12px;
 `;
 
 const FolderTitle = styled.Text`
@@ -22,23 +28,4 @@ const FolderTitle = styled.Text`
   color: #f6f6f6;
 `;
 
-const NoteItem = styled.View`
-  margin-top: 5px;
-  padding: 8px;
-  background-color: rgba(0, 0, 0, 0.2);
-  border-radius: 3px;
-`;
-
-const NoteText = styled.Text`
-  font-size: 16px;
-  color: #f6f6f6;
-`;
-
-export {
-  MainContainer,
-  FolderContainer,
-  FolderHeader,
-  FolderTitle,
-  NoteItem,
-  NoteText,
-};
+export { MainContainer, FolderContainer, FolderHeader, FolderTitle };
