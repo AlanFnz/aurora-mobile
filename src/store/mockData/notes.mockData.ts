@@ -1,6 +1,6 @@
-import { Note } from '@store/notesSlice';
+import { Note } from '@store/activeNoteSlice';
 
-const mockNotes: Note[] = [
+const notesMockData: Note[] = [
   {
     id: 1,
     title: 'Meeting Notes',
@@ -30,4 +30,4 @@ const mockNotes: Note[] = [
   },
 ];
 
-export default mockNotes;
+export default notesMockData;
