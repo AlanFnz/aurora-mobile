@@ -8,7 +8,7 @@ export const tabNavigatorStyles = (): BottomTabNavigationOptions => ({
     elevation: 0,
   },
   tabBarLabelStyle: {
-    paddingBottom: 5,
+    paddingBottom: 2,
     fontSize: 12,
     fontWeight: '600',
     textTransform: 'uppercase',
@@ -18,6 +18,6 @@ export const tabNavigatorStyles = (): BottomTabNavigationOptions => ({
   tabBarActiveTintColor: '#e0e0e0',
   tabBarInactiveTintColor: '#54565b',
   tabBarIconStyle: {
-    marginTop: 5,
+    marginTop: 8,
   },
 });
