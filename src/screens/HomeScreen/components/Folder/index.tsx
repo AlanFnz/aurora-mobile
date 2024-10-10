@@ -21,6 +21,7 @@ const Folder: React.FC<FolderProps> = ({ folder }) => {
         <FolderTitle>{folder.folderName}</FolderTitle>
         <Icon
           name={expanded ? 'angle-down' : 'angle-left'}
+          style={!expanded ? { marginRight: 4 } : {}}
           size={20}
           color="#f6f6f6"
         />
