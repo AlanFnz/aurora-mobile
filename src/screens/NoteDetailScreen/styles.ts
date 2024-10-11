@@ -20,16 +20,16 @@ const StyledTextInput = styled.TextInput.attrs({
   autoCapitalize: 'none',
 })`
   height: 40px;
+  font-size: 22px;
+  font-weight: bold;
   color: #f6f6f6;
-  background-color: rgba(255, 255, 255, 0.2);
   border-bottom-color: rgba(255, 255, 255, 0.3);
-  border-bottom-width: 2px;
+  border-bottom-width: 1 px;
   border-left-width: 0;
   border-right-width: 0;
   border-top-width: 0;
   border-top-left-radius: 2px;
   border-top-right-radius: 2px;
-  padding: 10px;
   margin-bottom: 20px;
 `;
 
@@ -37,9 +37,8 @@ const TextArea = styled.TextInput.attrs({
   placeholderTextColor: 'rgba(255, 255, 255, 0.6)',
   autoCapitalize: 'none',
 })`
-  height: 150px;
+  height: '100%';
   color: #f6f6f6;
-  background-color: rgba(255, 255, 255, 0.2);
   border-bottom-color: rgba(255, 255, 255, 0.3);
   border-bottom-width: 2px;
   border-left-width: 0;
@@ -47,7 +46,7 @@ const TextArea = styled.TextInput.attrs({
   border-top-width: 0;
   border-top-left-radius: 2px;
   border-top-right-radius: 2px;
-  padding: 10px;
+  padding-bottom: 24px;
   margin-bottom: 20px;
   text-align-vertical: top;
 `;
