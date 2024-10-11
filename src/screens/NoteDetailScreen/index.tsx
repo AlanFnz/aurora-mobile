@@ -10,12 +10,16 @@ import {
   ButtonText,
   Container,
   StyledText,
-  StyledTextInput,
+  NoteTitleInput,
   TextArea,
+  DateText,
+  HeaderContainer,
 } from './styles';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BackgroundLayers from '@root/src/components/BackgroundLayers';
 import { useNavigation } from '@react-navigation/native';
+import { formatTimestampToDateTime } from '@root/src/utils';
+import { View } from 'react-native';
 
 type NoteDetailScreenProps = StackScreenProps<RootStackParamList, 'NoteDetail'>;
 
@@ -28,11 +32,13 @@ const NoteDetailScreen: React.FC<NoteDetailScreenProps> = ({ route }) => {
   const [updateNote] = useUpdateNoteMutation();
 
   const [title, setTitle] = useState('');
+  const [modifiedDate, setModifiedDate] = useState('');
   const [content, setContent] = useState('');
 
   useEffect(() => {
     if (note) {
       setTitle(note.title);
+      setModifiedDate(formatTimestampToDateTime(note.modifiedDate));
       setContent(note.content || '');
     }
   }, [note]);
@@ -55,11 +61,15 @@ const NoteDetailScreen: React.FC<NoteDetailScreenProps> = ({ route }) => {
     <>
       <BackgroundLayers />
       <Container insets={insets}>
-        <StyledTextInput
-          value={title}
-          onChangeText={setTitle}
-          placeholder="Note Title"
-        />
+        <HeaderContainer>
+          <NoteTitleInput
+            value={title}
+            onChangeText={setTitle}
+            placeholder="Note Title"
+          />
+          <DateText>{modifiedDate}</DateText>
+        </HeaderContainer>
+
         <TextArea
           value={content}
           onChangeText={setContent}

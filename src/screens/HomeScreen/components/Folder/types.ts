@@ -2,6 +2,7 @@ type NoteListItem = {
   id: number;
   title: string;
   snippet: string;
+  modifiedDate: number;
 };
 
 type Folder = {

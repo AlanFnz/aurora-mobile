@@ -1,8 +1,8 @@
 import styled from 'styled-components/native';
 
 const MainContainer = styled.View`
-  width: 96%;
-  margin-left: 2%;
+  width: 95%;
+  margin-left: 2.5%;
   border-radius: 12px;
   margin-bottom: 18px;
   overflow: hidden;
@@ -26,6 +26,7 @@ const FolderTitle = styled.Text`
   font-size: 16px;
   font-weight: bold;
   color: #f6f6f6;
+  padding-left: 0px;
 `;
 
 export { MainContainer, FolderContainer, FolderHeader, FolderTitle };

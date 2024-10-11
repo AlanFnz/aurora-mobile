@@ -4,6 +4,7 @@ import styled from 'styled-components/native';
 import { NoteListItem } from '../types';
 import { useNavigation } from '@react-navigation/native';
 import { NoteDetailScreenNavigationProp } from '@navigation/types';
+import { formatTimestampToDate } from '@root/src/utils';
 
 interface NoteProps {
   index: number;
@@ -22,6 +23,7 @@ const NoteItem: React.FC<NoteProps> = ({ index, item, notesLength }) => {
     <>
       <NoteItemContainer onPress={navigateToNoteDetail}>
         <NoteText>{`${item.title}${item.snippet && `: ${item.snippet}`}`}</NoteText>
+        <DateText>{formatTimestampToDate(item.modifiedDate)}</DateText>
       </NoteItemContainer>
       {index < notesLength - 1 && (
         <Divider
@@ -44,6 +46,12 @@ const NoteItemContainer = styled.TouchableOpacity`
 const NoteText = styled.Text`
   font-size: 16px;
   color: #f6f6f6;
+`;
+
+const DateText = styled.Text`
+  font-size: 14px;
+  color: #b9b9b9;
+  paddingTop: 8px;
 `;
 
 export default NoteItem;

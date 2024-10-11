@@ -7,6 +7,7 @@ export interface Note {
   title: string;
   content?: string;
   folderId: number;
+  modifiedDate: number;
 }
 
 interface SelectedNoteState {

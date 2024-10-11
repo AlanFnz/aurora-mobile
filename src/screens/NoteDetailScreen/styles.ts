@@ -8,6 +8,10 @@ const Container = styled.View<{
   padding-top: ${props => props.insets.top}px;
 `;
 
+const HeaderContainer = styled.View`
+  padding-bottom: 25px;
+`;
+
 const Label = styled.Text`
   font-size: 16px;
   font-weight: bold;
@@ -15,7 +19,7 @@ const Label = styled.Text`
   color: #f6f6f6;
 `;
 
-const StyledTextInput = styled.TextInput.attrs({
+const NoteTitleInput = styled.TextInput.attrs({
   placeholderTextColor: 'rgba(255, 255, 255, 0.6)',
   autoCapitalize: 'none',
 })`
@@ -30,7 +34,11 @@ const StyledTextInput = styled.TextInput.attrs({
   border-top-width: 0;
   border-top-left-radius: 2px;
   border-top-right-radius: 2px;
-  margin-bottom: 20px;
+`;
+
+const DateText = styled.Text`
+  font-size: 14px;
+  color: #b9b9b9;
 `;
 
 const TextArea = styled.TextInput.attrs({
@@ -49,6 +57,7 @@ const TextArea = styled.TextInput.attrs({
   padding-bottom: 24px;
   margin-bottom: 20px;
   text-align-vertical: top;
+  font-size: 16px;
 `;
 
 const StyledText = styled.Text`
@@ -77,9 +86,11 @@ const Button = styled.TouchableOpacity`
 
 export {
   Container,
+  HeaderContainer,
   Label,
-  StyledTextInput,
+  NoteTitleInput,
   TextArea,
+  DateText,
   StyledText,
   ButtonText,
   Button,
