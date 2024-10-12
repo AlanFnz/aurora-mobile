@@ -11,6 +11,7 @@ import GradientBackground from './components/GradientBackground';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Divider from '@root/src/components/Divider';
 import NoteItem from './components/NoteItem';
+import colors from '@theme/colors';
 
 const Folder: React.FC<FolderProps> = ({ folder }) => {
   const [expanded, setExpanded] = useState(false);
@@ -23,7 +24,7 @@ const Folder: React.FC<FolderProps> = ({ folder }) => {
           name={expanded ? 'angle-down' : 'angle-left'}
           style={!expanded ? { marginRight: 4 } : {}}
           size={20}
-          color="#f6f6f6"
+          color={colors.common.offWhite}
         />
       </FolderHeader>
       <MainContainer>
@@ -46,7 +47,7 @@ const Folder: React.FC<FolderProps> = ({ folder }) => {
           </>
         ) : (
           <Divider
-            color="#e0e0e0"
+            color={colors.common.offWhite}
             opacity={0.2}
             height={1}
             marginHorizontal={2}

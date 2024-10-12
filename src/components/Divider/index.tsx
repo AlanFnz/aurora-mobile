@@ -1,3 +1,4 @@
+import colors from '@theme/colors';
 import React from 'react';
 import styled from 'styled-components/native';
 
@@ -10,7 +11,7 @@ interface DividerProps {
 }
 
 const Divider: React.FC<DividerProps> = ({
-  color = '#cccccc',
+  color = colors.common.lightGray,
   opacity = 1,
   height = 1,
   marginHorizontal = 0,

@@ -1,8 +1,8 @@
 import React from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Container } from './styles';
 import FolderList from './components/FolderList';
 import BackgroundLayers from '../../components/BackgroundLayers';
+import styled from 'styled-components/native';
 
 const HomeScreen: React.FC = () => {
   const insets = useSafeAreaInsets();
@@ -16,5 +16,15 @@ const HomeScreen: React.FC = () => {
     </>
   );
 };
+
+const Container = styled.View<{
+  insets: { top: number; bottom: number; left: number; right: number };
+}>`
+  flex: 1;
+  justify-content: center;
+  padding-top: ${props => props.insets.top}px;
+  padding-left: ${props => props.insets.left}px;
+  padding-right: ${props => props.insets.right}px;
+`;
 
 export default HomeScreen;

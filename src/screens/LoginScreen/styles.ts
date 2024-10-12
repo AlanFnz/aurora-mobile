@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import colors from '@theme/colors';
 
 const Container = styled.View`
   flex: 1;
@@ -10,20 +11,20 @@ const Container = styled.View`
 const Title = styled.Text`
   font-size: 18px;
   font-weight: bold;
-  color: #f6f6f6;
+  color: ${colors.common.offWhite};
   margin-bottom: 20px;
   text-transform: uppercase;
   letter-spacing: 2px;
 `;
 
 const Input = styled.TextInput.attrs({
-  placeholderTextColor: 'rgba(255, 255, 255, 0.6)',
+  placeholderTextColor: colors.lowOpacity.whiteMid,
   autoCapitalize: 'none',
 })`
   height: 40px;
-  color: #f6f6f6;
-  background-color: rgba(255, 255, 255, 0.2);
-  border-color: rgba(255, 255, 255, 0.3);
+  color: ${colors.common.offWhite};
+  background-color: ${colors.lowOpacity.whiteSuperLow};
+  border-color: ${colors.lowOpacity.whiteLow};
   border-radius: 5px;
   border-width: 0.5px;
   margin-bottom: 12px;
@@ -33,18 +34,18 @@ const Input = styled.TextInput.attrs({
 
 const SignInButton = styled.TouchableOpacity`
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: ${colors.lowOpacity.black};
   margin-top: 18px;
   padding-vertical: 10px;
   border-radius: 2px;
   border-width: 1px;
-  border-color: rgba(255, 255, 255, 0.3);
+  border-color: ${colors.lowOpacity.whiteLow};
   justify-content: center;
   align-items: center;
 `;
 
 const SignInText = styled.Text`
-  color: #e0e0e0;
+  color: ${colors.common.offWhite};
   font-size: 16px;
   font-weight: 600;
   text-transform: uppercase;

@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import colors from '@theme/colors';
 
 const Container = styled.View`
   flex: 1;
@@ -10,7 +11,7 @@ const Container = styled.View`
 const Title = styled.Text`
   font-size: 18px;
   font-weight: bold;
-  color: #f6f6f6;
+  color: ${colors.common.offWhite};
   margin-bottom: 20px;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -18,18 +19,18 @@ const Title = styled.Text`
 
 const SignOutButton = styled.TouchableOpacity`
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: ${colors.lowOpacity.black};
   margin-top: 18px;
   padding-vertical: 10px;
   border-radius: 2px;
   border-width: 1px;
-  border-color: rgba(255, 255, 255, 0.3);
+  border-color: ${colors.common.primaryGray};
   justify-content: center;
   align-items: center;
 `;
 
 const SignOutText = styled.Text`
-  color: #e0e0e0;
+  color: ${colors.common.offWhite};
   font-size: 16px;
   font-weight: 600;
   text-transform: uppercase;

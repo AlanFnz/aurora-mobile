@@ -1,6 +1,7 @@
 import React from 'react';
 import Divider from '@root/src/components/Divider';
 import styled from 'styled-components/native';
+import colors from '@theme/colors';
 import { NoteListItem } from '../types';
 import { useNavigation } from '@react-navigation/native';
 import { NoteDetailScreenNavigationProp } from '@navigation/types';
@@ -27,7 +28,7 @@ const NoteItem: React.FC<NoteProps> = ({ index, item, notesLength }) => {
       </NoteItemContainer>
       {index < notesLength - 1 && (
         <Divider
-          color="#e0e0e0"
+          color={colors.common.offWhite}
           opacity={0.2}
           height={1}
           marginHorizontal={9}
@@ -45,13 +46,13 @@ const NoteItemContainer = styled.TouchableOpacity`
 
 const NoteText = styled.Text`
   font-size: 16px;
-  color: #f6f6f6;
+  color: ${colors.common.offWhite};
 `;
 
 const DateText = styled.Text`
   font-size: 14px;
-  color: #b9b9b9;
-  paddingTop: 8px;
+  color: ${colors.common.primaryGray};
+  paddingtop: 8px;
 `;
 
 export default NoteItem;
