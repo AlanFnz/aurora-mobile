@@ -1,3 +1,4 @@
+import colors from '@theme/colors';
 import styled from 'styled-components/native';
 
 const MainContainer = styled.View`
@@ -10,8 +11,8 @@ const MainContainer = styled.View`
 
 const FolderContainer = styled.View`
   padding: 10px;
-  background-color: rgba(255, 255, 255, 0.08);
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: ${colors.lowOpacity.blackSuperLow};
+  box-shadow: 0px 2px 5px ${colors.lowOpacity.blackSuperLow};
 `;
 
 const FolderHeader = styled.TouchableOpacity`
@@ -25,7 +26,7 @@ const FolderHeader = styled.TouchableOpacity`
 const FolderTitle = styled.Text`
   font-size: 16px;
   font-weight: bold;
-  color: #f6f6f6;
+  color: ${colors.common.offWhite};
   padding-left: 0px;
 `;
 

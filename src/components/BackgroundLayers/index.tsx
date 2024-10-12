@@ -3,9 +3,7 @@ import { StyleSheet } from 'react-native';
 import { BlurView } from '@react-native-community/blur';
 import { Defs, LinearGradient, Rect, Stop, Svg } from 'react-native-svg';
 import NoiseLayer from '../NoiseLayer';
-
-const FROM_COLOR = 'rgb(39,36,37)';
-const TO_COLOR = 'rgb(134,50,92)';
+import colors from '@theme/colors';
 
 const BackgroundLayers: React.FC = () => {
   return (
@@ -13,8 +11,8 @@ const BackgroundLayers: React.FC = () => {
       <Svg height="100%" width="100%" style={StyleSheet.absoluteFillObject}>
         <Defs>
           <LinearGradient id="grad" x1="150%" y1="120%" x2="50%" y2="0%">
-            <Stop offset="0" stopColor={TO_COLOR} />
-            <Stop offset="1" stopColor={FROM_COLOR} />
+            <Stop offset="0" stopColor={colors.background.primary} />
+            <Stop offset="1" stopColor={colors.background.secondary} />
           </LinearGradient>
         </Defs>
         <Rect width="100%" height="100%" fill="url(#grad)" />

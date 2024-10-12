@@ -1,9 +1,10 @@
 import { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs';
+import colors from '@theme/colors';
 
 export const tabNavigatorStyles = (): BottomTabNavigationOptions => ({
   headerShown: false,
   tabBarStyle: {
-    backgroundColor: '#22262e',
+    backgroundColor: colors.common.darkGray,
     borderTopWidth: 0,
     elevation: 0,
   },
@@ -13,10 +14,10 @@ export const tabNavigatorStyles = (): BottomTabNavigationOptions => ({
     fontWeight: '600',
     textTransform: 'uppercase',
     letterSpacing: 1.2,
-    color: '#e0e0e0',
+    color: colors.common.offWhite,
   },
-  tabBarActiveTintColor: '#e0e0e0',
-  tabBarInactiveTintColor: '#54565b',
+  tabBarActiveTintColor: colors.common.offWhite,
+  tabBarInactiveTintColor: colors.common.secondaryGray,
   tabBarIconStyle: {
     marginTop: 8,
   },
