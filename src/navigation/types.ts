@@ -5,15 +5,15 @@ export type RootStackParamList = {
   Home: undefined;
   SignIn: undefined;
   AuthStack: undefined;
-  NoteDetail: { noteId: number };
+  NoteDetails: { noteId: number };
 };
 
 export type NoteDetailScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
-  'NoteDetail'
+  'NoteDetails'
 >;
 
 export type NoteDetailScreenRouteProp = RouteProp<
   RootStackParamList,
-  'NoteDetail'
+  'NoteDetails'
 >;

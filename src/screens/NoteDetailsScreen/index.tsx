@@ -20,9 +20,12 @@ import { formatTimestampToDateTime } from '@root/src/utils';
 import BackgroundLayers from '@root/src/components/BackgroundLayers';
 import Header from '@root/src/components/Header';
 
-type NoteDetailScreenProps = StackScreenProps<RootStackParamList, 'NoteDetail'>;
+type NoteDetailsScreenProps = StackScreenProps<
+  RootStackParamList,
+  'NoteDetails'
+>;
 
-const NoteDetailScreen: React.FC<NoteDetailScreenProps> = ({ route }) => {
+const NoteDetailsScreen: React.FC<NoteDetailsScreenProps> = ({ route }) => {
   const { noteId } = route.params;
   const insets = useSafeAreaInsets();
 
@@ -80,4 +83,4 @@ const NoteDetailScreen: React.FC<NoteDetailScreenProps> = ({ route }) => {
   );
 };
 
-export default NoteDetailScreen;
+export default NoteDetailsScreen;

@@ -17,7 +17,7 @@ const NoteItem: React.FC<NoteProps> = ({ index, item, notesLength }) => {
   const navigation = useNavigation<NoteDetailScreenNavigationProp>();
 
   const navigateToNoteDetail = () => {
-    navigation.navigate('NoteDetail', { noteId: item.id });
+    navigation.navigate('NoteDetails', { noteId: item.id });
   };
 
   return (

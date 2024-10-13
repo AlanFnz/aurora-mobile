@@ -7,7 +7,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import LoginScreen from '@screens/LoginScreen';
 import HomeScreen from '@screens/HomeScreen';
 import SettingsScreen from '@screens/SettingsScreen';
-import NoteDetailScreen from '@screens/NoteDetailScreen';
+import NoteDetailsScreen from '@screens/NoteDetailsScreen';
 
 // store
 import { useSelector, useDispatch } from 'react-redux';
@@ -23,7 +23,7 @@ function HomeStack() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen name="NoteDetail" component={NoteDetailScreen} />
+      <Stack.Screen name="NoteDetails" component={NoteDetailsScreen} />
     </Stack.Navigator>
   );
 }
@@ -31,7 +31,7 @@ function HomeStack() {
 function HomeTabs() {
   return (
     <Tab.Navigator screenOptions={tabNavigatorStyles}>
-      <Tab.Screen name="Home" component={HomeStack} />
+      <Tab.Screen name="HomeStack" component={HomeStack} />
       <Tab.Screen name="Settings" component={SettingsScreen} />
     </Tab.Navigator>
   );
