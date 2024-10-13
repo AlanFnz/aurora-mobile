@@ -13,20 +13,18 @@ import {
   NoteTitleInput,
   TextArea,
   DateText,
-  HeaderContainer,
+  TitleContainer,
 } from './styles';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import BackgroundLayers from '@root/src/components/BackgroundLayers';
-import { useNavigation } from '@react-navigation/native';
 import { formatTimestampToDateTime } from '@root/src/utils';
-import { View } from 'react-native';
+import BackgroundLayers from '@root/src/components/BackgroundLayers';
+import Header from '@root/src/components/Header';
 
 type NoteDetailScreenProps = StackScreenProps<RootStackParamList, 'NoteDetail'>;
 
 const NoteDetailScreen: React.FC<NoteDetailScreenProps> = ({ route }) => {
   const { noteId } = route.params;
   const insets = useSafeAreaInsets();
-  const navigation = useNavigation();
 
   const { data: note, isLoading } = useFetchNoteDetailsQuery(noteId);
   const [updateNote] = useUpdateNoteMutation();
@@ -49,10 +47,6 @@ const NoteDetailScreen: React.FC<NoteDetailScreenProps> = ({ route }) => {
     }
   };
 
-  const handleReturn = async () => {
-    navigation.goBack();
-  };
-
   if (isLoading) {
     return <StyledText>Loading...</StyledText>;
   }
@@ -61,14 +55,15 @@ const NoteDetailScreen: React.FC<NoteDetailScreenProps> = ({ route }) => {
     <>
       <BackgroundLayers />
       <Container insets={insets}>
-        <HeaderContainer>
+        <Header />
+        <TitleContainer>
           <NoteTitleInput
             value={title}
             onChangeText={setTitle}
             placeholder="Note Title"
           />
           <DateText>{modifiedDate}</DateText>
-        </HeaderContainer>
+        </TitleContainer>
 
         <TextArea
           value={content}
@@ -79,10 +74,6 @@ const NoteDetailScreen: React.FC<NoteDetailScreenProps> = ({ route }) => {
 
         <Button onPress={handleSave}>
           <ButtonText>Save Changes</ButtonText>
-        </Button>
-
-        <Button onPress={handleReturn}>
-          <ButtonText>Return</ButtonText>
         </Button>
       </Container>
     </>

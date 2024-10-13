@@ -9,7 +9,7 @@ const Container = styled.View<{
   padding-top: ${props => props.insets.top}px;
 `;
 
-const HeaderContainer = styled.View`
+const TitleContainer = styled.View`
   padding-bottom: 25px;
 `;
 
@@ -87,7 +87,7 @@ const Button = styled.TouchableOpacity`
 
 export {
   Container,
-  HeaderContainer,
+  TitleContainer,
   Label,
   NoteTitleInput,
   TextArea,
