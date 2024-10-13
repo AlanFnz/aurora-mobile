@@ -5,7 +5,7 @@ import {
   useFetchNoteDetailsQuery,
   useUpdateNoteMutation,
 } from '@store/queries/notes';
-import NoteDetailScreen from '@screens/NoteDetailScreen';
+import NoteDetailsScreen from '@screens/NoteDetailsScreen';
 import {
   NavigationContainer,
   RouteProp,
@@ -29,9 +29,9 @@ jest.mock('@react-navigation/native', () => ({
 
 const mockNavigate = jest.fn();
 const mockNavigation = { navigate: mockNavigate };
-const mockRoute: RouteProp<RootStackParamList, 'NoteDetail'> = {
+const mockRoute: RouteProp<RootStackParamList, 'NoteDetails'> = {
   key: 'NoteDetailKey',
-  name: 'NoteDetail',
+  name: 'NoteDetails',
   params: { noteId: 1 },
 };
 
@@ -56,7 +56,7 @@ describe('NoteDetailScreen', () => {
 
     const { getByText } = render(
       <NavigationContainer>
-        <NoteDetailScreen
+        <NoteDetailsScreen
           route={mockRoute}
           navigation={mockNavigation as any}
         />
@@ -78,7 +78,10 @@ describe('NoteDetailScreen', () => {
     });
 
     const { getByDisplayValue, getByText } = render(
-      <NoteDetailScreen route={mockRoute} navigation={mockNavigation as any} />,
+      <NoteDetailsScreen
+        route={mockRoute}
+        navigation={mockNavigation as any}
+      />,
     );
 
     expect(getByDisplayValue('Test Note')).toBeTruthy();
@@ -100,7 +103,10 @@ describe('NoteDetailScreen', () => {
     (useUpdateNoteMutation as jest.Mock).mockReturnValue([mockUpdateNote]);
 
     const { getByDisplayValue, getByText } = render(
-      <NoteDetailScreen route={mockRoute} navigation={mockNavigation as any} />,
+      <NoteDetailsScreen
+        route={mockRoute}
+        navigation={mockNavigation as any}
+      />,
     );
 
     fireEvent.changeText(getByDisplayValue('Test Note'), 'Updated Note Title');
@@ -131,7 +137,10 @@ describe('NoteDetailScreen', () => {
     });
 
     const { getByText } = render(
-      <NoteDetailScreen route={mockRoute} navigation={mockNavigation as any} />,
+      <NoteDetailsScreen
+        route={mockRoute}
+        navigation={mockNavigation as any}
+      />,
     );
 
     expect(getByText(/Oct 13, 2024 at \d{1,2}:\d{2} (AM|PM)/)).toBeTruthy();
