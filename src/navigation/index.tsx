@@ -31,8 +31,17 @@ function HomeStack() {
 function HomeTabs() {
   return (
     <Tab.Navigator screenOptions={tabNavigatorStyles}>
-      <Tab.Screen name="HomeStack" component={HomeStack} />
-      <Tab.Screen name="Settings" component={SettingsScreen} />
+      <Tab.Screen
+        name="HomeTab"
+        component={HomeStack}
+        options={{ tabBarLabel: 'Home' }}
+      />
+
+      <Tab.Screen
+        name="SettingsTab"
+        component={SettingsScreen}
+        options={{ tabBarLabel: 'Settings' }}
+      />
     </Tab.Navigator>
   );
 }
