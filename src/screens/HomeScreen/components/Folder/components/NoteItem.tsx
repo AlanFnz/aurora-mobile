@@ -22,12 +22,15 @@ const NoteItem: React.FC<NoteProps> = ({ index, item, notesLength }) => {
 
   return (
     <>
-      <NoteItemContainer onPress={navigateToNoteDetail}>
+      <NoteItemContainer
+        onPress={navigateToNoteDetail}
+        testID="note-item-container">
         <NoteText>{`${item.title}${item.snippet && `: ${item.snippet}`}`}</NoteText>
         <DateText>{formatTimestampToDate(item.modifiedDate)}</DateText>
       </NoteItemContainer>
       {index < notesLength - 1 && (
         <Divider
+          testID="divider"
           color={colors.common.offWhite}
           opacity={0.2}
           height={1}

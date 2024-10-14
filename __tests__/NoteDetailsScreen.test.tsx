@@ -12,6 +12,7 @@ import {
   useNavigation,
 } from '@react-navigation/native';
 import { RootStackParamList } from '@navigation/types';
+import { formatTimestampToDateTime } from '@root/src/utils';
 
 jest.mock('@store/queries/notes', () => ({
   useFetchNoteDetailsQuery: jest.fn(),
@@ -36,8 +37,11 @@ const mockRoute: RouteProp<RootStackParamList, 'NoteDetails'> = {
 };
 
 describe('NoteDetailScreen', () => {
+  const mockedDate = new Date('2024-10-13T11:34:00').getTime();
+
   beforeEach(() => {
     jest.clearAllMocks();
+    jest.spyOn(global.Date, 'now').mockImplementation(() => mockedDate);
     (useSafeAreaInsets as jest.Mock).mockReturnValue({
       top: 10,
       bottom: 10,
@@ -46,6 +50,10 @@ describe('NoteDetailScreen', () => {
     });
 
     (useNavigation as jest.Mock).mockReturnValue(mockNavigation);
+  });
+
+  afterEach(() => {
+    jest.restoreAllMocks();
   });
 
   it('renders loading state initially', () => {
@@ -94,7 +102,7 @@ describe('NoteDetailScreen', () => {
       data: {
         id: '1',
         title: 'Test Note',
-        modifiedDate: Date.now(),
+        modifiedDate: mockedDate,
         content: 'This is the content of the note',
       },
       isLoading: false,
@@ -130,7 +138,7 @@ describe('NoteDetailScreen', () => {
       data: {
         id: '1',
         title: 'Test Note',
-        modifiedDate: Date.now(),
+        modifiedDate: mockedDate,
         content: 'This is the content of the note',
       },
       isLoading: false,
@@ -143,6 +151,6 @@ describe('NoteDetailScreen', () => {
       />,
     );
 
-    expect(getByText(/Oct 13, 2024 at \d{1,2}:\d{2} (AM|PM)/)).toBeTruthy();
+    expect(getByText(formatTimestampToDateTime(mockedDate))).toBeTruthy();
   });
 });
