@@ -4,10 +4,11 @@
     "baseUrl": ".",
     "paths": {
       "@assets/*": ["src/assets/*"],
+      "@components/*": ["src/components/*"],
       "@screens/*": ["src/screens/*"],
-      "@store/*": ["src/store/*"],
-      "@theme/*": ["src/theme/*"],
       "@navigation/*": ["src/navigation/*"],
+      "@theme/*": ["src/theme/*"],
+      "@store/*": ["src/store/*"],
       "@root/*": ["./*"]
     },
     "isolatedModules": false
