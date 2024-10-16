@@ -11,9 +11,15 @@ interface NoteProps {
   index: number;
   notesLength: number;
   item: NoteListItem;
+  testID?: string;
 }
 
-const NoteItem: React.FC<NoteProps> = ({ index, item, notesLength }) => {
+const NoteItem: React.FC<NoteProps> = ({
+  index,
+  item,
+  notesLength,
+  testID = 'note-item-container',
+}) => {
   const navigation = useNavigation<NoteDetailScreenNavigationProp>();
 
   const navigateToNoteDetail = () => {
@@ -22,9 +28,7 @@ const NoteItem: React.FC<NoteProps> = ({ index, item, notesLength }) => {
 
   return (
     <>
-      <NoteItemContainer
-        onPress={navigateToNoteDetail}
-        testID="note-item-container">
+      <NoteItemContainer onPress={navigateToNoteDetail} testID={testID}>
         <NoteText>{`${item.title}${item.snippet && `: ${item.snippet}`}`}</NoteText>
         <DateText>{formatTimestampToDate(item.modifiedDate)}</DateText>
       </NoteItemContainer>

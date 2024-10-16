@@ -40,8 +40,10 @@ const Folder: React.FC<FolderProps> = ({ folder }) => {
                     index={index}
                     item={item}
                     notesLength={folder.notes.length}
+                    testID={`note-item-${item.id}`}
                   />
                 )}
+                testID="flat-list"
               />
             </FolderContainer>
           </>
@@ -52,6 +54,7 @@ const Folder: React.FC<FolderProps> = ({ folder }) => {
             height={1}
             marginHorizontal={2}
             marginVertical={2}
+            testID="divider"
           />
         )}
       </MainContainer>
