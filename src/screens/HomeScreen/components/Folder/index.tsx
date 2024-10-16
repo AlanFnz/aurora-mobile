@@ -27,7 +27,7 @@ const Folder: React.FC<FolderProps> = ({ folder }) => {
           color={colors.common.offWhite}
         />
       </FolderHeader>
-      <MainContainer>
+      <MainContainer testID="folder-component">
         {expanded ? (
           <>
             <GradientBackground expanded={expanded} />
