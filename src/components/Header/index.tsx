@@ -14,7 +14,7 @@ const Header: React.FC<{ title?: string }> = ({ title }) => {
 
   return (
     <HeaderContainer insets={insets}>
-      <BackButton onPress={handleBackPress}>
+      <BackButton onPress={handleBackPress} testID="back-button">
         <Icon name="arrow-left" size={20} color="#f6f6f6" />
       </BackButton>
       {title && <HeaderTitle>{title}</HeaderTitle>}

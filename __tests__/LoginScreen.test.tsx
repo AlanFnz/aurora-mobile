@@ -15,7 +15,7 @@ jest.mock('../src/store/authSlice', () => ({
 describe('LoginScreen', () => {
   const mockDispatch = jest.fn();
   beforeEach(() => {
-    (useDispatch as jest.Mock).mockReturnValue(mockDispatch);
+    (useDispatch as unknown as jest.Mock).mockReturnValue(mockDispatch);
   });
 
   it('renders correctly', () => {
