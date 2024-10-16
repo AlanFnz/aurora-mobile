@@ -5,10 +5,20 @@ import { Defs, LinearGradient, Rect, Stop, Svg } from 'react-native-svg';
 import NoiseLayer from '../NoiseLayer';
 import colors from '@theme/colors';
 
-const BackgroundLayers: React.FC = () => {
+interface BackgroundLayersProps {
+  testID?: string;
+}
+
+const BackgroundLayers: React.FC<BackgroundLayersProps> = ({
+  testID = 'background-layers',
+}) => {
   return (
     <>
-      <Svg height="100%" width="100%" style={StyleSheet.absoluteFillObject}>
+      <Svg
+        testID={testID}
+        height="100%"
+        width="100%"
+        style={StyleSheet.absoluteFillObject}>
         <Defs>
           <LinearGradient id="grad" x1="150%" y1="120%" x2="50%" y2="0%">
             <Stop offset="0" stopColor={colors.background.primary} />

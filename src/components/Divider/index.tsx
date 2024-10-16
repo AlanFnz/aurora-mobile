@@ -8,6 +8,7 @@ interface DividerProps {
   height?: number;
   marginHorizontal?: number;
   marginVertical?: number;
+  testID?: string;
 }
 
 const Divider: React.FC<DividerProps> = ({
@@ -16,9 +17,11 @@ const Divider: React.FC<DividerProps> = ({
   height = 1,
   marginHorizontal = 0,
   marginVertical = 8,
+  testID = 'divider',
 }) => {
   return (
     <DividerLine
+      testID={testID}
       color={color}
       opacity={opacity}
       height={height}
