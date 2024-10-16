@@ -9,9 +9,9 @@ const HomeScreen: React.FC = () => {
 
   return (
     <>
-      <BackgroundLayers />
-      <Container insets={insets}>
-        <FolderList />
+      <BackgroundLayers testID={'background-layers'} />
+      <Container testID={'container'} insets={insets}>
+        <FolderList testID={'folder-list'} />
       </Container>
     </>
   );

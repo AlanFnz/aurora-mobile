@@ -5,11 +5,15 @@ import { RootState } from '@store/index';
 import Folder from '../Folder';
 import styled from 'styled-components/native';
 
-const FolderList: React.FC = () => {
+interface FolderListProps {
+  testID?: string;
+}
+
+const FolderList: React.FC<FolderListProps> = ({ testID }) => {
   const folders = useSelector((state: RootState) => state.folders.folders);
 
   return (
-    <FolderListContainer>
+    <FolderListContainer testID={testID}>
       <FlatList
         data={folders}
         keyExtractor={folder => folder.id.toString()}
