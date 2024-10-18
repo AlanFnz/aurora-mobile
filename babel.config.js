@@ -12,6 +12,7 @@ module.exports = {
           '@theme': './src/theme',
           '@navigation': './src/navigation',
           '@store': './src/store',
+          '@config': './src/config',
           '@root': './',
         },
       },
