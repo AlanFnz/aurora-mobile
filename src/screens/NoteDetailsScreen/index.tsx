@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Toast from 'react-native-toast-message';
 import BackgroundLayers from '@root/src/components/BackgroundLayers';
 import Header from '@root/src/components/Header';
 import SaveButton from './components/SaveButton';
@@ -35,6 +36,35 @@ const NoteDetailsScreen: React.FC<NoteDetailsScreenProps> = ({ route }) => {
   const [modifiedDate, setModifiedDate] = useState('');
   const [content, setContent] = useState('');
 
+  const handleSave = async () => {
+    if (note) {
+      try {
+        await updateNote({ id: note.id, title, content });
+        showToast(true);
+      } catch (error) {
+        showToast(false);
+      }
+    }
+  };
+
+  const showToast = (isSuccess: boolean) => {
+    isSuccess
+      ? Toast.show({
+          type: 'success',
+          text1: 'Saved successfully!',
+          position: 'bottom',
+          bottomOffset: insets.bottom * 3,
+          visibilityTime: 1750,
+        })
+      : Toast.show({
+          type: 'error',
+          text1: 'Something went wrong',
+          position: 'bottom',
+          bottomOffset: insets.bottom * 3,
+          visibilityTime: 1750,
+        });
+  };
+
   useEffect(() => {
     if (note) {
       setTitle(note.title);
@@ -42,12 +72,6 @@ const NoteDetailsScreen: React.FC<NoteDetailsScreenProps> = ({ route }) => {
       setContent(note.content || '');
     }
   }, [note]);
-
-  const handleSave = async () => {
-    if (note) {
-      await updateNote({ id: note.id, title, content });
-    }
-  };
 
   if (isLoading) {
     return <StyledText>Loading...</StyledText>;

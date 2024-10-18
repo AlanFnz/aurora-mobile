@@ -1,7 +1,9 @@
 import React from 'react';
+import Toast from 'react-native-toast-message';
 import Navigation from '@navigation/index';
 import AppInitializer from '@root/AppInitializer';
-import { Provider as ReduxProvider, useDispatch } from 'react-redux';
+import toastConfig from '@config/toastConfig';
+import { Provider as ReduxProvider } from 'react-redux';
 import { store } from '@store/index';
 
 const App: React.FC = () => {
@@ -9,6 +11,7 @@ const App: React.FC = () => {
     <ReduxProvider store={store}>
       <AppInitializer />
       <Navigation />
+      <Toast config={toastConfig} />
     </ReduxProvider>
   );
 };
