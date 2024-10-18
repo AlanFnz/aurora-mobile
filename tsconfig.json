@@ -9,6 +9,7 @@
       "@navigation/*": ["src/navigation/*"],
       "@theme/*": ["src/theme/*"],
       "@store/*": ["src/store/*"],
+      "@config/*": ["src/config/*"],
       "@root/*": ["./*"]
     },
     "isolatedModules": false

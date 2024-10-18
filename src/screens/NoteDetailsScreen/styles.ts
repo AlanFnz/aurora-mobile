@@ -48,13 +48,6 @@ const TextArea = styled.TextInput.attrs({
 })`
   height: '100%';
   color: ${colors.common.offWhite};
-  border-bottom-color: ${colors.lowOpacity.whiteLow};
-  border-bottom-width: 2px;
-  border-left-width: 0;
-  border-right-width: 0;
-  border-top-width: 0;
-  border-top-left-radius: 2px;
-  border-top-right-radius: 2px;
   padding-bottom: 24px;
   margin-bottom: 20px;
   text-align-vertical: top;

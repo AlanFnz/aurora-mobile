@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import Toast from 'react-native-toast-message';
+import BackgroundLayers from '@root/src/components/BackgroundLayers';
+import Header from '@root/src/components/Header';
+import SaveButton from './components/SaveButton';
 import { RootStackParamList } from '@navigation/types';
 import { StackScreenProps } from '@react-navigation/stack';
 import {
@@ -6,8 +10,6 @@ import {
   useUpdateNoteMutation,
 } from '@store/queries/notes';
 import {
-  Button,
-  ButtonText,
   Container,
   StyledText,
   NoteTitleInput,
@@ -17,8 +19,6 @@ import {
 } from './styles';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { formatTimestampToDateTime } from '@root/src/utils';
-import BackgroundLayers from '@root/src/components/BackgroundLayers';
-import Header from '@root/src/components/Header';
 
 type NoteDetailsScreenProps = StackScreenProps<
   RootStackParamList,
@@ -36,6 +36,35 @@ const NoteDetailsScreen: React.FC<NoteDetailsScreenProps> = ({ route }) => {
   const [modifiedDate, setModifiedDate] = useState('');
   const [content, setContent] = useState('');
 
+  const handleSave = async () => {
+    if (note) {
+      try {
+        await updateNote({ id: note.id, title, content });
+        showToast(true);
+      } catch (error) {
+        showToast(false);
+      }
+    }
+  };
+
+  const showToast = (isSuccess: boolean) => {
+    isSuccess
+      ? Toast.show({
+          type: 'success',
+          text1: 'Saved successfully!',
+          position: 'bottom',
+          bottomOffset: insets.bottom * 3,
+          visibilityTime: 1750,
+        })
+      : Toast.show({
+          type: 'error',
+          text1: 'Something went wrong',
+          position: 'bottom',
+          bottomOffset: insets.bottom * 3,
+          visibilityTime: 1750,
+        });
+  };
+
   useEffect(() => {
     if (note) {
       setTitle(note.title);
@@ -43,12 +72,6 @@ const NoteDetailsScreen: React.FC<NoteDetailsScreenProps> = ({ route }) => {
       setContent(note.content || '');
     }
   }, [note]);
-
-  const handleSave = async () => {
-    if (note) {
-      await updateNote({ id: note.id, title, content });
-    }
-  };
 
   if (isLoading) {
     return <StyledText>Loading...</StyledText>;
@@ -58,7 +81,7 @@ const NoteDetailsScreen: React.FC<NoteDetailsScreenProps> = ({ route }) => {
     <>
       <BackgroundLayers />
       <Container insets={insets}>
-        <Header />
+        <Header rightColumnContent={<SaveButton handleSave={handleSave} />} />
         <TitleContainer>
           <NoteTitleInput
             value={title}
@@ -74,10 +97,6 @@ const NoteDetailsScreen: React.FC<NoteDetailsScreenProps> = ({ route }) => {
           placeholder="Note Content"
           multiline={true}
         />
-
-        <Button onPress={handleSave}>
-          <ButtonText>Save Changes</ButtonText>
-        </Button>
       </Container>
     </>
   );

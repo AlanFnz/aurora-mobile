@@ -13,11 +13,14 @@ const HeaderContainer = styled.View<{
 
 const BackButton = styled(TouchableOpacity)``;
 
-const HeaderTitle = styled.Text`
+const TitleContainer = styled.View`
   flex: 1;
+`;
+
+const HeaderTitle = styled.Text`
   font-size: 18px;
   color: ${colors.common.offWhite};
   text-align: center;
 `;
 
-export { HeaderContainer, BackButton, HeaderTitle };
+export { HeaderContainer, BackButton, TitleContainer, HeaderTitle };
