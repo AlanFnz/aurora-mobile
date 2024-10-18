@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import BackgroundLayers from '@root/src/components/BackgroundLayers';
+import Header from '@root/src/components/Header';
+import SaveButton from './components/SaveButton';
 import { RootStackParamList } from '@navigation/types';
 import { StackScreenProps } from '@react-navigation/stack';
 import {
@@ -6,8 +9,6 @@ import {
   useUpdateNoteMutation,
 } from '@store/queries/notes';
 import {
-  Button,
-  ButtonText,
   Container,
   StyledText,
   NoteTitleInput,
@@ -17,8 +18,6 @@ import {
 } from './styles';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { formatTimestampToDateTime } from '@root/src/utils';
-import BackgroundLayers from '@root/src/components/BackgroundLayers';
-import Header from '@root/src/components/Header';
 
 type NoteDetailsScreenProps = StackScreenProps<
   RootStackParamList,
@@ -58,7 +57,7 @@ const NoteDetailsScreen: React.FC<NoteDetailsScreenProps> = ({ route }) => {
     <>
       <BackgroundLayers />
       <Container insets={insets}>
-        <Header />
+        <Header rightColumnContent={<SaveButton handleSave={handleSave} />} />
         <TitleContainer>
           <NoteTitleInput
             value={title}
@@ -74,10 +73,6 @@ const NoteDetailsScreen: React.FC<NoteDetailsScreenProps> = ({ route }) => {
           placeholder="Note Content"
           multiline={true}
         />
-
-        <Button onPress={handleSave}>
-          <ButtonText>Save Changes</ButtonText>
-        </Button>
       </Container>
     </>
   );

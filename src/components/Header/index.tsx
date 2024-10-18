@@ -1,10 +1,21 @@
 import React from 'react';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import BackButtonIcon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/Ionicons';
+import colors from '@theme/colors';
 import { useNavigation } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { BackButton, HeaderContainer, HeaderTitle } from './styles';
+import {
+  BackButton,
+  HeaderContainer,
+  HeaderTitle,
+  TitleContainer,
+} from './styles';
 
-const Header: React.FC<{ title?: string }> = ({ title }) => {
+const Header: React.FC<{
+  title?: string;
+  showBackButton?: boolean;
+  rightColumnContent?: any;
+}> = ({ title, rightColumnContent = true, showBackButton = true }) => {
   const insets = useSafeAreaInsets();
   const navigation = useNavigation();
 
@@ -14,10 +25,19 @@ const Header: React.FC<{ title?: string }> = ({ title }) => {
 
   return (
     <HeaderContainer insets={insets}>
-      <BackButton onPress={handleBackPress} testID="back-button">
-        <Icon name="arrow-left" size={20} color="#f6f6f6" />
-      </BackButton>
-      {title && <HeaderTitle>{title}</HeaderTitle>}
+      {showBackButton && (
+        <BackButton onPress={handleBackPress} testID="back-button">
+          <BackButtonIcon
+            name="arrow-left"
+            size={20}
+            color={colors.common.offWhite}
+          />
+        </BackButton>
+      )}
+      <TitleContainer>
+        {title && <HeaderTitle>{title}</HeaderTitle>}
+      </TitleContainer>
+      {rightColumnContent && rightColumnContent}
     </HeaderContainer>
   );
 };
