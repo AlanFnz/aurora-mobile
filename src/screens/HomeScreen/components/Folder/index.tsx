@@ -51,7 +51,7 @@ const Folder: React.FC<FolderProps> = ({ folder }) => {
           <Divider
             color={colors.common.offWhite}
             opacity={0.2}
-            height={1}
+            height={0.5}
             marginHorizontal={2}
             marginVertical={2}
             testID="divider"
