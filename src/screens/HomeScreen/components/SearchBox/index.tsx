@@ -1,3 +1,4 @@
+import colors from '@theme/colors';
 import React from 'react';
 import styled from 'styled-components/native';
 
@@ -14,7 +15,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({
     <SearchContainer>
       <SearchInput
         placeholder="Search"
-        placeholderTextColor="#c4c4c4"
+        placeholderTextColor={colors.lowOpacity.whiteMid}
         value={searchQuery}
         onChangeText={setSearchQuery}
       />
@@ -23,19 +24,18 @@ const SearchBox: React.FC<SearchBoxProps> = ({
 };
 
 const SearchContainer = styled.View`
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
+  background-color: ${colors.lowOpacity.whitePointOne};
+  border-radius: 24px;
   margin-bottom: 20px;
-  padding: 10px;
+  margin: 10px 26px 15px 24px;
 `;
 
 const SearchInput = styled.TextInput`
-  height: 40px;
-  color: #f6f6f6;
-  background-color: transparent;
-  border-color: rgba(255, 255, 255, 0.3);
-  border-radius: 10px;
-  padding: 10px;
+  height: 50px;
+  color: ${colors.common.offWhite};
+  background-color: ${colors.lowOpacity.transparent};
+  border-color: ${colors.lowOpacity.whiteLow};
+  padding: 15px;
 `;
 
 export default SearchBox;
