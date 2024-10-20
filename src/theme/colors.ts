@@ -15,6 +15,7 @@ const colors = {
   },
   lowOpacity: {
     transparent: 'rgba(255, 255, 255, 0)',
+    whitePointOne: 'rgba(255, 255, 255, 0.1)',
     whiteSuperLow: 'rgba(255, 255, 255, 0.2)',
     whiteLow: 'rgba(255, 255, 255, 0.3)',
     whiteMid: 'rgba(255, 255, 255, 0.6)',
