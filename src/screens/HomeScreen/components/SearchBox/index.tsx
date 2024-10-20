@@ -1,6 +1,7 @@
-import colors from '@theme/colors';
 import React from 'react';
 import styled from 'styled-components/native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import colors from '@theme/colors';
 
 interface SearchBoxProps {
   searchQuery: string;
@@ -13,6 +14,13 @@ const SearchBox: React.FC<SearchBoxProps> = ({
 }) => {
   return (
     <SearchContainer>
+      <Icon
+        name="search"
+        size={20}
+        color="#c4c4c4"
+        style={{ marginLeft: 20, marginBottom: 2 }}
+      />
+
       <SearchInput
         placeholder="Search"
         placeholderTextColor={colors.lowOpacity.whiteMid}
@@ -26,12 +34,14 @@ const SearchBox: React.FC<SearchBoxProps> = ({
 const SearchContainer = styled.View`
   background-color: ${colors.lowOpacity.whitePointOne};
   border-radius: 24px;
-  margin-bottom: 20px;
   margin: 10px 26px 15px 24px;
+  flex-direction: row;
+  align-items: center;
 `;
 
 const SearchInput = styled.TextInput`
   height: 50px;
+  font-size: 14px;
   color: ${colors.common.offWhite};
   background-color: ${colors.lowOpacity.transparent};
   border-color: ${colors.lowOpacity.whiteLow};
