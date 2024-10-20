@@ -34,7 +34,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({
 const SearchContainer = styled.View`
   background-color: ${colors.lowOpacity.whitePointOne};
   border-radius: 24px;
-  margin: 10px 26px 15px 24px;
+  margin: 10px 26px 15px 23px;
   flex-direction: row;
   align-items: center;
 `;
