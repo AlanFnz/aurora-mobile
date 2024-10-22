@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components/native';
 import { FlatList } from 'react-native';
 import { NoteListItem } from '../Folder/types';
+import { useNavigation } from '@react-navigation/native';
+import { NoteDetailScreenNavigationProp } from '@navigation/types';
 
 interface NotesResultsListProps {
   notes: NoteListItem[];
@@ -12,13 +14,18 @@ const NotesResultsList: React.FC<NotesResultsListProps> = ({
   notes,
   testID,
 }) => {
+  const navigation = useNavigation<NoteDetailScreenNavigationProp>();
+  const navigateToNoteDetail = (noteId: number) => {
+    navigation.navigate('NoteDetails', { noteId });
+  };
+
   return (
     <ResultsListContainer testID={testID}>
       <FlatList
         data={notes}
         keyExtractor={note => note.id.toString()}
         renderItem={({ item }) => (
-          <NoteItem>
+          <NoteItem onPress={() => navigateToNoteDetail(item.id)}>
             <NoteText>{item.title}</NoteText>
           </NoteItem>
         )}
@@ -33,7 +40,7 @@ const ResultsListContainer = styled.View`
   width: 100%;
 `;
 
-const NoteItem = styled.View`
+const NoteItem = styled.TouchableOpacity`
   padding: 10px;
   border-bottom-width: 1px;
   border-bottom-color: #ccc;
