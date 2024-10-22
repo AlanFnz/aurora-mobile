@@ -1,17 +1,15 @@
 import React from 'react';
-import { FlatList } from 'react-native';
-import { useSelector } from 'react-redux';
-import { RootState } from '@store/index';
-import Folder from '../Folder';
 import styled from 'styled-components/native';
+import Folder from '../Folder';
+import { FlatList } from 'react-native';
+import { Folder as FolderTypes } from '../Folder/types';
 
 interface FolderListProps {
+  folders: FolderTypes[];
   testID?: string;
 }
 
-const FolderList: React.FC<FolderListProps> = ({ testID }) => {
-  const folders = useSelector((state: RootState) => state.folders.folders);
-
+const FolderList: React.FC<FolderListProps> = ({ folders, testID }) => {
   return (
     <FolderListContainer testID={testID}>
       <FlatList

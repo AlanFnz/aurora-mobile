@@ -4,17 +4,31 @@ import FolderList from './components/FolderList';
 import BackgroundLayers from '../../components/BackgroundLayers';
 import styled from 'styled-components/native';
 import SearchBox from './components/SearchBox';
+import { useSelector } from 'react-redux';
+import { RootState } from '@store/index';
+import NotesResultsList from './components/NotesResultsList';
 
 const HomeScreen: React.FC = () => {
   const insets = useSafeAreaInsets();
   const [searchQuery, setSearchQuery] = useState('');
+  const folders = useSelector((state: RootState) => state.folders.folders);
 
+  // TODO: notes searching will be handled by the backend
+  const allNotes = folders.flatMap(folder => folder.notes);
+  const filteredNotes = allNotes.filter(note =>
+    note.title.toLowerCase().includes(searchQuery.toLowerCase()),
+  );
+  
   return (
     <>
       <BackgroundLayers testID={'background-layers'} />
       <Container testID={'container'} insets={insets}>
         <SearchBox searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-        <FolderList testID={'folder-list'} />
+        {searchQuery ? (
+          <NotesResultsList testID={'notes-results'} notes={filteredNotes} />
+        ) : (
+          <FolderList testID={'folder-list'} folders={folders} />
+        )}
       </Container>
     </>
   );
