@@ -7,6 +7,7 @@ import SearchBox from './components/SearchBox';
 import { useSelector } from 'react-redux';
 import { RootState } from '@store/index';
 import NotesResultsList from './components/NotesResultsList';
+import FloatingActionButton from '@components/FloatingActionButton';
 
 const HomeScreen: React.FC = () => {
   const insets = useSafeAreaInsets();
@@ -18,7 +19,9 @@ const HomeScreen: React.FC = () => {
   const filteredNotes = allNotes.filter(note =>
     note.title.toLowerCase().includes(searchQuery.toLowerCase()),
   );
-  
+
+  const handleNewNote = () => console.log('New note button pressed');
+
   return (
     <>
       <BackgroundLayers testID={'background-layers'} />
@@ -29,6 +32,11 @@ const HomeScreen: React.FC = () => {
         ) : (
           <FolderList testID={'folder-list'} folders={folders} />
         )}
+        <FloatingActionButton
+          onPress={handleNewNote}
+          icon="+"
+          testID="new-note-button"
+        />
       </Container>
     </>
   );

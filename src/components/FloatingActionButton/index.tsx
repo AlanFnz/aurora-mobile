@@ -22,25 +22,27 @@ const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
 
 const ButtonContainer = styled.TouchableOpacity`
   position: absolute;
-  bottom: 20px;
-  right: 20px;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-35px);
   background-color: ${colors.common.offWhite};
-  border-radius: 30px;
-  width: 60px;
-  height: 60px;
+  border-radius: 25px;
+  width: 70px;
+  height: 50px;
   justify-content: center;
   align-items: center;
-  shadow-color: ${colors.common.black};
-  shadow-offset: { width: 0, height: 2 };
+  shadow-color: ${colors.lowOpacity.black};
+  shadow-offset: 0px 2px;
   shadow-opacity: 0.8;
   shadow-radius: 2px;
   elevation: 5;
+  opacity: 0.9;
 `;
 
 const ButtonText = styled.Text`
   font-size: 30px;
-  color: white;
-  font-weight: bold;
+  color: ${colors.common.darkGray};
+  font-weight: 500;
 `;
 
 export default FloatingActionButton;
