@@ -8,11 +8,14 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@store/index';
 import NotesResultsList from './components/NotesResultsList';
 import FloatingActionButton from '@components/FloatingActionButton';
+import { useNavigation } from '@react-navigation/native';
+import { NoteDetailScreenNavigationProp } from '@navigation/types';
 
 const HomeScreen: React.FC = () => {
   const insets = useSafeAreaInsets();
-  const [searchQuery, setSearchQuery] = useState('');
   const folders = useSelector((state: RootState) => state.folders.folders);
+  const navigation = useNavigation<NoteDetailScreenNavigationProp>();
+  const [searchQuery, setSearchQuery] = useState('');
 
   // TODO: notes searching will be handled by the backend
   const allNotes = folders.flatMap(folder => folder.notes);
@@ -20,7 +23,9 @@ const HomeScreen: React.FC = () => {
     note.title.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
-  const handleNewNote = () => console.log('New note button pressed');
+  const handleNewNote = () => {
+    navigation.navigate('NoteDetails', { isNew: true });
+  };
 
   return (
     <>
