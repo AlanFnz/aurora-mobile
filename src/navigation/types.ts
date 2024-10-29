@@ -5,7 +5,7 @@ export type RootStackParamList = {
   Home: undefined;
   SignIn: undefined;
   AuthStack: undefined;
-  NoteDetails: { noteId: number };
+  NoteDetails: { noteId?: number, isNew?: boolean };
 };
 
 export type NoteDetailScreenNavigationProp = StackNavigationProp<

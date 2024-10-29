@@ -41,7 +41,7 @@ export const noteApi = createApi({
         }
       },
     }),
-    updateNote: builder.mutation<Note, Partial<Note> & { id: number }>({
+    updateNote: builder.mutation<Note, Partial<Note> & { id?: number }>({
       queryFn: updatedNote => {
         const index = notesMockData.findIndex(n => n.id === updatedNote.id);
         if (index === -1) {

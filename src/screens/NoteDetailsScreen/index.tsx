@@ -26,10 +26,13 @@ type NoteDetailsScreenProps = StackScreenProps<
 >;
 
 const NoteDetailsScreen: React.FC<NoteDetailsScreenProps> = ({ route }) => {
-  const { noteId } = route.params;
+  const { noteId = 0, isNew } = route.params;
   const insets = useSafeAreaInsets();
 
-  const { data: note, isLoading } = useFetchNoteDetailsQuery(noteId);
+  const { data: note, isLoading } = useFetchNoteDetailsQuery(noteId, {
+    skip: isNew,
+  });
+
   const [updateNote] = useUpdateNoteMutation();
 
   const [title, setTitle] = useState('');
@@ -39,7 +42,7 @@ const NoteDetailsScreen: React.FC<NoteDetailsScreenProps> = ({ route }) => {
   const handleSave = async () => {
     if (note) {
       try {
-        await updateNote({ id: note.id, title, content });
+        await updateNote({ id: note ? note.id : undefined, title, content });
         showToast(true);
       } catch (error) {
         showToast(false);
@@ -48,21 +51,13 @@ const NoteDetailsScreen: React.FC<NoteDetailsScreenProps> = ({ route }) => {
   };
 
   const showToast = (isSuccess: boolean) => {
-    isSuccess
-      ? Toast.show({
-          type: 'success',
-          text1: 'Saved successfully!',
-          position: 'bottom',
-          bottomOffset: insets.bottom * 3,
-          visibilityTime: 1750,
-        })
-      : Toast.show({
-          type: 'error',
-          text1: 'Something went wrong',
-          position: 'bottom',
-          bottomOffset: insets.bottom * 3,
-          visibilityTime: 1750,
-        });
+    Toast.show({
+      type: isSuccess ? 'success' : 'error',
+      text1: isSuccess ? 'Saved successfully!' : 'Something went wrong',
+      position: 'bottom',
+      bottomOffset: insets.bottom * 3,
+      visibilityTime: 1750,
+    });
   };
 
   useEffect(() => {
@@ -70,10 +65,14 @@ const NoteDetailsScreen: React.FC<NoteDetailsScreenProps> = ({ route }) => {
       setTitle(note.title);
       setModifiedDate(formatTimestampToDateTime(note.modifiedDate));
       setContent(note.content || '');
+    } else if (isNew) {
+      setTitle('');
+      setContent('');
+      setModifiedDate('');
     }
-  }, [note]);
+  }, [note, isNew]);
 
-  if (isLoading) {
+  if (!isNew && isLoading) {
     return <StyledText>Loading...</StyledText>;
   }
 
