@@ -48,17 +48,9 @@ const NoteDetailsScreen: React.FC<NoteDetailsScreenProps> = ({ route }) => {
   };
 
   const showToast = (isSuccess: boolean) => {
-    isSuccess
-      ? Toast.show({
-          type: 'success',
-          text1: 'Saved successfully!',
-          position: 'bottom',
-          bottomOffset: insets.bottom * 3,
-          visibilityTime: 1750,
-        })
-      : Toast.show({
-          type: 'error',
-          text1: 'Something went wrong',
+    Toast.show({
+      type: isSuccess ? 'success' : 'error',
+      text1: isSuccess ? 'Saved successfully!' : 'Something went wrong',
           position: 'bottom',
           bottomOffset: insets.bottom * 3,
           visibilityTime: 1750,
