@@ -1,18 +1,13 @@
 import React from 'react';
 import { Defs, LinearGradient, Rect, Stop, Svg } from 'react-native-svg';
 
-interface GradientBackgroundProps {
-  expanded: boolean;
-}
+interface GradientBackgroundProps {}
 
-const GradientBackground: React.FC<GradientBackgroundProps> = ({
-  expanded,
-}) => {
+const GradientBackground: React.FC<GradientBackgroundProps> = ({}) => {
   return (
     <Svg
       height="100%"
       width="100%"
-      key={expanded ? 'expanded' : 'collapsed'}
       style={{ position: 'absolute', borderRadius: 10 }}>
       <Defs>
         <LinearGradient id="grad" x1="20%" y1="0%" x2="100%" y2="0%">
