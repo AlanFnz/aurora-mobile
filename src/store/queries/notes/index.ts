@@ -26,18 +26,6 @@ export const noteApi = createApi({
   reducerPath: 'noteApi',
   baseQuery: fetchBaseQuery({ baseUrl: '/' }),
   endpoints: builder => ({
-    createNote: builder.mutation<Note, Omit<Note, 'id'>>({
-      queryFn: newNote => {
-        const newId = notesMockData.length
-          ? Math.max(...notesMockData.map(n => n.id)) + 1
-          : 1;
-        const createdNote = { ...newNote, id: newId, modifiedDate: Date.now() };
-
-        notesMockData.push(createdNote);
-
-        return { data: createdNote };
-      },
-    }),
     fetchNoteDetails: builder.query<Note, number>({
       queryFn: noteId => {
         const note = notesMockData.find(n => n.id === noteId);
@@ -51,6 +39,18 @@ export const noteApi = createApi({
             },
           };
         }
+      },
+    }),
+    createNote: builder.mutation<Note, Omit<Note, 'id' | 'modifiedDate'>>({
+      queryFn: newNote => {
+        const newId = notesMockData.length
+          ? Math.max(...notesMockData.map(n => n.id)) + 1
+          : 1;
+        const createdNote = { ...newNote, id: newId, modifiedDate: Date.now() };
+
+        notesMockData.push(createdNote);
+
+        return { data: createdNote };
       },
     }),
     updateNote: builder.mutation<Note, Partial<Note> & { id?: number }>({
