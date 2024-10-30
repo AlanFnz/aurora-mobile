@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components/native';
 import { Modal, TouchableOpacity } from 'react-native';
 import { Folder } from '@store/foldersSlice';
+import colors from '@theme/colors';
+import BackgroundLayers from '@components/BackgroundLayers';
 
 interface FolderSelectionModalProps {
   visible: boolean;
@@ -35,7 +37,9 @@ const FolderSelectionModal: React.FC<FolderSelectionModalProps> = ({
                 key={folder.id}
                 isSelected={selectedFolderId === folder.id}
                 onPress={() => onFolderSelect(folder.id)}>
-                <DropdownText>{folder.folderName}</DropdownText>
+                <DropdownText isSelected={selectedFolderId === folder.id}>
+                  {folder.folderName}
+                </DropdownText>
               </DropdownItem>
             ))}
             <DropdownItem
@@ -61,7 +65,9 @@ const Overlay = styled.View`
 
 const ModalContainer = styled.View`
   width: 80%;
-  background-color: white;
+  border-width: 0.5px;
+  background-color: ${colors.lowOpacity.whiteSuperLow};
+  border-color: ${colors.lowOpacity.whiteLow};
   padding: 20px;
   border-radius: 10px;
 `;
@@ -70,6 +76,7 @@ const ModalTitle = styled.Text`
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 15px;
+  color: ${colors.common.offWhite};
 `;
 
 const Dropdown = styled.View`
@@ -78,24 +85,31 @@ const Dropdown = styled.View`
 
 const DropdownItem = styled(TouchableOpacity)<{ isSelected?: boolean }>`
   padding: 10px;
-  background-color: ${({ isSelected }) => (isSelected ? '#e0e0e0' : 'white')};
-  border-bottom-width: 1px;
-  border-bottom-color: #ccc;
+  border-radius: 5px;
+  background-color: ${({ isSelected }) =>
+    isSelected ? colors.common.offWhite : 'transparent'};
 `;
 
-const DropdownText = styled.Text`
+const DropdownText = styled.Text<{ isSelected?: boolean }>`
   font-size: 16px;
+  color: ${({ isSelected }) =>
+    isSelected ? colors.common.black : colors.common.offWhite};
 `;
 
 const NewFolderText = styled(DropdownText)`
-  color: blue;
+  color: ${colors.common.lightGray};
 `;
 
 const ConfirmButton = styled.TouchableOpacity`
-  background-color: #007aff;
-  padding: 10px;
+  width: 100%;
+  background-color: ${colors.lowOpacity.black};
+  margin-top: 18px;
+  padding-vertical: 10px;
+  border-radius: 2px;
+  border-width: 1px;
+  border-color: ${colors.common.primaryGray};
+  justify-content: center;
   align-items: center;
-  border-radius: 5px;
 `;
 
 const ConfirmButtonText = styled.Text`
