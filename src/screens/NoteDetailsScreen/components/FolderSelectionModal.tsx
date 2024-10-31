@@ -1,9 +1,8 @@
 import React from 'react';
 import styled from 'styled-components/native';
+import colors from '@theme/colors';
 import { Modal, TouchableOpacity } from 'react-native';
 import { Folder } from '@store/foldersSlice';
-import colors from '@theme/colors';
-import BackgroundLayers from '@components/BackgroundLayers';
 
 interface FolderSelectionModalProps {
   visible: boolean;
