@@ -2,14 +2,15 @@ import React, { useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
-// screens
+// Screens
 import LoginScreen from '@screens/LoginScreen';
 import HomeScreen from '@screens/HomeScreen';
 import SettingsScreen from '@screens/SettingsScreen';
 import NoteDetailsScreen from '@screens/NoteDetailsScreen';
 
-// store
+// Store
 import { useSelector, useDispatch } from 'react-redux';
 import { AppDispatch, RootState } from '@store/index';
 import { bootstrapAsync } from '@store/authSlice';
@@ -34,13 +35,23 @@ function HomeTabs() {
       <Tab.Screen
         name="HomeTab"
         component={HomeStack}
-        options={{ tabBarLabel: 'Home' }}
+        options={{
+          tabBarLabel: 'Home',
+          tabBarIcon: ({ color }) => (
+            <Icon name="home" color={color} size={18} />
+          ),
+        }}
       />
 
       <Tab.Screen
         name="SettingsTab"
         component={SettingsScreen}
-        options={{ tabBarLabel: 'Settings' }}
+        options={{
+          tabBarLabel: 'Settings',
+          tabBarIcon: ({ color }) => (
+            <Icon name="cog" color={color} size={18} />
+          ),
+        }}
       />
     </Tab.Navigator>
   );

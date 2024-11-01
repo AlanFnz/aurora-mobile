@@ -10,15 +10,15 @@ export const tabNavigatorStyles = (): BottomTabNavigationOptions => ({
   },
   tabBarLabelStyle: {
     paddingBottom: 2,
-    fontSize: 12,
+    fontSize: 11,
     fontWeight: '600',
     textTransform: 'uppercase',
     letterSpacing: 1.2,
     color: colors.common.offWhite,
   },
   tabBarActiveTintColor: colors.common.offWhite,
-  tabBarInactiveTintColor: colors.common.secondaryGray,
+  tabBarInactiveTintColor: colors.lowOpacity.whiteMid,
   tabBarIconStyle: {
-    marginTop: 8,
+    marginTop: 4,
   },
 });
