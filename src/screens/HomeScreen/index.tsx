@@ -54,7 +54,7 @@ const Container = styled.View<{
   justify-content: center;
   padding-top: ${props => props.insets.top}px;
   padding-left: ${props => props.insets.left}px;
-  padding-right: ${props => props.insets.right}px;
+  padding-right: ${props => props.insets.right - 2}px;
 `;
 
 export default HomeScreen;

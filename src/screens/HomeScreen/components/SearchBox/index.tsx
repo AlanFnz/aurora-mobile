@@ -43,15 +43,15 @@ const SearchBox: React.FC<SearchBoxProps> = ({
 
 const SearchContainer = styled.View<{ hasInput: boolean }>`
   background-color: ${colors.lowOpacity.whitePointOne};
-  border-radius: 24px;
-  margin: 10px 26px 15px 22px;
+  border-radius: 23px;
+  margin: 10px 22px 15px 20px;
   flex-direction: row;
   align-items: center;
   ${({ hasInput }) => hasInput && 'justify-content: space-between;'}
 `;
 
 const SearchInput = styled.TextInput<{ hasInput: boolean }>`
-  height: 50px;
+  height: 44px;
   font-size: 14px;
   color: ${colors.common.offWhite};
   background-color: ${colors.lowOpacity.transparent};
