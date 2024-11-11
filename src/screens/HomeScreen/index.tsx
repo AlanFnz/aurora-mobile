@@ -17,7 +17,9 @@ const HomeScreen: React.FC = () => {
   const navigation = useNavigation<NoteDetailScreenNavigationProp>();
   const [searchQuery, setSearchQuery] = useState('');
 
-  // TODO: notes searching will be handled by the backend
+  /*
+   *TODO: should I combine local filtering with the query?
+   */
   const allNotes = folders.flatMap(folder => folder.notes);
   const filteredNotes = allNotes.filter(note =>
     note.title.toLowerCase().includes(searchQuery.toLowerCase()),
@@ -39,7 +41,9 @@ const HomeScreen: React.FC = () => {
         )}
         <FloatingActionButton
           onPress={handleNewNote}
+          onLongPress={() => console.log('long press')}
           icon="+"
+          longPressIcon="o"
           testID="new-note-button"
         />
       </Container>

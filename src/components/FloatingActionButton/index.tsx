@@ -1,31 +1,48 @@
 import colors from '@theme/colors';
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components/native';
 
 interface FloatingActionButtonProps {
   onPress: () => void;
+  onLongPress: () => void;
   icon: string;
+  longPressIcon: string;
   testID?: string;
 }
 
 const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
   onPress,
+  onLongPress,
   icon,
+  longPressIcon,
   testID,
 }) => {
+  const [isLongPressed, setIsLongPressed] = useState(false);
+
   return (
-    <ButtonContainer onPress={onPress} testID={testID}>
-      <ButtonText>{icon}</ButtonText>
+    <ButtonContainer
+      onPress={onPress}
+      onLongPress={() => {
+        setIsLongPressed(true);
+        onLongPress();
+      }}
+      onPressOut={() => setIsLongPressed(false)}
+      testID={testID}
+      isLongPressed={isLongPressed}>
+      <ButtonText isLongPressed={isLongPressed}>
+        {isLongPressed ? longPressIcon : icon}
+      </ButtonText>
     </ButtonContainer>
   );
 };
 
-const ButtonContainer = styled.TouchableOpacity`
+const ButtonContainer = styled.TouchableOpacity<{ isLongPressed: boolean }>`
   position: absolute;
   bottom: 25px;
   left: 50%;
   transform: translateX(-35px);
-  background-color: ${colors.common.offWhite};
+  background-color: ${({ isLongPressed }) =>
+    isLongPressed ? colors.common.darkGray : colors.common.offWhite};
   border-radius: 25px;
   width: 70px;
   height: 50px;
@@ -39,9 +56,10 @@ const ButtonContainer = styled.TouchableOpacity`
   opacity: 0.9;
 `;
 
-const ButtonText = styled.Text`
+const ButtonText = styled.Text<{ isLongPressed: boolean }>`
   font-size: 30px;
-  color: ${colors.common.darkGray};
+  color: ${({ isLongPressed }) =>
+    isLongPressed ? colors.common.offWhite : colors.common.darkGray};
   font-weight: 500;
 `;
 
