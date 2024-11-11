@@ -18,17 +18,33 @@ const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
   testID,
 }) => {
   const [isLongPressed, setIsLongPressed] = useState(false);
+  const [opacity, setOpacity] = useState(0.9);
+
+  const handlePressIn = () => {
+    setOpacity(0.2);
+    setIsLongPressed(false);
+  };
+
+  const handleLongPress = () => {
+    setOpacity(0.9);
+    setIsLongPressed(true);
+    onLongPress();
+  };
+
+  const handlePressOut = () => {
+    setOpacity(0.9);
+    setIsLongPressed(false);
+  };
 
   return (
     <ButtonContainer
       onPress={onPress}
-      onLongPress={() => {
-        setIsLongPressed(true);
-        onLongPress();
-      }}
-      onPressOut={() => setIsLongPressed(false)}
-      testID={testID}
-      isLongPressed={isLongPressed}>
+      onLongPress={handleLongPress}
+      onPressIn={handlePressIn}
+      onPressOut={handlePressOut}
+      isLongPressed={isLongPressed}
+      opacity={opacity}
+      testID={testID}>
       <ButtonText isLongPressed={isLongPressed}>
         {isLongPressed ? longPressIcon : icon}
       </ButtonText>
@@ -36,7 +52,10 @@ const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
   );
 };
 
-const ButtonContainer = styled.TouchableOpacity<{ isLongPressed: boolean }>`
+const ButtonContainer = styled.TouchableOpacity<{
+  isLongPressed: boolean;
+  opacity: number;
+}>`
   position: absolute;
   bottom: 25px;
   left: 50%;
@@ -53,7 +72,7 @@ const ButtonContainer = styled.TouchableOpacity<{ isLongPressed: boolean }>`
   shadow-opacity: 0.8;
   shadow-radius: 2px;
   elevation: 5;
-  opacity: 0.9;
+  opacity: ${({ opacity }) => opacity};
 `;
 
 const ButtonText = styled.Text<{ isLongPressed: boolean }>`
