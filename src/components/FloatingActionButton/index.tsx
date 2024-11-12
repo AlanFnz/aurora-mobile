@@ -61,7 +61,7 @@ const ButtonContainer = styled.TouchableOpacity<{
   left: 50%;
   transform: translateX(-35px);
   background-color: ${({ isLongPressed }) =>
-    isLongPressed ? colors.common.darkGray : colors.common.offWhite};
+    isLongPressed ? colors.lowOpacity.whiteMid : colors.common.offWhite};
   border-radius: 25px;
   width: 70px;
   height: 50px;
@@ -78,7 +78,7 @@ const ButtonContainer = styled.TouchableOpacity<{
 const ButtonText = styled.Text<{ isLongPressed: boolean }>`
   font-size: 30px;
   color: ${({ isLongPressed }) =>
-    isLongPressed ? colors.common.offWhite : colors.common.darkGray};
+    isLongPressed ? colors.lowOpacity.redMid : colors.common.darkGray};
   font-weight: 500;
 `;
 
