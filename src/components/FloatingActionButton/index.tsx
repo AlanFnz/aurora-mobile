@@ -1,6 +1,7 @@
-import colors from '@theme/colors';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
+import { Animated, TouchableWithoutFeedback } from 'react-native';
 import styled from 'styled-components/native';
+import colors from '@theme/colors';
 
 interface FloatingActionButtonProps {
   onPress: () => void;
@@ -18,51 +19,102 @@ const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
   testID,
 }) => {
   const [isLongPressed, setIsLongPressed] = useState(false);
-  const [opacity, setOpacity] = useState(0.9);
+
+  const borderRadiusAnim = useRef(new Animated.Value(25)).current;
+  const bottomPositionAnim = useRef(new Animated.Value(25)).current;
+  const opacityAnim = useRef(new Animated.Value(0.9)).current;
+  const heightAnim = useRef(new Animated.Value(50)).current;
 
   const handlePressIn = () => {
-    setOpacity(0.2);
-    setIsLongPressed(false);
+    Animated.timing(opacityAnim, {
+      toValue: 0.2,
+      duration: 100,
+      useNativeDriver: false,
+    }).start();
   };
 
   const handleLongPress = () => {
-    setOpacity(0.9);
     setIsLongPressed(true);
+    Animated.parallel([
+      Animated.timing(borderRadiusAnim, {
+        toValue: 35,
+        duration: 300,
+        useNativeDriver: false,
+      }),
+      Animated.timing(bottomPositionAnim, {
+        toValue: 35,
+        duration: 300,
+        useNativeDriver: false,
+      }),
+      Animated.timing(opacityAnim, {
+        toValue: 0.9,
+        duration: 300,
+        useNativeDriver: false,
+      }),
+      Animated.timing(heightAnim, {
+        toValue: 70,
+        duration: 300,
+        useNativeDriver: false,
+      }),
+    ]).start();
+
     onLongPress();
   };
 
   const handlePressOut = () => {
-    setOpacity(0.9);
+    !isLongPressed && onPress();
+    Animated.parallel([
+      Animated.timing(borderRadiusAnim, {
+        toValue: 25,
+        duration: 300,
+        useNativeDriver: false,
+      }),
+      Animated.timing(bottomPositionAnim, {
+        toValue: 25,
+        duration: 300,
+        useNativeDriver: false,
+      }),
+      Animated.timing(opacityAnim, {
+        toValue: 0.9,
+        duration: 300,
+        useNativeDriver: false,
+      }),
+      Animated.timing(heightAnim, {
+        toValue: 50,
+        duration: 300,
+        useNativeDriver: false,
+      }),
+    ]).start();
+
     setIsLongPressed(false);
   };
 
   return (
-    <ButtonContainer
-      onPress={onPress}
-      onLongPress={handleLongPress}
+    <TouchableWithoutFeedback
       onPressIn={handlePressIn}
       onPressOut={handlePressOut}
-      isLongPressed={isLongPressed}
-      opacity={opacity}
-      testID={testID}>
-      <ButtonText isLongPressed={isLongPressed}>
-        {isLongPressed ? longPressIcon : icon}
-      </ButtonText>
-    </ButtonContainer>
+      onLongPress={handleLongPress}>
+      <AnimatedButtonContainer
+        style={{
+          height: heightAnim,
+          borderRadius: borderRadiusAnim,
+          bottom: bottomPositionAnim,
+          opacity: opacityAnim,
+        }}
+        testID={testID}>
+        <ButtonText isLongPressed={isLongPressed}>
+          {isLongPressed ? longPressIcon : icon}
+        </ButtonText>
+      </AnimatedButtonContainer>
+    </TouchableWithoutFeedback>
   );
 };
 
-const ButtonContainer = styled.TouchableOpacity<{
-  isLongPressed: boolean;
-  opacity: number;
-}>`
+const AnimatedButtonContainer = styled(Animated.View)`
   position: absolute;
-  bottom: 25px;
   left: 50%;
   transform: translateX(-35px);
-  background-color: ${({ isLongPressed }) =>
-    isLongPressed ? colors.lowOpacity.whiteMid : colors.common.offWhite};
-  border-radius: 25px;
+  background-color: ${colors.common.offWhite};
   width: 70px;
   height: 50px;
   justify-content: center;
@@ -72,7 +124,6 @@ const ButtonContainer = styled.TouchableOpacity<{
   shadow-opacity: 0.8;
   shadow-radius: 2px;
   elevation: 5;
-  opacity: ${({ opacity }) => opacity};
 `;
 
 const ButtonText = styled.Text<{ isLongPressed: boolean }>`
