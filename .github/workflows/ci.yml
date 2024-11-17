@@ -24,8 +24,9 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: Run ESLint
-        run: yarn lint
+#      - name: Run ESLint
+#        run: yarn lint
+# disabling step until eslint issue #10338 is fixed
 
       - name: Run Tests
         run: yarn test
