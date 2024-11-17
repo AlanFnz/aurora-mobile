@@ -1636,6 +1636,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/runtime@npm:^7.9.2":
+  version: 7.26.0
+  resolution: "@babel/runtime@npm:7.26.0"
+  dependencies:
+    regenerator-runtime: ^0.14.0
+  checksum: c8e2c0504ab271b3467a261a8f119bf2603eb857a0d71e37791f4e3fae00f681365073cc79f141ddaa90c6077c60ba56448004ad5429d07ac73532be9f7cf28a
+  languageName: node
+  linkType: hard
+
 "@babel/template@npm:^7.0.0, @babel/template@npm:^7.24.7, @babel/template@npm:^7.25.0, @babel/template@npm:^7.3.3":
   version: 7.25.0
   resolution: "@babel/template@npm:7.25.0"
@@ -2999,6 +3008,15 @@ __metadata:
     "@types/prop-types": "*"
     csstype: ^3.0.2
   checksum: 63d2ff473b348c902b68c20be55d2c5124d078c4336c2d1778f316c27789ed596657e8e714022ce14fb24994b0960fc64c913e629bb0bf85815355b0c31eb46b
+  languageName: node
+  linkType: hard
+
+"@types/redux-mock-store@npm:^1.0.6":
+  version: 1.0.6
+  resolution: "@types/redux-mock-store@npm:1.0.6"
+  dependencies:
+    redux: ^4.0.5
+  checksum: 5c799d2fc5b3f0f84bfcd6243c56b1ac98be6707057f570b5e51e9d305f446978cc2958c7e0b629ebf73293f15a79765517e6d0a1df0371fd27551f7128325c7
   languageName: node
   linkType: hard
 
@@ -7074,6 +7092,7 @@ __metadata:
     "@types/react": ^18.3.5
     "@types/react-native-vector-icons": ^6.4.18
     "@types/react-test-renderer": ^18.3.0
+    "@types/redux-mock-store": ^1.0.6
     "@types/styled-components": ^5.1.34
     babel-jest: ^29.7.0
     babel-plugin-module-resolver: ^5.0.2
@@ -8903,6 +8922,15 @@ __metadata:
   peerDependencies:
     redux: ^5.0.0
   checksum: bea96f8233975aad4c9f24ca1ffd08ac7ec91eaefc26e7ba9935544dc55d7f09ba2aa726676dab53dc79d0c91e8071f9729cddfea927f4c41839757d2ade0f50
+  languageName: node
+  linkType: hard
+
+"redux@npm:^4.0.5":
+  version: 4.2.1
+  resolution: "redux@npm:4.2.1"
+  dependencies:
+    "@babel/runtime": ^7.9.2
+  checksum: f63b9060c3a1d930ae775252bb6e579b42415aee7a23c4114e21a0b4ba7ec12f0ec76936c00f546893f06e139819f0e2855e0d55ebfce34ca9c026241a6950dd
   languageName: node
   linkType: hard
 
