@@ -18,6 +18,7 @@ export const useFloatingButtonHandlers = ({
   const bottomPositionAnim = useRef(new Animated.Value(25)).current;
   const opacityAnim = useRef(new Animated.Value(0.9)).current;
   const heightAnim = useRef(new Animated.Value(50)).current;
+  const translateYAnim = useRef(new Animated.Value(0)).current;
 
   const handlePressIn = () => {
     Animated.timing(opacityAnim, {
@@ -32,6 +33,11 @@ export const useFloatingButtonHandlers = ({
     Animated.parallel([
       Animated.timing(bottomPositionAnim, {
         toValue: 35,
+        duration: pressAnimationDuration,
+        useNativeDriver: false,
+      }),
+      Animated.timing(translateYAnim, {
+        toValue: -5,
         duration: pressAnimationDuration,
         useNativeDriver: false,
       }),
@@ -60,6 +66,11 @@ export const useFloatingButtonHandlers = ({
         duration: releaseAnimationDuration,
         useNativeDriver: false,
       }),
+      Animated.timing(translateYAnim, {
+        toValue: 0,
+        duration: pressAnimationDuration,
+        useNativeDriver: false,
+      }),
       Animated.timing(opacityAnim, {
         toValue: 0.9,
         duration: releaseAnimationDuration,
@@ -75,11 +86,16 @@ export const useFloatingButtonHandlers = ({
     setIsLongPressed(false);
   };
 
+  const animatedStyles = {
+    height: heightAnim,
+    bottom: bottomPositionAnim,
+    opacity: opacityAnim,
+    transform: [{ translateY: translateYAnim }, { translateX: -35 }],
+  };
+
   return {
     isLongPressed,
-    bottomPositionAnim,
-    opacityAnim,
-    heightAnim,
+    animatedStyles,
     handlePressIn,
     handlePressOut,
     handleLongPress,

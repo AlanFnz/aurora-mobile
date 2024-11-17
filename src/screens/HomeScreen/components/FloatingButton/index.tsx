@@ -21,9 +21,7 @@ const FloatingButton: React.FC<FloatingButtonProps> = ({
 }) => {
   const {
     isLongPressed,
-    bottomPositionAnim,
-    opacityAnim,
-    heightAnim,
+    animatedStyles,
     handlePressIn,
     handlePressOut,
     handleLongPress,
@@ -34,13 +32,7 @@ const FloatingButton: React.FC<FloatingButtonProps> = ({
       onPressIn={handlePressIn}
       onPressOut={handlePressOut}
       onLongPress={handleLongPress}>
-      <AnimatedButtonContainer
-        style={{
-          height: heightAnim,
-          bottom: bottomPositionAnim,
-          opacity: opacityAnim,
-        }}
-        testID={testID}>
+      <AnimatedButtonContainer style={animatedStyles} testID={testID}>
         <ButtonText isLongPressed={isLongPressed}>
           {isLongPressed ? longPressIcon : icon}
         </ButtonText>
@@ -56,6 +48,7 @@ const AnimatedButtonContainer = styled(Animated.View)`
   background-color: ${colors.common.offWhite};
   width: 70px;
   height: 50px;
+  border-radius: 35px;
   justify-content: center;
   align-items: center;
   shadow-color: ${colors.lowOpacity.black};
