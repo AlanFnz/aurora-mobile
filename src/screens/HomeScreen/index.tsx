@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import FolderList from './components/FolderList';
-import BackgroundLayers from '../../components/BackgroundLayers';
 import styled from 'styled-components/native';
-import SearchBox from './components/SearchBox';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useSelector } from 'react-redux';
 import { RootState } from '@store/index';
-import NotesResultsList from './components/NotesResultsList';
-import FloatingActionButton from '@screens/HomeScreen/components/FloatingActionButton';
 import { useNavigation } from '@react-navigation/native';
 import { NoteDetailScreenNavigationProp } from '@navigation/types';
+import BackgroundLayers from '../../components/BackgroundLayers';
+import FolderList from './components/FolderList';
+import SearchBox from './components/SearchBox';
+import NotesResultsList from './components/NotesResultsList';
+import FloatingButton from './components/FloatingButton';
 
 const HomeScreen: React.FC = () => {
   const insets = useSafeAreaInsets();
@@ -39,7 +39,7 @@ const HomeScreen: React.FC = () => {
         ) : (
           <FolderList testID={'folder-list'} folders={folders} />
         )}
-        <FloatingActionButton
+        <FloatingButton
           onPress={handleNewNote}
           onLongPress={() => console.log('long press')}
           icon="+"
