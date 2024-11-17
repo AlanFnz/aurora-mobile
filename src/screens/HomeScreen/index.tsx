@@ -25,6 +25,10 @@ const HomeScreen: React.FC = () => {
     note.title.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
+  const handleRecordVoiceNote = () => {
+    console.log('recording voice note');
+  };
+
   const handleNewNote = () => {
     navigation.navigate('NoteDetails', { isNew: true });
   };
@@ -41,9 +45,7 @@ const HomeScreen: React.FC = () => {
         )}
         <FloatingButton
           onPress={handleNewNote}
-          onLongPress={() => console.log('long press')}
-          icon="+"
-          longPressIcon="o"
+          onLongPress={handleRecordVoiceNote}
           testID="new-note-button"
         />
       </Container>

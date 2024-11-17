@@ -7,16 +7,12 @@ import { AnimatedButtonContainer, FullCircleIcon, PlusIcon } from './styles';
 interface FloatingButtonProps {
   onPress: () => void;
   onLongPress: () => void;
-  icon: string;
-  longPressIcon: string;
   testID?: string;
 }
 
 const FloatingButton: React.FC<FloatingButtonProps> = ({
   onPress,
   onLongPress,
-  icon,
-  longPressIcon,
   testID,
 }) => {
   const {
