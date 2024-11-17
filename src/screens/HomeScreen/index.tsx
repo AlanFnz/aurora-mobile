@@ -7,7 +7,7 @@ import SearchBox from './components/SearchBox';
 import { useSelector } from 'react-redux';
 import { RootState } from '@store/index';
 import NotesResultsList from './components/NotesResultsList';
-import FloatingActionButton from '@components/FloatingActionButton';
+import FloatingActionButton from '@screens/HomeScreen/components/FloatingActionButton';
 import { useNavigation } from '@react-navigation/native';
 import { NoteDetailScreenNavigationProp } from '@navigation/types';
 
