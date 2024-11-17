@@ -2,9 +2,11 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { render } from '@testing-library/react-native';
-import configureStore from 'redux-mock-store';
+import { fireEvent, render } from '@testing-library/react-native';
+import configureStore, { MockStoreEnhanced } from 'redux-mock-store';
 import HomeScreen from '@screens/HomeScreen';
+import foldersMockData from '@store/mockData/folders.mockData';
+import { RootState } from '@store/index';
 
 jest.mock('@screens/HomeScreen/components/FolderList', () => 'FolderList');
 jest.mock('@screens/HomeScreen/components/SearchBox', () => 'SearchBox');
@@ -23,12 +25,18 @@ jest.mock('react-native-safe-area-context', () => ({
 }));
 
 describe('HomeScreen', () => {
-  const mockStore = configureStore();
+  const mockStore = configureStore<Partial<RootState>>([]);
   const initialState = {
-    folders: { folders: [{ id: 1, name: 'Test Folder', notes: [] }] },
+    folders: {
+      folders: foldersMockData,
+    },
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  let store: MockStoreEnhanced<Partial<RootState>>;
+
   beforeEach(() => {
+    store = mockStore(initialState);
     (useSafeAreaInsets as jest.Mock).mockReturnValue({
       top: 20,
       bottom: 0,
@@ -58,9 +66,7 @@ describe('HomeScreen', () => {
 
   it('renders the container with correct insets', () => {
     const { getByTestId } = renderWithProviders(<HomeScreen />);
-
     const container = getByTestId('container');
-
     expect(container.props.style.paddingTop).toBe(20);
     expect(container.props.style.paddingLeft).toBe(0);
     expect(container.props.style.paddingRight).toBe(-2);
@@ -69,5 +75,14 @@ describe('HomeScreen', () => {
   it('renders the folder list', () => {
     const { getByTestId } = renderWithProviders(<HomeScreen />);
     expect(getByTestId('folder-list')).toBeTruthy();
+  });
+
+  it('renders the notes results list when there is a search query', () => {
+    const { getByTestId } = renderWithProviders(<HomeScreen />);
+
+    const searchInput = getByTestId('search-input');
+    fireEvent.changeText(searchInput, 'Sample Note');
+
+    expect(getByTestId('notes-results')).toBeTruthy();
   });
 });

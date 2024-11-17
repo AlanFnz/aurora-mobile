@@ -3,18 +3,18 @@ import { render, fireEvent, waitFor } from '@testing-library/react-native';
 import configureStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+import NoteDetailsScreen from '@screens/NoteDetailsScreen';
+import { RootStackParamList } from '@navigation/types';
 import {
   useFetchNoteDetailsQuery,
   useUpdateNoteMutation,
 } from '@store/queries/notes';
-import NoteDetailsScreen from '@screens/NoteDetailsScreen';
 import {
   NavigationContainer,
   RouteProp,
   useNavigation,
 } from '@react-navigation/native';
-import { RootStackParamList } from '@navigation/types';
-import { formatTimestampToDateTime } from '@root/src/utils';
 
 jest.mock('@store/queries/notes', () => ({
   useFetchNoteDetailsQuery: jest.fn(),
@@ -26,9 +26,10 @@ jest.mock('react-native-safe-area-context', () => ({
   useSafeAreaInsets: jest.fn(),
 }));
 
-jest.mock('@react-navigation/native', () => ({
-  ...jest.requireActual('@react-navigation/native'),
-  useNavigation: jest.fn(),
+jest.mock('@store/queries/notes', () => ({
+  useFetchNoteDetailsQuery: jest.fn(),
+  useUpdateNoteMutation: jest.fn(() => [jest.fn()]),
+  useCreateNoteMutation: jest.fn(() => [jest.fn().mockResolvedValue({})]),
 }));
 
 const mockStore = configureStore([]);
@@ -40,7 +41,7 @@ const mockRoute: RouteProp<RootStackParamList, 'NoteDetails'> = {
   params: { noteId: 1, isNew: false },
 };
 
-describe('NoteDetailScreen', () => {
+describe('NoteDetailsScreen', () => {
   const mockedDate = new Date('2024-10-13T11:34:00').getTime();
 
   beforeEach(() => {
@@ -96,7 +97,7 @@ describe('NoteDetailScreen', () => {
       data: {
         id: '1',
         title: 'Test Note',
-        modifiedDate: Date.now(),
+        modifiedDate: mockedDate,
         content: 'This is the content of the note',
       },
       isLoading: false,
@@ -209,6 +210,6 @@ describe('NoteDetailScreen', () => {
       </Provider>,
     );
 
-    expect(getByText(formatTimestampToDateTime(mockedDate))).toBeTruthy();
+    expect(getByText('Oct 13, 2024 at 11:34 AM')).toBeTruthy();
   });
 });
