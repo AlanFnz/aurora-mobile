@@ -1,18 +1,23 @@
 import React from 'react';
-import { render, fireEvent, waitFor } from '@testing-library/react-native';
+import {
+  render,
+  fireEvent,
+  waitFor,
+  screen,
+} from '@testing-library/react-native';
+import { NavigationContainer, RouteProp } from '@react-navigation/native';
+import { Provider } from 'react-redux';
+import { configureStore } from '@reduxjs/toolkit';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+import NoteDetailsScreen from '@screens/NoteDetailsScreen';
+import { RootStackParamList } from '@navigation/types';
+import foldersReducer from '@store/foldersSlice';
+import authReducer from '@store/authSlice';
 import {
   useFetchNoteDetailsQuery,
   useUpdateNoteMutation,
 } from '@store/queries/notes';
-import NoteDetailsScreen from '@screens/NoteDetailsScreen';
-import {
-  NavigationContainer,
-  RouteProp,
-  useNavigation,
-} from '@react-navigation/native';
-import { RootStackParamList } from '@navigation/types';
-import { formatTimestampToDateTime } from '@root/src/utils';
 
 jest.mock('@store/queries/notes', () => ({
   useFetchNoteDetailsQuery: jest.fn(),
@@ -23,20 +28,25 @@ jest.mock('react-native-safe-area-context', () => ({
   useSafeAreaInsets: jest.fn(),
 }));
 
-jest.mock('@react-navigation/native', () => ({
-  ...jest.requireActual('@react-navigation/native'),
-  useNavigation: jest.fn(),
+jest.mock('@store/queries/notes', () => ({
+  useFetchNoteDetailsQuery: jest.fn(),
+  useUpdateNoteMutation: jest.fn(() => [jest.fn()]),
+  useCreateNoteMutation: jest.fn(() => [jest.fn().mockResolvedValue({})]),
 }));
 
-const mockNavigate = jest.fn();
-const mockNavigation = { navigate: mockNavigate };
+const mockNavigation = {
+  navigate: jest.fn(),
+  goBack: jest.fn(),
+  setParams: jest.fn(),
+};
+
 const mockRoute: RouteProp<RootStackParamList, 'NoteDetails'> = {
   key: 'NoteDetailKey',
   name: 'NoteDetails',
-  params: { noteId: 1 },
+  params: { noteId: 1, isNew: false },
 };
 
-describe('NoteDetailScreen', () => {
+describe('NoteDetailsScreen', () => {
   const mockedDate = new Date('2024-10-13T11:34:00').getTime();
 
   beforeEach(() => {
@@ -48,13 +58,38 @@ describe('NoteDetailScreen', () => {
       left: 0,
       right: 0,
     });
-
-    (useNavigation as jest.Mock).mockReturnValue(mockNavigation);
   });
 
   afterEach(() => {
     jest.restoreAllMocks();
   });
+
+  const renderWithProvider = (ui: React.ReactElement) => {
+    const mockStore = configureStore({
+      reducer: {
+        folders: foldersReducer,
+        auth: authReducer,
+      },
+      preloadedState: {
+        folders: {
+          folders: [
+            {
+              id: 1,
+              folderName: 'Personal',
+              notes: [],
+            },
+          ],
+        },
+        auth: { userToken: 'mockToken', isLoading: false, isSignout: false },
+      },
+    });
+
+    return render(
+      <Provider store={mockStore}>
+        <NavigationContainer>{ui}</NavigationContainer>
+      </Provider>,
+    );
+  };
 
   it('renders loading state initially', () => {
     (useFetchNoteDetailsQuery as jest.Mock).mockReturnValue({
@@ -62,13 +97,11 @@ describe('NoteDetailScreen', () => {
       isLoading: true,
     });
 
-    const { getByText } = render(
-      <NavigationContainer>
-        <NoteDetailsScreen
-          route={mockRoute}
-          navigation={mockNavigation as any}
-        />
-      </NavigationContainer>,
+    const { getByText } = renderWithProvider(
+      <NoteDetailsScreen
+        route={mockRoute}
+        navigation={mockNavigation as any}
+      />,
     );
 
     expect(getByText('Loading...')).toBeTruthy();
@@ -79,13 +112,13 @@ describe('NoteDetailScreen', () => {
       data: {
         id: '1',
         title: 'Test Note',
-        modifiedDate: Date.now(),
+        modifiedDate: mockedDate,
         content: 'This is the content of the note',
       },
       isLoading: false,
     });
 
-    const { getByDisplayValue, getByText } = render(
+    const { getByDisplayValue, getByText } = renderWithProvider(
       <NoteDetailsScreen
         route={mockRoute}
         navigation={mockNavigation as any}
@@ -110,7 +143,7 @@ describe('NoteDetailScreen', () => {
 
     (useUpdateNoteMutation as jest.Mock).mockReturnValue([mockUpdateNote]);
 
-    const { getByDisplayValue, getByText } = render(
+    const { getByDisplayValue, getByText } = renderWithProvider(
       <NoteDetailsScreen
         route={mockRoute}
         navigation={mockNavigation as any}
@@ -122,7 +155,7 @@ describe('NoteDetailScreen', () => {
       getByDisplayValue('This is the content of the note'),
       'Updated Note Content',
     );
-    fireEvent.press(getByText('Save Changes'));
+    fireEvent.press(screen.getByTestId('save-button'));
 
     await waitFor(() => {
       expect(mockUpdateNote).toHaveBeenCalledWith({
@@ -144,13 +177,13 @@ describe('NoteDetailScreen', () => {
       isLoading: false,
     });
 
-    const { getByText } = render(
+    const { getByText } = renderWithProvider(
       <NoteDetailsScreen
         route={mockRoute}
         navigation={mockNavigation as any}
       />,
     );
 
-    expect(getByText(formatTimestampToDateTime(mockedDate))).toBeTruthy();
+    expect(getByText('Oct 13, 2024 at 11:34 AM')).toBeTruthy();
   });
 });

@@ -6,7 +6,7 @@ import { TouchableOpacity } from 'react-native';
 
 const SaveButton: React.FC<{ handleSave: any }> = ({ handleSave }) => {
   return (
-    <ButtonContainer onPress={handleSave} testID="back-button">
+    <ButtonContainer onPress={handleSave} testID="save-button">
       <Icon name="save-sharp" size={20} color={colors.common.offWhite} />
     </ButtonContainer>
   );

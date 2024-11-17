@@ -16,7 +16,7 @@ const PlusIcon = ({ color }: { color: string }) => (
       x2="15"
       y2="25"
       stroke={color}
-      strokeWidth="3  "
+      strokeWidth="3"
       strokeLinecap="round"
     />
     <Line
