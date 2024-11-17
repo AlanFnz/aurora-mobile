@@ -38,22 +38,22 @@ const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
     Animated.parallel([
       Animated.timing(borderRadiusAnim, {
         toValue: 35,
-        duration: 300,
+        duration: 190,
         useNativeDriver: false,
       }),
       Animated.timing(bottomPositionAnim, {
         toValue: 35,
-        duration: 300,
+        duration: 190,
         useNativeDriver: false,
       }),
       Animated.timing(opacityAnim, {
         toValue: 0.9,
-        duration: 300,
+        duration: 190,
         useNativeDriver: false,
       }),
       Animated.timing(heightAnim, {
         toValue: 70,
-        duration: 300,
+        duration: 190,
         useNativeDriver: false,
       }),
     ]).start();
@@ -66,22 +66,22 @@ const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
     Animated.parallel([
       Animated.timing(borderRadiusAnim, {
         toValue: 25,
-        duration: 300,
+        duration: 150,
         useNativeDriver: false,
       }),
       Animated.timing(bottomPositionAnim, {
         toValue: 25,
-        duration: 300,
+        duration: 150,
         useNativeDriver: false,
       }),
       Animated.timing(opacityAnim, {
         toValue: 0.9,
-        duration: 300,
+        duration: 150,
         useNativeDriver: false,
       }),
       Animated.timing(heightAnim, {
         toValue: 50,
-        duration: 300,
+        duration: 150,
         useNativeDriver: false,
       }),
     ]).start();
