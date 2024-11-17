@@ -1,8 +1,8 @@
-import React, { useRef, useState } from 'react';
-import { Animated, TouchableWithoutFeedback } from 'react-native';
-import styled from 'styled-components/native';
+import React from 'react';
 import colors from '@theme/colors';
+import { TouchableWithoutFeedback } from 'react-native';
 import { useFloatingButtonHandlers } from './hooks/useFloatingButtonHandlers';
+import { AnimatedButtonContainer, FullCircleIcon, PlusIcon } from './styles';
 
 interface FloatingButtonProps {
   onPress: () => void;
@@ -33,36 +33,14 @@ const FloatingButton: React.FC<FloatingButtonProps> = ({
       onPressOut={handlePressOut}
       onLongPress={handleLongPress}>
       <AnimatedButtonContainer style={animatedStyles} testID={testID}>
-        <ButtonText isLongPressed={isLongPressed}>
-          {isLongPressed ? longPressIcon : icon}
-        </ButtonText>
+        {isLongPressed ? (
+          <FullCircleIcon color={colors.lowOpacity.redMid} />
+        ) : (
+          <PlusIcon color={colors.common.darkGray} />
+        )}
       </AnimatedButtonContainer>
     </TouchableWithoutFeedback>
   );
 };
-
-const AnimatedButtonContainer = styled(Animated.View)`
-  position: absolute;
-  left: 50%;
-  transform: translateX(-35px);
-  background-color: ${colors.common.offWhite};
-  width: 70px;
-  height: 50px;
-  border-radius: 35px;
-  justify-content: center;
-  align-items: center;
-  shadow-color: ${colors.lowOpacity.black};
-  shadow-offset: 0px 2px;
-  shadow-opacity: 0.8;
-  shadow-radius: 2px;
-  elevation: 5;
-`;
-
-const ButtonText = styled.Text<{ isLongPressed: boolean }>`
-  font-size: 30px;
-  color: ${({ isLongPressed }) =>
-    isLongPressed ? colors.lowOpacity.redMid : colors.common.darkGray};
-  font-weight: 500;
-`;
 
 export default FloatingButton;

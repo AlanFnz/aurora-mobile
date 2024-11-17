@@ -32,7 +32,7 @@ export const useFloatingButtonHandlers = ({
     setIsLongPressed(true);
     Animated.parallel([
       Animated.timing(bottomPositionAnim, {
-        toValue: 35,
+        toValue: 25,
         duration: pressAnimationDuration,
         useNativeDriver: false,
       }),
@@ -57,9 +57,8 @@ export const useFloatingButtonHandlers = ({
   };
 
   const handlePressOut = () => {
-    if (!isLongPressed) {
-      onPress();
-    }
+    if (!isLongPressed) onPress();
+
     Animated.parallel([
       Animated.timing(bottomPositionAnim, {
         toValue: 25,
