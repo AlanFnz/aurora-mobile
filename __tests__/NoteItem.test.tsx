@@ -63,7 +63,7 @@ describe('NoteItem', () => {
   });
 
   it('renders the divider for all but the last item', () => {
-    const { getByTestId, queryByTestId } = render(
+    const { getByTestId } = render(
       <NoteItem index={0} item={item} notesLength={2} />,
     );
 

@@ -26,7 +26,7 @@ describe('FolderList', () => {
   it('renders the correct number of folders', () => {
     const { getAllByTestId } = render(<FolderList folders={mockFolders} />);
 
-    expect(getAllByTestId('folder-component').length).toBe(mockFolders.length);
+    expect(getAllByTestId('folder-component')).toHaveLength(mockFolders.length);
   });
 
   it('renders no folders when the list is empty', () => {

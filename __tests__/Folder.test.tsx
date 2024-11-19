@@ -65,7 +65,7 @@ describe('Folder', () => {
 
     const flatList = getByTestId('flat-list');
     expect(flatList).toBeTruthy();
-    expect(flatList.props.data.length).toBe(2);
+    expect(flatList.props.data).toHaveLength(2);
 
     expect(getByTestId('note-item-1')).toBeTruthy();
     expect(getByTestId('note-item-2')).toBeTruthy();
