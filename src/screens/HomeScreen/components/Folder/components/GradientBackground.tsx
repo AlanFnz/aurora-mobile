@@ -1,9 +1,7 @@
 import React from 'react';
 import { Defs, LinearGradient, Rect, Stop, Svg } from 'react-native-svg';
 
-interface GradientBackgroundProps {}
-
-const GradientBackground: React.FC<GradientBackgroundProps> = ({}) => {
+const GradientBackground: React.FC = () => {
   return (
     <Svg
       height="100%"

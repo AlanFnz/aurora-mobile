@@ -1,3 +1,4 @@
+import React from 'react';
 import { Animated } from 'react-native';
 import { Svg, Circle, Line } from 'react-native-svg';
 import styled from 'styled-components/native';

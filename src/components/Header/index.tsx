@@ -1,6 +1,5 @@
 import React from 'react';
 import BackButtonIcon from 'react-native-vector-icons/FontAwesome';
-import Icon from 'react-native-vector-icons/Ionicons';
 import colors from '@theme/colors';
 import { useNavigation } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';

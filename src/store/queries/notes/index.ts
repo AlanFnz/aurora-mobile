@@ -10,18 +10,6 @@ export interface Note {
   modifiedDate: number;
 }
 
-interface SelectedNoteState {
-  selectedNote: Note | null;
-  loading: boolean;
-  error: string | null;
-}
-
-const initialState: SelectedNoteState = {
-  selectedNote: null,
-  loading: false,
-  error: null,
-};
-
 export const noteApi = createApi({
   reducerPath: 'noteApi',
   baseQuery: fetchBaseQuery({ baseUrl: '/' }),

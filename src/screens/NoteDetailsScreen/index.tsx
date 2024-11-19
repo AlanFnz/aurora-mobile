@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components/native';
 import Toast from 'react-native-toast-message';
 import BackgroundLayers from '@root/src/components/BackgroundLayers';
 import Header from '@root/src/components/Header';
@@ -58,6 +57,7 @@ const NoteDetailsScreen: React.FC<NoteDetailsScreenProps> = ({ route }) => {
         await updateNote({ id: note.id, title, content });
         showToast(true);
       } catch (error) {
+        console.error(error);
         showToast(false);
       }
     }
@@ -115,6 +115,7 @@ const NoteDetailsScreen: React.FC<NoteDetailsScreenProps> = ({ route }) => {
 
         showToast(true);
       } catch (error) {
+        console.error(error);
         showToast(false);
       }
     }
