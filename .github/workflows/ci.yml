@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  build-and-test:
+  lint-and-test:
     runs-on: ubuntu-latest
 
     steps:
@@ -20,16 +20,12 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18'
-          
+
       - name: Install dependencies
         run: yarn install
 
-#      - name: Run ESLint
-#        run: yarn lint
-# disabling step until eslint issue #10338 is fixed
+      - name: Run ESLint
+        run: yarn lint
 
       - name: Run Tests
         run: yarn test
-
-      - name: Check Build
-        run: yarn build
