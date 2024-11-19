@@ -7,7 +7,7 @@ import renderer from 'react-test-renderer';
 it('renders correctly', async () => {
   let tree;
 
-    await act(async () => {
+  await act(async () => {
     tree = renderer.create(<App />);
   });
 

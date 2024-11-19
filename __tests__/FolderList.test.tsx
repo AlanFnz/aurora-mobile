@@ -24,7 +24,7 @@ describe('FolderList', () => {
   });
 
   it('renders the correct number of folders', () => {
-    const { getAllByTestId } = render(<FolderList />);
+    const { getAllByTestId } = render(<FolderList folders={mockFolders} />);
 
     expect(getAllByTestId('folder-component').length).toBe(mockFolders.length);
   });
@@ -34,7 +34,7 @@ describe('FolderList', () => {
       callback({ folders: { folders: [] } }),
     );
 
-    const { queryByTestId } = render(<FolderList />);
+    const { queryByTestId } = render(<FolderList folders={[]} />);
 
     expect(queryByTestId('folder-component')).toBeNull();
   });

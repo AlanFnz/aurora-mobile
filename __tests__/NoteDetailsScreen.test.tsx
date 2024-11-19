@@ -1,5 +1,7 @@
 import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react-native';
+import configureStore from 'redux-mock-store';
+import { Provider } from 'react-redux';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import {
   useFetchNoteDetailsQuery,
@@ -17,6 +19,7 @@ import { formatTimestampToDateTime } from '@root/src/utils';
 jest.mock('@store/queries/notes', () => ({
   useFetchNoteDetailsQuery: jest.fn(),
   useUpdateNoteMutation: jest.fn(() => [jest.fn()]),
+  useCreateNoteMutation: jest.fn(() => [jest.fn()]),
 }));
 
 jest.mock('react-native-safe-area-context', () => ({
@@ -28,12 +31,13 @@ jest.mock('@react-navigation/native', () => ({
   useNavigation: jest.fn(),
 }));
 
+const mockStore = configureStore([]);
 const mockNavigate = jest.fn();
 const mockNavigation = { navigate: mockNavigate };
 const mockRoute: RouteProp<RootStackParamList, 'NoteDetails'> = {
   key: 'NoteDetailKey',
   name: 'NoteDetails',
-  params: { noteId: 1 },
+  params: { noteId: 1, isNew: false },
 };
 
 describe('NoteDetailScreen', () => {
@@ -48,9 +52,9 @@ describe('NoteDetailScreen', () => {
       left: 0,
       right: 0,
     });
-
-    (useNavigation as jest.Mock).mockReturnValue(mockNavigation);
   });
+
+  (useNavigation as jest.Mock).mockReturnValue(mockNavigation);
 
   afterEach(() => {
     jest.restoreAllMocks();
@@ -62,13 +66,26 @@ describe('NoteDetailScreen', () => {
       isLoading: true,
     });
 
+    const store = mockStore({
+      folders: {
+        folders: [
+          {
+            id: 1,
+            folderName: 'Test Folder',
+            notes: [],
+          },
+        ],
+      },
+    });
     const { getByText } = render(
-      <NavigationContainer>
-        <NoteDetailsScreen
-          route={mockRoute}
-          navigation={mockNavigation as any}
-        />
-      </NavigationContainer>,
+      <Provider store={store}>
+        <NavigationContainer>
+          <NoteDetailsScreen
+            route={mockRoute}
+            navigation={mockNavigation as any}
+          />
+        </NavigationContainer>
+      </Provider>,
     );
 
     expect(getByText('Loading...')).toBeTruthy();
@@ -85,11 +102,24 @@ describe('NoteDetailScreen', () => {
       isLoading: false,
     });
 
-    const { getByDisplayValue, getByText } = render(
-      <NoteDetailsScreen
-        route={mockRoute}
-        navigation={mockNavigation as any}
-      />,
+    const store = mockStore({
+      folders: {
+        folders: [
+          {
+            id: 1,
+            folderName: 'Test Folder',
+            notes: [],
+          },
+        ],
+      },
+    });
+    const { getByDisplayValue } = render(
+      <Provider store={store}>
+        <NoteDetailsScreen
+          route={mockRoute}
+          navigation={mockNavigation as any}
+        />
+      </Provider>,
     );
 
     expect(getByDisplayValue('Test Note')).toBeTruthy();
@@ -110,11 +140,25 @@ describe('NoteDetailScreen', () => {
 
     (useUpdateNoteMutation as jest.Mock).mockReturnValue([mockUpdateNote]);
 
-    const { getByDisplayValue, getByText } = render(
-      <NoteDetailsScreen
-        route={mockRoute}
-        navigation={mockNavigation as any}
-      />,
+    const store = mockStore({
+      folders: {
+        folders: [
+          {
+            id: 1,
+            folderName: 'Test Folder',
+            notes: [],
+          },
+        ],
+      },
+    });
+
+    const { getByDisplayValue, getByTestId } = render(
+      <Provider store={store}>
+        <NoteDetailsScreen
+          route={mockRoute}
+          navigation={mockNavigation as any}
+        />
+      </Provider>,
     );
 
     fireEvent.changeText(getByDisplayValue('Test Note'), 'Updated Note Title');
@@ -122,7 +166,7 @@ describe('NoteDetailScreen', () => {
       getByDisplayValue('This is the content of the note'),
       'Updated Note Content',
     );
-    fireEvent.press(getByText('Save Changes'));
+    fireEvent.press(getByTestId('save-button'));
 
     await waitFor(() => {
       expect(mockUpdateNote).toHaveBeenCalledWith({
@@ -144,11 +188,25 @@ describe('NoteDetailScreen', () => {
       isLoading: false,
     });
 
+    const store = mockStore({
+      folders: {
+        folders: [
+          {
+            id: 1,
+            folderName: 'Test Folder',
+            notes: [],
+          },
+        ],
+      },
+    });
+
     const { getByText } = render(
-      <NoteDetailsScreen
-        route={mockRoute}
-        navigation={mockNavigation as any}
-      />,
+      <Provider store={store}>
+        <NoteDetailsScreen
+          route={mockRoute}
+          navigation={mockNavigation as any}
+        />
+      </Provider>,
     );
 
     expect(getByText(formatTimestampToDateTime(mockedDate))).toBeTruthy();
