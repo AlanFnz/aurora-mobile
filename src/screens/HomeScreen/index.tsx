@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import FolderList from './components/FolderList';
-import BackgroundLayers from '../../components/BackgroundLayers';
 import styled from 'styled-components/native';
-import SearchBox from './components/SearchBox';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useSelector } from 'react-redux';
 import { RootState } from '@store/index';
-import NotesResultsList from './components/NotesResultsList';
-import FloatingActionButton from '@components/FloatingActionButton';
 import { useNavigation } from '@react-navigation/native';
 import { NoteDetailScreenNavigationProp } from '@navigation/types';
+import BackgroundLayers from '../../components/BackgroundLayers';
+import FolderList from './components/FolderList';
+import SearchBox from './components/SearchBox';
+import NotesResultsList from './components/NotesResultsList';
+import FloatingButton from './components/FloatingButton';
 
 const HomeScreen: React.FC = () => {
   const insets = useSafeAreaInsets();
@@ -17,11 +17,17 @@ const HomeScreen: React.FC = () => {
   const navigation = useNavigation<NoteDetailScreenNavigationProp>();
   const [searchQuery, setSearchQuery] = useState('');
 
-  // TODO: notes searching will be handled by the backend
+  /*
+   *TODO: should I combine local filtering with the query?
+   */
   const allNotes = folders.flatMap(folder => folder.notes);
   const filteredNotes = allNotes.filter(note =>
     note.title.toLowerCase().includes(searchQuery.toLowerCase()),
   );
+
+  const handleRecordVoiceNote = () => {
+    console.log('recording voice note');
+  };
 
   const handleNewNote = () => {
     navigation.navigate('NoteDetails', { isNew: true });
@@ -37,9 +43,9 @@ const HomeScreen: React.FC = () => {
         ) : (
           <FolderList testID={'folder-list'} folders={folders} />
         )}
-        <FloatingActionButton
+        <FloatingButton
           onPress={handleNewNote}
-          icon="+"
+          onLongPress={handleRecordVoiceNote}
           testID="new-note-button"
         />
       </Container>

@@ -21,6 +21,7 @@ const colors = {
     whiteMid: 'rgba(255, 255, 255, 0.6)',
     blackSuperLow: 'rgba(255, 255, 255, 0.08)',
     black: 'rgba(0, 0, 0, 0.2)',
+    redMid: 'rgba(250,1,51, 0.6)',
     feedback: {
       positive: 'rgba(0, 255, 0, 0.2)',
       negative: 'rgba(255, 0, 0, 0.2)',
