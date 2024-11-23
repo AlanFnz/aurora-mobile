@@ -32,6 +32,14 @@ jest.mock('@store/queries/notes', () => ({
   useCreateNoteMutation: jest.fn(() => [jest.fn().mockResolvedValue({})]),
 }));
 
+jest.mock('@react-navigation/native', () => {
+  const actual = jest.requireActual('@react-navigation/native');
+  return {
+    ...actual,
+    useNavigation: jest.fn(),
+  };
+});
+
 const mockStore = configureStore([]);
 const mockNavigate = jest.fn();
 const mockNavigation = { navigate: mockNavigate };

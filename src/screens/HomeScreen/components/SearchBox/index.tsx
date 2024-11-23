@@ -25,6 +25,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({
       )}
 
       <SearchInput
+        testID="search-input"
         placeholder="Search"
         placeholderTextColor={colors.lowOpacity.whiteMid}
         value={searchQuery}

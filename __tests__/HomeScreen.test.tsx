@@ -9,7 +9,6 @@ import foldersMockData from '@store/mockData/folders.mockData';
 import { RootState } from '@store/index';
 
 jest.mock('@screens/HomeScreen/components/FolderList', () => 'FolderList');
-jest.mock('@screens/HomeScreen/components/SearchBox', () => 'SearchBox');
 jest.mock(
   '@screens/HomeScreen/components/NotesResultsList',
   () => 'NotesResultsList',
