@@ -46,11 +46,9 @@ export const noteApi = createApi({
         const newId = notesMockData.length
           ? Math.max(...notesMockData.map(n => n.id)) + 1
           : 1;
-        const createdNote = { ...newNote, id: newId, modifiedDate: Date.now() };
-
-        notesMockData.push(createdNote);
-
-        return { data: createdNote };
+        const note = { ...newNote, id: newId, modifiedDate: Date.now() };
+        notesMockData.push(note);
+        return { data: note };
       },
     }),
     updateNote: builder.mutation<Note, Partial<Note> & { id?: number }>({
