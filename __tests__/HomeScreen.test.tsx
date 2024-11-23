@@ -1,12 +1,13 @@
 import React from 'react';
+import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { fireEvent, render } from '@testing-library/react-native';
-import configureStore, { MockStoreEnhanced } from 'redux-mock-store';
-import HomeScreen from '@screens/HomeScreen';
+
+import foldersReducer from '@store/foldersSlice';
 import foldersMockData from '@store/mockData/folders.mockData';
-import { RootState } from '@store/index';
+import HomeScreen from '@screens/HomeScreen';
 
 jest.mock('@screens/HomeScreen/components/FolderList', () => 'FolderList');
 jest.mock(
@@ -24,18 +25,13 @@ jest.mock('react-native-safe-area-context', () => ({
 }));
 
 describe('HomeScreen', () => {
-  const mockStore = configureStore<Partial<RootState>>([]);
   const initialState = {
     folders: {
       folders: foldersMockData,
     },
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  let store: MockStoreEnhanced<Partial<RootState>>;
-
   beforeEach(() => {
-    store = mockStore(initialState);
     (useSafeAreaInsets as jest.Mock).mockReturnValue({
       top: 20,
       bottom: 0,
@@ -48,8 +44,16 @@ describe('HomeScreen', () => {
     jest.clearAllMocks();
   });
 
+  const createTestStore = (preloadedState = {}) =>
+    configureStore({
+      reducer: {
+        folders: foldersReducer,
+      },
+      preloadedState,
+    });
+
   const renderWithProviders = (component: React.ReactNode) => {
-    const store = mockStore(initialState);
+    const store = createTestStore(initialState);
 
     return render(
       <Provider store={store}>

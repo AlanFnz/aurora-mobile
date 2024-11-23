@@ -1,20 +1,21 @@
 import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react-native';
-import configureStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
+import { configureStore } from '@reduxjs/toolkit';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-
-import NoteDetailsScreen from '@screens/NoteDetailsScreen';
-import { RootStackParamList } from '@navigation/types';
-import {
-  useFetchNoteDetailsQuery,
-  useUpdateNoteMutation,
-} from '@store/queries/notes';
 import {
   NavigationContainer,
   RouteProp,
   useNavigation,
 } from '@react-navigation/native';
+
+import foldersReducer from '@store/foldersSlice';
+import {
+  useFetchNoteDetailsQuery,
+  useUpdateNoteMutation,
+} from '@store/queries/notes';
+import NoteDetailsScreen from '@screens/NoteDetailsScreen';
+import { RootStackParamList } from '@navigation/types';
 
 jest.mock('@store/queries/notes', () => ({
   useFetchNoteDetailsQuery: jest.fn(),
@@ -40,7 +41,15 @@ jest.mock('@react-navigation/native', () => {
   };
 });
 
-const mockStore = configureStore([]);
+const createTestStore = (preloadedState = {}) => {
+  return configureStore({
+    reducer: {
+      folders: foldersReducer,
+    },
+    preloadedState,
+  });
+};
+
 const mockNavigate = jest.fn();
 const mockNavigation = { navigate: mockNavigate };
 const mockRoute: RouteProp<RootStackParamList, 'NoteDetails'> = {
@@ -75,7 +84,7 @@ describe('NoteDetailsScreen', () => {
       isLoading: true,
     });
 
-    const store = mockStore({
+    const store = createTestStore({
       folders: {
         folders: [
           {
@@ -86,6 +95,7 @@ describe('NoteDetailsScreen', () => {
         ],
       },
     });
+
     const { getByText } = render(
       <Provider store={store}>
         <NavigationContainer>
@@ -111,7 +121,7 @@ describe('NoteDetailsScreen', () => {
       isLoading: false,
     });
 
-    const store = mockStore({
+    const store = createTestStore({
       folders: {
         folders: [
           {
@@ -122,6 +132,7 @@ describe('NoteDetailsScreen', () => {
         ],
       },
     });
+
     const { getByDisplayValue } = render(
       <Provider store={store}>
         <NoteDetailsScreen
@@ -149,7 +160,7 @@ describe('NoteDetailsScreen', () => {
 
     (useUpdateNoteMutation as jest.Mock).mockReturnValue([mockUpdateNote]);
 
-    const store = mockStore({
+    const store = createTestStore({
       folders: {
         folders: [
           {
@@ -197,7 +208,7 @@ describe('NoteDetailsScreen', () => {
       isLoading: false,
     });
 
-    const store = mockStore({
+    const store = createTestStore({
       folders: {
         folders: [
           {
