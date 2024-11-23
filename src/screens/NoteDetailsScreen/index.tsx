@@ -33,7 +33,7 @@ type NoteDetailsScreenProps = StackScreenProps<
 const NoteDetailsScreen: React.FC<NoteDetailsScreenProps> = ({ route }) => {
   const { noteId = 0, isNew } = route.params;
   const insets = useSafeAreaInsets();
-  const folders = useSelector((state: RootState) => state.folders.folders);
+  const folders = useSelector((state: RootState) => state.folders);
   const dispatch = useDispatch();
 
   const { data: note, isLoading } = useFetchNoteDetailsQuery(noteId, {

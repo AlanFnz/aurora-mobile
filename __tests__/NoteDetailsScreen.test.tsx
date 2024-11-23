@@ -85,15 +85,13 @@ describe('NoteDetailsScreen', () => {
     });
 
     const store = createTestStore({
-      folders: {
-        folders: [
-          {
-            id: 1,
-            folderName: 'Test Folder',
-            notes: [],
-          },
-        ],
-      },
+      folders: [
+        {
+          id: 1,
+          folderName: 'Test Folder',
+          notes: [],
+        },
+      ],
     });
 
     const { getByText } = render(
@@ -122,15 +120,13 @@ describe('NoteDetailsScreen', () => {
     });
 
     const store = createTestStore({
-      folders: {
-        folders: [
-          {
-            id: 1,
-            folderName: 'Test Folder',
-            notes: [],
-          },
-        ],
-      },
+      folders: [
+        {
+          id: 1,
+          folderName: 'Test Folder',
+          notes: [],
+        },
+      ],
     });
 
     const { getByDisplayValue } = render(
@@ -161,15 +157,13 @@ describe('NoteDetailsScreen', () => {
     (useUpdateNoteMutation as jest.Mock).mockReturnValue([mockUpdateNote]);
 
     const store = createTestStore({
-      folders: {
-        folders: [
-          {
-            id: 1,
-            folderName: 'Test Folder',
-            notes: [],
-          },
-        ],
-      },
+      folders: [
+        {
+          id: 1,
+          folderName: 'Test Folder',
+          notes: [],
+        },
+      ],
     });
 
     const { getByDisplayValue, getByTestId } = render(
@@ -209,15 +203,13 @@ describe('NoteDetailsScreen', () => {
     });
 
     const store = createTestStore({
-      folders: {
-        folders: [
-          {
-            id: 1,
-            folderName: 'Test Folder',
-            notes: [],
-          },
-        ],
-      },
+      folders: [
+        {
+          id: 1,
+          folderName: 'Test Folder',
+          notes: [],
+        },
+      ],
     });
 
     const { getByText } = render(

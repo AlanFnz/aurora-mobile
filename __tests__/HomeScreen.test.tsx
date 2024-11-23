@@ -26,9 +26,7 @@ jest.mock('react-native-safe-area-context', () => ({
 
 describe('HomeScreen', () => {
   const initialState = {
-    folders: {
-      folders: foldersMockData,
-    },
+    folders: foldersMockData,
   };
 
   beforeEach(() => {
@@ -44,7 +42,7 @@ describe('HomeScreen', () => {
     jest.clearAllMocks();
   });
 
-  const createTestStore = (preloadedState = {}) =>
+  const createTestStore = (preloadedState = initialState) =>
     configureStore({
       reducer: {
         folders: foldersReducer,
