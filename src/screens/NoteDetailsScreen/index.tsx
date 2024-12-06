@@ -120,6 +120,7 @@ const NoteDetailsScreen: React.FC<NoteDetailsScreenProps> = ({ route }) => {
       }
     }
   };
+
   if (!isNew && isLoading) {
     return <StyledText>Loading...</StyledText>;
   }

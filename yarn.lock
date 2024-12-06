@@ -7497,6 +7497,7 @@ __metadata:
     react-native-audio-recorder-player: ^3.6.12
     react-native-gesture-handler: ^2.19.0
     react-native-paper: ^5.12.5
+    react-native-permissions: ^5.2.1
     react-native-safe-area-context: ^4.11.0
     react-native-safe-area-view: ^1.1.1
     react-native-screens: ^3.34.0
@@ -9058,6 +9059,20 @@ __metadata:
     react-native-safe-area-context: "*"
     react-native-vector-icons: "*"
   checksum: 35ce56e0bb19c46ce85adc47a504527b7ec455d1a15f3ace0d6fd438abd51b1fe30e1b44351950e16d6376ddbc18ecc94b558e267767d0a9fd886a5f66a4c322
+  languageName: node
+  linkType: hard
+
+"react-native-permissions@npm:^5.2.1":
+  version: 5.2.1
+  resolution: "react-native-permissions@npm:5.2.1"
+  peerDependencies:
+    react: ">=18.1.0"
+    react-native: ">=0.70.0"
+    react-native-windows: ">=0.70.0"
+  peerDependenciesMeta:
+    react-native-windows:
+      optional: true
+  checksum: a57b0a6c71c38bb126e48e76b8eef7e62bee8083d748ec1cf7e7b5699d46867b10e96a02837c45a045b77dab37e45a5c20b1deb3637ad5cee963c9e92c6ee05a
   languageName: node
   linkType: hard
 
