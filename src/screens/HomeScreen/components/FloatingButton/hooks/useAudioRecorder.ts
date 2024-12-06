@@ -1,43 +1,21 @@
 import { useState } from 'react';
-import { PermissionsAndroid, Platform } from 'react-native';
 import AudioRecorderPlayer from 'react-native-audio-recorder-player';
+
+import { usePermissions } from '@root/src/utils/hooks/usePermissions';
 
 const audioRecorderPlayer = new AudioRecorderPlayer();
 
 export const useAudioRecorder = () => {
   const [isRecording, setIsRecording] = useState(false);
   const [recordingPath, setRecordingPath] = useState<string | null>(null);
+  const { requestAudioPermissions } = usePermissions();
 
   const startRecording = async () => {
     try {
-      // TODO: move this to permissions helper
-      if (Platform.OS === 'android') {
-        try {
-          const grants = await PermissionsAndroid.requestMultiple([
-            PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
-            PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
-            PermissionsAndroid.PERMISSIONS.RECORD_AUDIO,
-          ]);
-
-          console.log('write external storage', grants);
-
-          if (
-            grants['android.permission.WRITE_EXTERNAL_STORAGE'] ===
-              PermissionsAndroid.RESULTS.GRANTED &&
-            grants['android.permission.READ_EXTERNAL_STORAGE'] ===
-              PermissionsAndroid.RESULTS.GRANTED &&
-            grants['android.permission.RECORD_AUDIO'] ===
-              PermissionsAndroid.RESULTS.GRANTED
-          ) {
-            console.log('Permissions granted');
-          } else {
-            console.log('All required permissions not granted');
-            return;
-          }
-        } catch (err) {
-          console.warn(err);
-          return;
-        }
+      const hasPermissions = await requestAudioPermissions();
+      if (!hasPermissions) {
+        console.log('Permissions not granted');
+        return;
       }
 
       setIsRecording(true);
