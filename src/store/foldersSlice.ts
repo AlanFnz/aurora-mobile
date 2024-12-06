@@ -7,39 +7,30 @@ export interface Folder {
   notes: NoteListItem[];
 }
 
-interface FoldersState {
-  folders: Folder[];
-}
+type FoldersState = Folder[];
 
-const initialState: FoldersState = {
-  folders: [],
-};
+const initialState: FoldersState = [];
 
 const foldersSlice = createSlice({
   name: 'folders',
   initialState,
   reducers: {
-    setFolders: (state, action: PayloadAction<Folder[]>) => {
-      state.folders = action.payload;
-    },
+    setFolders: (state, action: PayloadAction<Folder[]>) => action.payload,
     addFolder: (state, action: PayloadAction<Folder>) => {
-      state.folders.push(action.payload);
+      state.push(action.payload);
     },
     addNoteToFolder: (
       state,
       action: PayloadAction<{ folderId: number; note: NoteListItem }>,
     ) => {
       const { folderId, note } = action.payload;
-      const folder = state.folders.find(f => f.id === folderId);
+      const folder = state.find(f => f.id === folderId);
       if (folder) {
         folder.notes.push(note);
       }
     },
-    removeFolder: (state, action: PayloadAction<number>) => {
-      state.folders = state.folders.filter(
-        folder => folder.id !== action.payload,
-      );
-    },
+    removeFolder: (state, action: PayloadAction<number>) =>
+      state.filter(folder => folder.id !== action.payload),
   },
 });
 

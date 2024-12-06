@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 import { Animated } from 'react-native';
+import { useAudioRecorder } from './useAudioRecorder';
 
 const pressAnimationDuration = 190;
 const releaseAnimationDuration = 150;
@@ -13,6 +14,8 @@ export const useFloatingButtonHandlers = ({
   onPress,
   onLongPress,
 }: UseFloatingButtonHandlersProps) => {
+  const { startRecording, stopRecording, isRecording } = useAudioRecorder();
+
   const [isLongPressed, setIsLongPressed] = useState(false);
 
   const bottomPositionAnim = useRef(new Animated.Value(25)).current;
@@ -28,7 +31,7 @@ export const useFloatingButtonHandlers = ({
     }).start();
   };
 
-  const handleLongPress = () => {
+  const handleLongPress = async () => {
     setIsLongPressed(true);
     Animated.parallel([
       Animated.timing(bottomPositionAnim, {
@@ -53,11 +56,14 @@ export const useFloatingButtonHandlers = ({
       }),
     ]).start();
 
-    onLongPress();
+    if (onLongPress) onLongPress();
+    await startRecording();
   };
 
-  const handlePressOut = () => {
-    if (!isLongPressed) onPress();
+  const handlePressOut = async () => {
+    if (isLongPressed) {
+      await stopRecording();
+    } else onPress();
 
     Animated.parallel([
       Animated.timing(bottomPositionAnim, {
@@ -94,6 +100,7 @@ export const useFloatingButtonHandlers = ({
 
   return {
     isLongPressed,
+    isRecording,
     animatedStyles,
     handlePressIn,
     handlePressOut,

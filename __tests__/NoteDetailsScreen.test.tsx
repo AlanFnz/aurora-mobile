@@ -1,20 +1,21 @@
 import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react-native';
-import configureStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
+import { configureStore } from '@reduxjs/toolkit';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import {
-  useFetchNoteDetailsQuery,
-  useUpdateNoteMutation,
-} from '@store/queries/notes';
-import NoteDetailsScreen from '@screens/NoteDetailsScreen';
 import {
   NavigationContainer,
   RouteProp,
   useNavigation,
 } from '@react-navigation/native';
+
+import foldersReducer from '@store/foldersSlice';
+import {
+  useFetchNoteDetailsQuery,
+  useUpdateNoteMutation,
+} from '@store/queries/notes';
+import NoteDetailsScreen from '@screens/NoteDetailsScreen';
 import { RootStackParamList } from '@navigation/types';
-import { formatTimestampToDateTime } from '@root/src/utils';
 
 jest.mock('@store/queries/notes', () => ({
   useFetchNoteDetailsQuery: jest.fn(),
@@ -26,12 +27,29 @@ jest.mock('react-native-safe-area-context', () => ({
   useSafeAreaInsets: jest.fn(),
 }));
 
-jest.mock('@react-navigation/native', () => ({
-  ...jest.requireActual('@react-navigation/native'),
-  useNavigation: jest.fn(),
+jest.mock('@store/queries/notes', () => ({
+  useFetchNoteDetailsQuery: jest.fn(),
+  useUpdateNoteMutation: jest.fn(() => [jest.fn()]),
+  useCreateNoteMutation: jest.fn(() => [jest.fn().mockResolvedValue({})]),
 }));
 
-const mockStore = configureStore([]);
+jest.mock('@react-navigation/native', () => {
+  const actual = jest.requireActual('@react-navigation/native');
+  return {
+    ...actual,
+    useNavigation: jest.fn(),
+  };
+});
+
+const createTestStore = (preloadedState = {}) => {
+  return configureStore({
+    reducer: {
+      folders: foldersReducer,
+    },
+    preloadedState,
+  });
+};
+
 const mockNavigate = jest.fn();
 const mockNavigation = { navigate: mockNavigate };
 const mockRoute: RouteProp<RootStackParamList, 'NoteDetails'> = {
@@ -40,7 +58,7 @@ const mockRoute: RouteProp<RootStackParamList, 'NoteDetails'> = {
   params: { noteId: 1, isNew: false },
 };
 
-describe('NoteDetailScreen', () => {
+describe('NoteDetailsScreen', () => {
   const mockedDate = new Date('2024-10-13T11:34:00').getTime();
 
   beforeEach(() => {
@@ -66,17 +84,16 @@ describe('NoteDetailScreen', () => {
       isLoading: true,
     });
 
-    const store = mockStore({
-      folders: {
-        folders: [
-          {
-            id: 1,
-            folderName: 'Test Folder',
-            notes: [],
-          },
-        ],
-      },
+    const store = createTestStore({
+      folders: [
+        {
+          id: 1,
+          folderName: 'Test Folder',
+          notes: [],
+        },
+      ],
     });
+
     const { getByText } = render(
       <Provider store={store}>
         <NavigationContainer>
@@ -96,23 +113,22 @@ describe('NoteDetailScreen', () => {
       data: {
         id: '1',
         title: 'Test Note',
-        modifiedDate: Date.now(),
+        modifiedDate: mockedDate,
         content: 'This is the content of the note',
       },
       isLoading: false,
     });
 
-    const store = mockStore({
-      folders: {
-        folders: [
-          {
-            id: 1,
-            folderName: 'Test Folder',
-            notes: [],
-          },
-        ],
-      },
+    const store = createTestStore({
+      folders: [
+        {
+          id: 1,
+          folderName: 'Test Folder',
+          notes: [],
+        },
+      ],
     });
+
     const { getByDisplayValue } = render(
       <Provider store={store}>
         <NoteDetailsScreen
@@ -140,16 +156,14 @@ describe('NoteDetailScreen', () => {
 
     (useUpdateNoteMutation as jest.Mock).mockReturnValue([mockUpdateNote]);
 
-    const store = mockStore({
-      folders: {
-        folders: [
-          {
-            id: 1,
-            folderName: 'Test Folder',
-            notes: [],
-          },
-        ],
-      },
+    const store = createTestStore({
+      folders: [
+        {
+          id: 1,
+          folderName: 'Test Folder',
+          notes: [],
+        },
+      ],
     });
 
     const { getByDisplayValue, getByTestId } = render(
@@ -188,16 +202,14 @@ describe('NoteDetailScreen', () => {
       isLoading: false,
     });
 
-    const store = mockStore({
-      folders: {
-        folders: [
-          {
-            id: 1,
-            folderName: 'Test Folder',
-            notes: [],
-          },
-        ],
-      },
+    const store = createTestStore({
+      folders: [
+        {
+          id: 1,
+          folderName: 'Test Folder',
+          notes: [],
+        },
+      ],
     });
 
     const { getByText } = render(
@@ -209,6 +221,6 @@ describe('NoteDetailScreen', () => {
       </Provider>,
     );
 
-    expect(getByText(formatTimestampToDateTime(mockedDate))).toBeTruthy();
+    expect(getByText('Oct 13, 2024 at 11:34 AM')).toBeTruthy();
   });
 });

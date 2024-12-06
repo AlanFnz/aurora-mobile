@@ -13,7 +13,7 @@ import FloatingButton from './components/FloatingButton';
 
 const HomeScreen: React.FC = () => {
   const insets = useSafeAreaInsets();
-  const folders = useSelector((state: RootState) => state.folders.folders);
+  const folders = useSelector((state: RootState) => state.folders);
   const navigation = useNavigation<NoteDetailScreenNavigationProp>();
   const [searchQuery, setSearchQuery] = useState('');
 

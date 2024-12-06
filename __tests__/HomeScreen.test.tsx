@@ -1,13 +1,15 @@
 import React from 'react';
+import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { render } from '@testing-library/react-native';
-import configureStore from 'redux-mock-store';
+import { fireEvent, render } from '@testing-library/react-native';
+
+import foldersReducer from '@store/foldersSlice';
+import foldersMockData from '@store/mockData/folders.mockData';
 import HomeScreen from '@screens/HomeScreen';
 
 jest.mock('@screens/HomeScreen/components/FolderList', () => 'FolderList');
-jest.mock('@screens/HomeScreen/components/SearchBox', () => 'SearchBox');
 jest.mock(
   '@screens/HomeScreen/components/NotesResultsList',
   () => 'NotesResultsList',
@@ -23,9 +25,8 @@ jest.mock('react-native-safe-area-context', () => ({
 }));
 
 describe('HomeScreen', () => {
-  const mockStore = configureStore();
   const initialState = {
-    folders: { folders: [{ id: 1, name: 'Test Folder', notes: [] }] },
+    folders: foldersMockData,
   };
 
   beforeEach(() => {
@@ -41,8 +42,16 @@ describe('HomeScreen', () => {
     jest.clearAllMocks();
   });
 
+  const createTestStore = (preloadedState = initialState) =>
+    configureStore({
+      reducer: {
+        folders: foldersReducer,
+      },
+      preloadedState,
+    });
+
   const renderWithProviders = (component: React.ReactNode) => {
-    const store = mockStore(initialState);
+    const store = createTestStore(initialState);
 
     return render(
       <Provider store={store}>
@@ -58,9 +67,7 @@ describe('HomeScreen', () => {
 
   it('renders the container with correct insets', () => {
     const { getByTestId } = renderWithProviders(<HomeScreen />);
-
     const container = getByTestId('container');
-
     expect(container.props.style.paddingTop).toBe(20);
     expect(container.props.style.paddingLeft).toBe(0);
     expect(container.props.style.paddingRight).toBe(-2);
@@ -69,5 +76,14 @@ describe('HomeScreen', () => {
   it('renders the folder list', () => {
     const { getByTestId } = renderWithProviders(<HomeScreen />);
     expect(getByTestId('folder-list')).toBeTruthy();
+  });
+
+  it('renders the notes results list when there is a search query', () => {
+    const { getByTestId } = renderWithProviders(<HomeScreen />);
+
+    const searchInput = getByTestId('search-input');
+    fireEvent.changeText(searchInput, 'Sample Note');
+
+    expect(getByTestId('notes-results')).toBeTruthy();
   });
 });
