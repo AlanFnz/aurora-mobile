@@ -6210,6 +6210,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"hyochan-welcome@npm:^1.0.0":
+  version: 1.0.1
+  resolution: "hyochan-welcome@npm:1.0.1"
+  bin:
+    hyochan-welcome: bin/hello.js
+  checksum: 2ea7093b54eefcde4c65e4a8ffd3f3926a55ff0bce20a3f5142fe1108e76c0dfcb98517b47714c536f9de8302b92ae02bf240891d3114d527ccd497e2ea9478e
+  languageName: node
+  linkType: hard
+
 "iconv-lite@npm:^0.6.2":
   version: 0.6.3
   resolution: "iconv-lite@npm:0.6.3"
@@ -7485,6 +7494,7 @@ __metadata:
     prettier: ^3.3.3
     react: 18.3.1
     react-native: 0.75.3
+    react-native-audio-recorder-player: ^3.6.12
     react-native-gesture-handler: ^2.19.0
     react-native-paper: ^5.12.5
     react-native-safe-area-context: ^4.11.0
@@ -9005,6 +9015,18 @@ __metadata:
   version: 17.0.2
   resolution: "react-is@npm:17.0.2"
   checksum: 9d6d111d8990dc98bc5402c1266a808b0459b5d54830bbea24c12d908b536df7883f268a7868cfaedde3dd9d4e0d574db456f84d2e6df9c4526f99bb4b5344d8
+  languageName: node
+  linkType: hard
+
+"react-native-audio-recorder-player@npm:^3.6.12":
+  version: 3.6.12
+  resolution: "react-native-audio-recorder-player@npm:3.6.12"
+  dependencies:
+    hyochan-welcome: ^1.0.0
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: a0c74694fe54eacd8f705b38d77d8ee35ddb9e964243ac0a727483d001e7ad24178b5ed3edcb0b4ddccf87d65af3233a823d5dd73fc98099ddbe0602134586e7
   languageName: node
   linkType: hard
 
