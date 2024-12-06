@@ -1,14 +1,19 @@
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import AudioRecorderPlayer from 'react-native-audio-recorder-player';
 
 import { usePermissions } from '@root/src/utils/hooks/usePermissions';
 
-const audioRecorderPlayer = new AudioRecorderPlayer();
-
 export const useAudioRecorder = () => {
+  const audioRecorderPlayer = useMemo(() => new AudioRecorderPlayer(), []);
   const [isRecording, setIsRecording] = useState(false);
-  const [recordingPath, setRecordingPath] = useState<string | null>(null);
+  const [recordingResult, setRecordingResult] = useState<string | null>(null);
   const { requestAudioPermissions } = usePermissions();
+
+  useEffect(() => {
+    return () => {
+      audioRecorderPlayer.removeRecordBackListener();
+    };
+  }, [audioRecorderPlayer]);
 
   const startRecording = async () => {
     try {
@@ -19,9 +24,14 @@ export const useAudioRecorder = () => {
       }
 
       setIsRecording(true);
-      const path = 'audioRecord.m4a';
-      const uri = await audioRecorderPlayer.startRecorder(path);
-      setRecordingPath(uri);
+      const result = await audioRecorderPlayer.startRecorder();
+
+      audioRecorderPlayer.addRecordBackListener(e => {
+        console.log(e);
+        return;
+      });
+
+      console.log('🚀 ~ startRecording ~ result:', result);
     } catch (error) {
       console.error('Failed to start recording:', error);
       setIsRecording(false);
@@ -32,14 +42,16 @@ export const useAudioRecorder = () => {
     if (!isRecording) return;
 
     try {
-      const uri = 'uri';
+      const result = await audioRecorderPlayer.stopRecorder();
+      audioRecorderPlayer.removeRecordBackListener();
+
       setIsRecording(false);
-      console.log('Audio saved at:', uri);
-      return uri;
+      setRecordingResult(result);
+      console.log('🚀 ~ stopRecording ~ result:', result);
     } catch (error) {
       console.error('Failed to stop recording:', error);
     }
   };
 
-  return { startRecording, stopRecording, isRecording, recordingPath };
+  return { startRecording, stopRecording, isRecording, recordingResult };
 };
