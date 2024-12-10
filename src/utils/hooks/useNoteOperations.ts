@@ -1,13 +1,16 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import {
   useCreateNoteMutation,
   useUpdateNoteMutation,
 } from '@store/queries/notes';
-import { addNoteToFolder } from '@store/foldersSlice';
+import { RootState } from '@store/index';
+import { addNoteToFolder, setFolders } from '@store/foldersSlice';
 
 export const useNoteOperations = () => {
   const dispatch = useDispatch();
+  const folders = useSelector((state: RootState) => state.folders);
+
   const [createNote] = useCreateNoteMutation();
   const [updateNoteMutation] = useUpdateNoteMutation();
 
@@ -57,6 +60,24 @@ export const useNoteOperations = () => {
       title,
       content,
     }).unwrap();
+
+    const updatedFolders = folders.map(folder => ({
+      ...folder,
+      notes: folder.notes.map(note =>
+        note.id === id
+          ? {
+              ...note,
+              title: updatedNote.title,
+              snippet: updatedNote.content
+                ? updatedNote.content.slice(0, 50)
+                : '',
+              modifiedDate: updatedNote.modifiedDate,
+            }
+          : note,
+      ),
+    }));
+
+    dispatch(setFolders(updatedFolders));
 
     return updatedNote;
   };
