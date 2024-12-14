@@ -3,7 +3,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import Toast from 'react-native-toast-message'
 
 import { useFetchNoteDetailsQuery } from '@store/queries/notes'
-import { useNoteOperations } from '@hooks/useNoteOperations'
+import { useNoteOperations } from '@root/src/hooks/useNoteOperations'
 import { formatTimestampToDateTime } from '@utils/time'
 
 export const useNoteDetails = ({

@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import AudioRecorderPlayer from 'react-native-audio-recorder-player'
 
-import { usePermissions } from '@root/src/utils/hooks/usePermissions'
+import { usePermissions } from '@root/src/hooks/usePermissions'
 
 export const useAudioRecorder = () => {
   const audioRecorderPlayer = useMemo(() => new AudioRecorderPlayer(), [])
