@@ -13,7 +13,7 @@ jest.mock(
   '@screens/home/components/folder/components/note-item',
   () => 'NoteItem',
 )
-jest.mock('@root/src/components/divider', () => 'Divider')
+jest.mock('@components/divider', () => 'Divider')
 
 const folderData: FolderProps = {
   folder: {
