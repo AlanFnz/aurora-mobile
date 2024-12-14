@@ -24,6 +24,9 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
+      - name: Clear Jest Cache
+        run: yarn jest --clearCache
+
       - name: Run ESLint
         run: yarn lint
 
