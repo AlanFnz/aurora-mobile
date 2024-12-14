@@ -1,16 +1,16 @@
-import React from 'react';
-import BackgroundLayers from '@root/src/components/BackgroundLayers';
-import { performSignOut } from '../../store/authSlice';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../../store';
-import { Container, SignOutButton, SignOutText, Title } from './styles';
+import React from 'react'
+import BackgroundLayers from '@root/src/components/BackgroundLayers'
+import { performSignOut } from '../../store/authSlice'
+import { useDispatch } from 'react-redux'
+import { AppDispatch } from '../../store'
+import { Container, SignOutButton, SignOutText, Title } from './styles'
 
 const SettingsScreen: React.FC = () => {
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useDispatch<AppDispatch>()
 
   const handleSignOut = () => {
-    dispatch(performSignOut());
-  };
+    dispatch(performSignOut())
+  }
 
   return (
     <>
@@ -22,7 +22,7 @@ const SettingsScreen: React.FC = () => {
         </SignOutButton>
       </Container>
     </>
-  );
-};
+  )
+}
 
-export default SettingsScreen;
+export default SettingsScreen

@@ -1,18 +1,18 @@
-import React from 'react';
-import Folder from '@screens/HomeScreen/components/Folder';
-import { render, fireEvent } from '@testing-library/react-native';
-import { FolderProps } from '@screens/HomeScreen/components/Folder/types';
+import React from 'react'
+import Folder from '@screens/HomeScreen/components/Folder'
+import { render, fireEvent } from '@testing-library/react-native'
+import { FolderProps } from '@screens/HomeScreen/components/Folder/types'
 
-jest.mock('react-native-vector-icons/FontAwesome', () => 'Icon');
+jest.mock('react-native-vector-icons/FontAwesome', () => 'Icon')
 jest.mock(
   '@screens/HomeScreen/components/Folder/components/GradientBackground',
   () => 'GradientBackground',
-);
+)
 jest.mock(
   '@screens/HomeScreen/components/Folder/components/NoteItem',
   () => 'NoteItem',
-);
-jest.mock('@root/src/components/Divider', () => 'Divider');
+)
+jest.mock('@root/src/components/Divider', () => 'Divider')
 
 const folderData: FolderProps = {
   folder: {
@@ -33,47 +33,47 @@ const folderData: FolderProps = {
       },
     ],
   },
-};
+}
 
 describe('Folder', () => {
   it('renders the folder title correctly', () => {
-    const { getByText } = render(<Folder folder={folderData.folder} />);
+    const { getByText } = render(<Folder folder={folderData.folder} />)
 
-    expect(getByText('Test Folder')).toBeTruthy();
-  });
+    expect(getByText('Test Folder')).toBeTruthy()
+  })
 
   it('toggles the folder expansion when header is pressed', () => {
     const { getByText, queryByTestId } = render(
       <Folder folder={folderData.folder} />,
-    );
+    )
 
-    expect(queryByTestId('divider')).toBeTruthy();
-    expect(queryByTestId('flat-list')).toBeNull();
+    expect(queryByTestId('divider')).toBeTruthy()
+    expect(queryByTestId('flat-list')).toBeNull()
 
-    fireEvent.press(getByText('Test Folder'));
+    fireEvent.press(getByText('Test Folder'))
 
-    expect(queryByTestId('divider')).toBeNull();
-    expect(queryByTestId('flat-list')).toBeTruthy();
-  });
+    expect(queryByTestId('divider')).toBeNull()
+    expect(queryByTestId('flat-list')).toBeTruthy()
+  })
 
   it('displays notes when the folder is expanded', () => {
     const { getByText, getByTestId } = render(
       <Folder folder={folderData.folder} />,
-    );
+    )
 
-    fireEvent.press(getByText('Test Folder'));
+    fireEvent.press(getByText('Test Folder'))
 
-    const flatList = getByTestId('flat-list');
-    expect(flatList).toBeTruthy();
-    expect(flatList.props.data).toHaveLength(2);
+    const flatList = getByTestId('flat-list')
+    expect(flatList).toBeTruthy()
+    expect(flatList.props.data).toHaveLength(2)
 
-    expect(getByTestId('note-item-1')).toBeTruthy();
-    expect(getByTestId('note-item-2')).toBeTruthy();
-  });
+    expect(getByTestId('note-item-1')).toBeTruthy()
+    expect(getByTestId('note-item-2')).toBeTruthy()
+  })
 
   it('renders a divider when the folder is not expanded', () => {
-    const { queryByTestId } = render(<Folder folder={folderData.folder} />);
+    const { queryByTestId } = render(<Folder folder={folderData.folder} />)
 
-    expect(queryByTestId('divider')).toBeTruthy();
-  });
-});
+    expect(queryByTestId('divider')).toBeTruthy()
+  })
+})

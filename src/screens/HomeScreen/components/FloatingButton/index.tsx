@@ -1,11 +1,11 @@
-import React from 'react';
-import colors from '@theme/colors';
-import { TouchableWithoutFeedback } from 'react-native';
-import { useFloatingButtonHandlers } from './hooks/useFloatingButtonHandlers';
-import { AnimatedButtonContainer, FullCircleIcon, PlusIcon } from './styles';
+import React from 'react'
+import colors from '@theme/colors'
+import { TouchableWithoutFeedback } from 'react-native'
+import { useFloatingButtonHandlers } from './hooks/useFloatingButtonHandlers'
+import { AnimatedButtonContainer, FullCircleIcon, PlusIcon } from './styles'
 
 interface FloatingButtonProps {
-  testID?: string;
+  testID?: string
 }
 
 const FloatingButton: React.FC<FloatingButtonProps> = ({ testID }) => {
@@ -15,7 +15,7 @@ const FloatingButton: React.FC<FloatingButtonProps> = ({ testID }) => {
     handlePressIn,
     handlePressOut,
     handleLongPress,
-  } = useFloatingButtonHandlers();
+  } = useFloatingButtonHandlers()
 
   return (
     <TouchableWithoutFeedback
@@ -30,7 +30,7 @@ const FloatingButton: React.FC<FloatingButtonProps> = ({ testID }) => {
         )}
       </AnimatedButtonContainer>
     </TouchableWithoutFeedback>
-  );
-};
+  )
+}
 
-export default FloatingButton;
+export default FloatingButton

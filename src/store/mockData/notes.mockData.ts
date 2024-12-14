@@ -1,4 +1,4 @@
-import { Note } from '@store/queries/notes';
+import { Note } from '@store/queries/notes'
 
 const notesMockData: Note[] = [
   {
@@ -32,6 +32,6 @@ const notesMockData: Note[] = [
     folderId: 2,
     modifiedDate: 1696636800000,
   },
-];
+]
 
-export default notesMockData;
+export default notesMockData

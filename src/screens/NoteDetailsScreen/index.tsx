@@ -1,15 +1,15 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { StackScreenProps } from '@react-navigation/stack';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { RootStackParamList } from '@navigation/types';
+import React from 'react'
+import { useSelector } from 'react-redux'
+import { StackScreenProps } from '@react-navigation/stack'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { RootStackParamList } from '@navigation/types'
 
-import BackgroundLayers from '@root/src/components/BackgroundLayers';
-import Header from '@root/src/components/Header';
-import { RootState } from '@store/index';
-import FolderSelectionModal from './components/FolderSelectionModal';
-import SaveButton from './components/SaveButton';
-import { useNoteDetails } from './hooks/useNoteDetails';
+import BackgroundLayers from '@root/src/components/BackgroundLayers'
+import Header from '@root/src/components/Header'
+import { RootState } from '@store/index'
+import FolderSelectionModal from './components/FolderSelectionModal'
+import SaveButton from './components/SaveButton'
+import { useNoteDetails } from './hooks/useNoteDetails'
 import {
   Container,
   DateText,
@@ -17,17 +17,17 @@ import {
   StyledText,
   TextArea,
   TitleContainer,
-} from './styles';
+} from './styles'
 
 type NoteDetailsScreenProps = StackScreenProps<
   RootStackParamList,
   'NoteDetails'
->;
+>
 
 const NoteDetailsScreen: React.FC<NoteDetailsScreenProps> = ({ route }) => {
-  const { noteId = 0, isNew } = route.params;
-  const insets = useSafeAreaInsets();
-  const folders = useSelector((state: RootState) => state.folders);
+  const { noteId = 0, isNew } = route.params
+  const insets = useSafeAreaInsets()
+  const folders = useSelector((state: RootState) => state.folders)
 
   const {
     title,
@@ -42,10 +42,10 @@ const NoteDetailsScreen: React.FC<NoteDetailsScreenProps> = ({ route }) => {
     handleSave,
     handleFolderSelect,
     handleConfirmFolderSelection,
-  } = useNoteDetails({ noteId, isNew });
+  } = useNoteDetails({ noteId, isNew })
 
   if (!isNew && isLoading) {
-    return <StyledText>Loading...</StyledText>;
+    return <StyledText>Loading...</StyledText>
   }
 
   return (
@@ -79,7 +79,7 @@ const NoteDetailsScreen: React.FC<NoteDetailsScreenProps> = ({ route }) => {
         onClose={() => setIsModalVisible(false)}
       />
     </>
-  );
-};
+  )
+}
 
-export default NoteDetailsScreen;
+export default NoteDetailsScreen

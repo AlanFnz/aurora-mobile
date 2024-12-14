@@ -1,14 +1,14 @@
-import React from 'react';
-import { Animated } from 'react-native';
-import { Svg, Circle, Line } from 'react-native-svg';
-import styled from 'styled-components/native';
-import colors from '@theme/colors';
+import React from 'react'
+import { Animated } from 'react-native'
+import { Svg, Circle, Line } from 'react-native-svg'
+import styled from 'styled-components/native'
+import colors from '@theme/colors'
 
 const FullCircleIcon = ({ color }: { color: string }) => (
   <Svg height="24" width="24" viewBox="0 0 30 30">
     <Circle cx="15" cy="15" r="14" fill={color} />
   </Svg>
-);
+)
 const PlusIcon = ({ color }: { color: string }) => (
   <Svg height="24" width="24" viewBox="0 0 30 30">
     <Line
@@ -30,7 +30,7 @@ const PlusIcon = ({ color }: { color: string }) => (
       strokeLinecap="round"
     />
   </Svg>
-);
+)
 
 const AnimatedButtonContainer = styled(Animated.View)`
   position: absolute;
@@ -47,6 +47,6 @@ const AnimatedButtonContainer = styled(Animated.View)`
   shadow-opacity: 0.8;
   shadow-radius: 2px;
   elevation: 5;
-`;
+`
 
-export { FullCircleIcon, PlusIcon, AnimatedButtonContainer };
+export { FullCircleIcon, PlusIcon, AnimatedButtonContainer }

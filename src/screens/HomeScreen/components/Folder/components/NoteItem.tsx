@@ -1,17 +1,17 @@
-import React from 'react';
-import Divider from '@root/src/components/Divider';
-import styled from 'styled-components/native';
-import colors from '@theme/colors';
-import { NoteListItem } from '../types';
-import { useNavigation } from '@react-navigation/native';
-import { NoteDetailScreenNavigationProp } from '@navigation/types';
-import { formatTimestampToDate } from '@root/src/utils';
+import React from 'react'
+import Divider from '@root/src/components/Divider'
+import styled from 'styled-components/native'
+import colors from '@theme/colors'
+import { NoteListItem } from '../types'
+import { useNavigation } from '@react-navigation/native'
+import { NoteDetailScreenNavigationProp } from '@navigation/types'
+import { formatTimestampToDate } from '@root/src/utils'
 
 interface NoteProps {
-  index: number;
-  notesLength: number;
-  item: NoteListItem;
-  testID?: string;
+  index: number
+  notesLength: number
+  item: NoteListItem
+  testID?: string
 }
 
 const NoteItem: React.FC<NoteProps> = ({
@@ -20,11 +20,11 @@ const NoteItem: React.FC<NoteProps> = ({
   notesLength,
   testID = 'note-item-container',
 }) => {
-  const navigation = useNavigation<NoteDetailScreenNavigationProp>();
+  const navigation = useNavigation<NoteDetailScreenNavigationProp>()
 
   const navigateToNoteDetail = () => {
-    navigation.navigate('NoteDetails', { noteId: item.id });
-  };
+    navigation.navigate('NoteDetails', { noteId: item.id })
+  }
 
   return (
     <>
@@ -42,24 +42,24 @@ const NoteItem: React.FC<NoteProps> = ({
         />
       )}
     </>
-  );
-};
+  )
+}
 
 const NoteItemContainer = styled.TouchableOpacity`
   margin-top: 5px;
   padding: 8px;
   border-radius: 3px;
-`;
+`
 
 const NoteText = styled.Text`
   font-size: 16px;
   color: ${colors.common.offWhite};
-`;
+`
 
 const DateText = styled.Text`
   font-size: 14px;
   color: ${colors.common.primaryGray};
   paddingtop: 8px;
-`;
+`
 
-export default NoteItem;
+export default NoteItem

@@ -1,6 +1,6 @@
-import colors from '@theme/colors';
-import React from 'react';
-import { BaseToast, ErrorToast, ToastProps } from 'react-native-toast-message';
+import colors from '@theme/colors'
+import React from 'react'
+import { BaseToast, ErrorToast, ToastProps } from 'react-native-toast-message'
 
 const toastConfig = {
   success: (props: ToastProps) => (
@@ -37,6 +37,6 @@ const toastConfig = {
       }}
     />
   ),
-};
+}
 
-export default toastConfig;
+export default toastConfig

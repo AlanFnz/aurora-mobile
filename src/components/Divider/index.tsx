@@ -1,14 +1,14 @@
-import colors from '@theme/colors';
-import React from 'react';
-import styled from 'styled-components/native';
+import colors from '@theme/colors'
+import React from 'react'
+import styled from 'styled-components/native'
 
 interface DividerProps {
-  color?: string;
-  opacity?: number;
-  height?: number;
-  marginHorizontal?: number;
-  marginVertical?: number;
-  testID?: string;
+  color?: string
+  opacity?: number
+  height?: number
+  marginHorizontal?: number
+  marginVertical?: number
+  testID?: string
 }
 
 const Divider: React.FC<DividerProps> = ({
@@ -28,8 +28,8 @@ const Divider: React.FC<DividerProps> = ({
       marginHorizontal={marginHorizontal}
       marginVertical={marginVertical}
     />
-  );
-};
+  )
+}
 
 const DividerLine = styled.View<DividerProps>`
   height: ${({ height }) => height}px;
@@ -37,6 +37,6 @@ const DividerLine = styled.View<DividerProps>`
   background-color: ${({ color }) => color};
   margin: ${({ marginVertical }) => marginVertical}px
     ${({ marginHorizontal }) => marginHorizontal}px;
-`;
+`
 
-export default Divider;
+export default Divider

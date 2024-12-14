@@ -1,12 +1,12 @@
-import styled from 'styled-components/native';
-import colors from '@theme/colors';
+import styled from 'styled-components/native'
+import colors from '@theme/colors'
 
 const Container = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
   padding: 0 6%;
-`;
+`
 
 const Title = styled.Text`
   font-size: 18px;
@@ -15,7 +15,7 @@ const Title = styled.Text`
   margin-bottom: 20px;
   text-transform: uppercase;
   letter-spacing: 2px;
-`;
+`
 
 const Input = styled.TextInput.attrs({
   placeholderTextColor: colors.lowOpacity.whiteMid,
@@ -30,7 +30,7 @@ const Input = styled.TextInput.attrs({
   margin-bottom: 12px;
   padding: 0 10px;
   width: 100%;
-`;
+`
 
 const SignInButton = styled.TouchableOpacity`
   width: 100%;
@@ -42,13 +42,13 @@ const SignInButton = styled.TouchableOpacity`
   border-color: ${colors.lowOpacity.whiteLow};
   justify-content: center;
   align-items: center;
-`;
+`
 
 const SignInText = styled.Text`
   color: ${colors.common.offWhite};
   font-size: 16px;
   font-weight: 600;
   text-transform: uppercase;
-`;
+`
 
-export { Container, Title, Input, SignInButton, SignInText };
+export { Container, Title, Input, SignInButton, SignInText }

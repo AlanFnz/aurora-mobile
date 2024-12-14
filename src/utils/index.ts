@@ -1,1 +1,1 @@
-export { formatTimestampToDate, formatTimestampToDateTime } from './time';
+export { formatTimestampToDate, formatTimestampToDateTime } from './time'

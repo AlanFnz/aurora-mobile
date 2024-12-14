@@ -1,12 +1,12 @@
-import styled from 'styled-components/native';
-import colors from '@theme/colors';
+import styled from 'styled-components/native'
+import colors from '@theme/colors'
 
 const Container = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
   padding: 0 6%;
-`;
+`
 
 const Title = styled.Text`
   font-size: 18px;
@@ -15,7 +15,7 @@ const Title = styled.Text`
   margin-bottom: 20px;
   text-transform: uppercase;
   letter-spacing: 2px;
-`;
+`
 
 const SignOutButton = styled.TouchableOpacity`
   width: 100%;
@@ -27,13 +27,13 @@ const SignOutButton = styled.TouchableOpacity`
   border-color: ${colors.common.primaryGray};
   justify-content: center;
   align-items: center;
-`;
+`
 
 const SignOutText = styled.Text`
   color: ${colors.common.offWhite};
   font-size: 16px;
   font-weight: 600;
   text-transform: uppercase;
-`;
+`
 
-export { Container, Title, SignOutButton, SignOutText };
+export { Container, Title, SignOutButton, SignOutText }

@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
-import { FlatList } from 'react-native';
+import React, { useState } from 'react'
+import { FlatList } from 'react-native'
 import {
   FolderContainer,
   FolderHeader,
   FolderTitle,
   MainContainer,
-} from './styles';
-import { FolderProps } from './types';
-import GradientBackground from './components/GradientBackground';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import Divider from '@root/src/components/Divider';
-import NoteItem from './components/NoteItem';
-import colors from '@theme/colors';
+} from './styles'
+import { FolderProps } from './types'
+import GradientBackground from './components/GradientBackground'
+import Icon from 'react-native-vector-icons/FontAwesome'
+import Divider from '@root/src/components/Divider'
+import NoteItem from './components/NoteItem'
+import colors from '@theme/colors'
 
 const Folder: React.FC<FolderProps> = ({ folder }) => {
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState(false)
 
   return (
     <>
@@ -59,7 +59,7 @@ const Folder: React.FC<FolderProps> = ({ folder }) => {
         )}
       </MainContainer>
     </>
-  );
-};
+  )
+}
 
-export default Folder;
+export default Folder

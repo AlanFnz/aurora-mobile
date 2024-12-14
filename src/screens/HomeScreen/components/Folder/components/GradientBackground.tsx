@@ -1,5 +1,5 @@
-import React from 'react';
-import { Defs, LinearGradient, Rect, Stop, Svg } from 'react-native-svg';
+import React from 'react'
+import { Defs, LinearGradient, Rect, Stop, Svg } from 'react-native-svg'
 
 const GradientBackground: React.FC = () => {
   return (
@@ -15,7 +15,7 @@ const GradientBackground: React.FC = () => {
       </Defs>
       <Rect width="100%" height="100%" fill="url(#grad)" />
     </Svg>
-  );
-};
+  )
+}
 
-export default GradientBackground;
+export default GradientBackground

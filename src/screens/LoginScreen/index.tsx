@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
-import BackgroundLayers from '@root/src/components/BackgroundLayers';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '@store/index';
-import { performSignIn } from '@store/authSlice';
-import { Container, Input, SignInButton, SignInText, Title } from './styles';
+import React, { useState } from 'react'
+import BackgroundLayers from '@root/src/components/BackgroundLayers'
+import { useDispatch } from 'react-redux'
+import { AppDispatch } from '@store/index'
+import { performSignIn } from '@store/authSlice'
+import { Container, Input, SignInButton, SignInText, Title } from './styles'
 
 const LoginScreen: React.FC = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const dispatch = useDispatch<AppDispatch>();
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const dispatch = useDispatch<AppDispatch>()
 
   const handleSignIn = () => {
-    dispatch(performSignIn(username, password));
-  };
+    dispatch(performSignIn(username, password))
+  }
 
   return (
     <>
@@ -35,7 +35,7 @@ const LoginScreen: React.FC = () => {
         </SignInButton>
       </Container>
     </>
-  );
-};
+  )
+}
 
-export default LoginScreen;
+export default LoginScreen

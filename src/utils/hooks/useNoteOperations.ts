@@ -1,34 +1,34 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux'
 
 import {
   useCreateNoteMutation,
   useUpdateNoteMutation,
-} from '@store/queries/notes';
-import { RootState } from '@store/index';
-import { addNoteToFolder, setFolders } from '@store/foldersSlice';
+} from '@store/queries/notes'
+import { RootState } from '@store/index'
+import { addNoteToFolder, setFolders } from '@store/foldersSlice'
 
 export const useNoteOperations = () => {
-  const dispatch = useDispatch();
-  const folders = useSelector((state: RootState) => state.folders);
+  const dispatch = useDispatch()
+  const folders = useSelector((state: RootState) => state.folders)
 
-  const [createNote] = useCreateNoteMutation();
-  const [updateNoteMutation] = useUpdateNoteMutation();
+  const [createNote] = useCreateNoteMutation()
+  const [updateNoteMutation] = useUpdateNoteMutation()
 
   const createNewNote = async ({
     title,
     content,
     folderId,
   }: {
-    title: string;
-    content: string;
-    folderId: number | null;
+    title: string
+    content: string
+    folderId: number | null
   }) => {
-    if (!folderId) return;
+    if (!folderId) return
     const createdNote = await createNote({
       title,
       content,
       folderId,
-    }).unwrap();
+    }).unwrap()
 
     dispatch(
       addNoteToFolder({
@@ -40,26 +40,26 @@ export const useNoteOperations = () => {
           modifiedDate: createdNote.modifiedDate,
         },
       }),
-    );
+    )
 
-    return createdNote;
-  };
+    return createdNote
+  }
 
   const updateNote = async ({
     id,
     title,
     content,
   }: {
-    id: number;
-    title: string;
-    content: string;
+    id: number
+    title: string
+    content: string
   }) => {
-    if (!id) return;
+    if (!id) return
     const updatedNote = await updateNoteMutation({
       id,
       title,
       content,
-    }).unwrap();
+    }).unwrap()
 
     const updatedFolders = folders.map(folder => ({
       ...folder,
@@ -75,12 +75,12 @@ export const useNoteOperations = () => {
             }
           : note,
       ),
-    }));
+    }))
 
-    dispatch(setFolders(updatedFolders));
+    dispatch(setFolders(updatedFolders))
 
-    return updatedNote;
-  };
+    return updatedNote
+  }
 
-  return { createNewNote, updateNote };
-};
+  return { createNewNote, updateNote }
+}

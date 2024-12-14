@@ -31,6 +31,6 @@ const colors = {
     positive: '#2ecc71',
     negative: '#e74c3c',
   },
-};
+}
 
-export default colors;
+export default colors

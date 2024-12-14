@@ -1,24 +1,24 @@
-import styled from 'styled-components/native';
-import colors from '@theme/colors';
+import styled from 'styled-components/native'
+import colors from '@theme/colors'
 
 const Container = styled.View<{
-  insets: { top: number; bottom: number; left: number; right: number };
+  insets: { top: number; bottom: number; left: number; right: number }
 }>`
   flex: 1;
   padding: 20px;
   padding-top: ${props => props.insets.top}px;
-`;
+`
 
 const TitleContainer = styled.View`
   padding-bottom: 25px;
-`;
+`
 
 const Label = styled.Text`
   font-size: 16px;
   font-weight: bold;
   margin-bottom: 10px;
   color: ${colors.common.offWhite};
-`;
+`
 
 const NoteTitleInput = styled.TextInput.attrs({
   placeholderTextColor: colors.lowOpacity.whiteMid,
@@ -35,12 +35,12 @@ const NoteTitleInput = styled.TextInput.attrs({
   border-top-width: 0;
   border-top-left-radius: 2px;
   border-top-right-radius: 2px;
-`;
+`
 
 const DateText = styled.Text`
   font-size: 14px;
   color: ${colors.common.primaryGray};
-`;
+`
 
 const TextArea = styled.TextInput.attrs({
   placeholderTextColor: colors.lowOpacity.whiteMid,
@@ -52,19 +52,19 @@ const TextArea = styled.TextInput.attrs({
   margin-bottom: 20px;
   text-align-vertical: top;
   font-size: 16px;
-`;
+`
 
 const StyledText = styled.Text`
   font-size: 18px;
   color: ${colors.common.tertiaryGray};
-`;
+`
 
 const ButtonText = styled.Text`
   color: ${colors.common.offWhite};
   font-size: 16px;
   font-weight: 600;
   text-transform: uppercase;
-`;
+`
 
 const Button = styled.TouchableOpacity`
   width: 100%;
@@ -76,7 +76,7 @@ const Button = styled.TouchableOpacity`
   border-color: ${colors.lowOpacity.whiteLow};
   justify-content: center;
   align-items: center;
-`;
+`
 
 export {
   Container,
@@ -88,4 +88,4 @@ export {
   StyledText,
   ButtonText,
   Button,
-};
+}

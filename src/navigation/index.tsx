@@ -1,24 +1,24 @@
-import React, { useEffect } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createStackNavigator } from '@react-navigation/stack';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import React, { useEffect } from 'react'
+import { NavigationContainer } from '@react-navigation/native'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { createStackNavigator } from '@react-navigation/stack'
+import Icon from 'react-native-vector-icons/FontAwesome'
 
 // Store
-import { useSelector, useDispatch } from 'react-redux';
-import { AppDispatch, RootState } from '@store/index';
-import { bootstrapAsync } from '@store/authSlice';
-import { tabNavigatorStyles } from '@navigation/tabNavigatorStyles';
-import { RootStackParamList } from './types';
+import { useSelector, useDispatch } from 'react-redux'
+import { AppDispatch, RootState } from '@store/index'
+import { bootstrapAsync } from '@store/authSlice'
+import { tabNavigatorStyles } from '@navigation/tabNavigatorStyles'
+import { RootStackParamList } from './types'
 // Screens
 
-import LoginScreen from '@screens/LoginScreen';
-import HomeScreen from '@screens/HomeScreen';
-import SettingsScreen from '@screens/SettingsScreen';
-import NoteDetailsScreen from '@screens/NoteDetailsScreen';
+import LoginScreen from '@screens/LoginScreen'
+import HomeScreen from '@screens/HomeScreen'
+import SettingsScreen from '@screens/SettingsScreen'
+import NoteDetailsScreen from '@screens/NoteDetailsScreen'
 
-const Stack = createStackNavigator<RootStackParamList>();
-const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator<RootStackParamList>()
+const Tab = createBottomTabNavigator()
 
 function HomeStack() {
   return (
@@ -26,7 +26,7 @@ function HomeStack() {
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="NoteDetails" component={NoteDetailsScreen} />
     </Stack.Navigator>
-  );
+  )
 }
 
 function HomeTabs() {
@@ -54,21 +54,19 @@ function HomeTabs() {
         }}
       />
     </Tab.Navigator>
-  );
+  )
 }
 
 export default function Navigation() {
-  const dispatch = useDispatch<AppDispatch>();
-  const { isLoading, userToken } = useSelector(
-    (state: RootState) => state.auth,
-  );
+  const dispatch = useDispatch<AppDispatch>()
+  const { isLoading, userToken } = useSelector((state: RootState) => state.auth)
 
   useEffect(() => {
-    dispatch(bootstrapAsync());
-  }, [dispatch]);
+    dispatch(bootstrapAsync())
+  }, [dispatch])
 
   if (isLoading) {
-    return <></>;
+    return <></>
   }
 
   return (
@@ -85,5 +83,5 @@ export default function Navigation() {
         )}
       </Stack.Navigator>
     </NavigationContainer>
-  );
+  )
 }

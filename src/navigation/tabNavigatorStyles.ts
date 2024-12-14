@@ -1,5 +1,5 @@
-import { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs';
-import colors from '@theme/colors';
+import { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs'
+import colors from '@theme/colors'
 
 export const tabNavigatorStyles = (): BottomTabNavigationOptions => ({
   headerShown: false,
@@ -21,4 +21,4 @@ export const tabNavigatorStyles = (): BottomTabNavigationOptions => ({
   tabBarIconStyle: {
     marginTop: 4,
   },
-});
+})

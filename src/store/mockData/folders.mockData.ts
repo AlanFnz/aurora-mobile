@@ -1,4 +1,4 @@
-import { Folder } from '@screens/HomeScreen/components/Folder/types';
+import { Folder } from '@screens/HomeScreen/components/Folder/types'
 
 const foldersMockData: Folder[] = [
   {
@@ -37,6 +37,6 @@ const foldersMockData: Folder[] = [
       },
     ],
   },
-];
+]
 
-export default foldersMockData;
+export default foldersMockData

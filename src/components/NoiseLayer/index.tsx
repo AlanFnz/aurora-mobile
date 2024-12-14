@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
-import React from 'react';
-import { Image, StyleSheet } from 'react-native';
+import React from 'react'
+import { Image, StyleSheet } from 'react-native'
 
 interface NoiseLayerProps {
-  opacity?: number;
+  opacity?: number
 }
 
 const NoiseLayer: React.FC<NoiseLayerProps> = ({ opacity = 0.1 }) => (
@@ -12,7 +12,7 @@ const NoiseLayer: React.FC<NoiseLayerProps> = ({ opacity = 0.1 }) => (
     style={[styles.noiseImage, { opacity }]}
     resizeMode="repeat"
   />
-);
+)
 
 const styles = StyleSheet.create({
   noiseImage: {
@@ -20,6 +20,6 @@ const styles = StyleSheet.create({
     height: '100%',
     position: 'absolute',
   },
-});
+})
 
-export default NoiseLayer;
+export default NoiseLayer

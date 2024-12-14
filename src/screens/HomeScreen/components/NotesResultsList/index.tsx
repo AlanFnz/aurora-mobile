@@ -1,23 +1,23 @@
-import React from 'react';
-import styled from 'styled-components/native';
-import { FlatList } from 'react-native';
-import { NoteListItem } from '../Folder/types';
-import { useNavigation } from '@react-navigation/native';
-import { NoteDetailScreenNavigationProp } from '@navigation/types';
+import React from 'react'
+import styled from 'styled-components/native'
+import { FlatList } from 'react-native'
+import { NoteListItem } from '../Folder/types'
+import { useNavigation } from '@react-navigation/native'
+import { NoteDetailScreenNavigationProp } from '@navigation/types'
 
 interface NotesResultsListProps {
-  notes: NoteListItem[];
-  testID: string;
+  notes: NoteListItem[]
+  testID: string
 }
 
 const NotesResultsList: React.FC<NotesResultsListProps> = ({
   notes,
   testID,
 }) => {
-  const navigation = useNavigation<NoteDetailScreenNavigationProp>();
+  const navigation = useNavigation<NoteDetailScreenNavigationProp>()
   const navigateToNoteDetail = (noteId: number) => {
-    navigation.navigate('NoteDetails', { noteId });
-  };
+    navigation.navigate('NoteDetails', { noteId })
+  }
 
   return (
     <ResultsListContainer testID={testID}>
@@ -31,24 +31,24 @@ const NotesResultsList: React.FC<NotesResultsListProps> = ({
         )}
       />
     </ResultsListContainer>
-  );
-};
+  )
+}
 
 const ResultsListContainer = styled.View`
   flex: 1;
   padding: 10px;
   width: 100%;
-`;
+`
 
 const NoteItem = styled.TouchableOpacity`
   padding: 10px;
   border-bottom-width: 1px;
   border-bottom-color: #ccc;
-`;
+`
 
 const NoteText = styled.Text`
   font-size: 16px;
   color: #f6f6f6;
-`;
+`
 
-export default NotesResultsList;
+export default NotesResultsList

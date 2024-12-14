@@ -1,6 +1,6 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { Folder } from '@store/foldersSlice';
-import foldersMockData from '@store/mockData/folders.mockData';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { Folder } from '@store/foldersSlice'
+import foldersMockData from '@store/mockData/folders.mockData'
 
 export const foldersApi = createApi({
   reducerPath: 'foldersApi',
@@ -8,10 +8,10 @@ export const foldersApi = createApi({
   endpoints: builder => ({
     fetchFolders: builder.query<Folder[], void>({
       queryFn: () => {
-        return { data: foldersMockData };
+        return { data: foldersMockData }
       },
     }),
   }),
-});
+})
 
-export const { useFetchFoldersQuery } = foldersApi;
+export const { useFetchFoldersQuery } = foldersApi

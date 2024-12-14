@@ -1,26 +1,26 @@
-import React from 'react';
-import BackButtonIcon from 'react-native-vector-icons/FontAwesome';
-import colors from '@theme/colors';
-import { useNavigation } from '@react-navigation/native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import React from 'react'
+import BackButtonIcon from 'react-native-vector-icons/FontAwesome'
+import colors from '@theme/colors'
+import { useNavigation } from '@react-navigation/native'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import {
   BackButton,
   HeaderContainer,
   HeaderTitle,
   TitleContainer,
-} from './styles';
+} from './styles'
 
 const Header: React.FC<{
-  title?: string;
-  showBackButton?: boolean;
-  rightColumnContent?: any;
+  title?: string
+  showBackButton?: boolean
+  rightColumnContent?: any
 }> = ({ title, rightColumnContent = true, showBackButton = true }) => {
-  const insets = useSafeAreaInsets();
-  const navigation = useNavigation();
+  const insets = useSafeAreaInsets()
+  const navigation = useNavigation()
 
   const handleBackPress = () => {
-    navigation.goBack();
-  };
+    navigation.goBack()
+  }
 
   return (
     <HeaderContainer insets={insets}>
@@ -38,7 +38,7 @@ const Header: React.FC<{
       </TitleContainer>
       {rightColumnContent && rightColumnContent}
     </HeaderContainer>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

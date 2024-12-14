@@ -1,12 +1,12 @@
-import React from 'react';
-import { StyleSheet } from 'react-native';
-import { BlurView } from '@react-native-community/blur';
-import { Defs, LinearGradient, Rect, Stop, Svg } from 'react-native-svg';
-import NoiseLayer from '../NoiseLayer';
-import colors from '@theme/colors';
+import React from 'react'
+import { StyleSheet } from 'react-native'
+import { BlurView } from '@react-native-community/blur'
+import { Defs, LinearGradient, Rect, Stop, Svg } from 'react-native-svg'
+import NoiseLayer from '../NoiseLayer'
+import colors from '@theme/colors'
 
 interface BackgroundLayersProps {
-  testID?: string;
+  testID?: string
 }
 
 const BackgroundLayers: React.FC<BackgroundLayersProps> = ({
@@ -37,8 +37,8 @@ const BackgroundLayers: React.FC<BackgroundLayersProps> = ({
 
       <NoiseLayer opacity={0.05} />
     </>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   blurView: {
@@ -49,6 +49,6 @@ const styles = StyleSheet.create({
     right: 0,
     opacity: 0.5,
   },
-});
+})
 
-export default BackgroundLayers;
+export default BackgroundLayers
