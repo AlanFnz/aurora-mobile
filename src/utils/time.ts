@@ -1,27 +1,27 @@
 function formatTimestampToDate(timestamp: number): string {
-  const date = new Date(timestamp);
+  const date = new Date(timestamp)
   return new Intl.DateTimeFormat('en-US', {
     month: 'short', // "Jan"
     day: 'numeric', // "6"
     year: 'numeric', // "2023"
-  }).format(date);
+  }).format(date)
 }
 
 function formatTimestampToDateTime(timestamp: number): string {
-  const date = new Date(timestamp);
+  const date = new Date(timestamp)
   const formattedDate = new Intl.DateTimeFormat('en-US', {
     month: 'short', // "Jan"
     day: 'numeric', // "6"
     year: 'numeric', // "2023"
-  }).format(date);
+  }).format(date)
 
   const formattedTime = new Intl.DateTimeFormat('en-US', {
     hour: 'numeric', // "6"
     minute: 'numeric', // "49"
     hour12: true, // "AM/PM"
-  }).format(date);
+  }).format(date)
 
-  return `${formattedDate} at ${formattedTime}`;
+  return `${formattedDate} at ${formattedTime}`
 }
 
-export { formatTimestampToDate, formatTimestampToDateTime };
+export { formatTimestampToDate, formatTimestampToDateTime }

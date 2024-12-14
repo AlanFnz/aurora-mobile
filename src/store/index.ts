@@ -1,8 +1,10 @@
-import { foldersApi } from './queries/folders';
-import { noteApi } from './queries/notes';
-import { configureStore } from '@reduxjs/toolkit';
-import authReducer from '@store/authSlice';
-import foldersReducer from '@store/foldersSlice';
+import { configureStore } from '@reduxjs/toolkit'
+
+import authReducer from '@store/auth.slice'
+import foldersReducer from '@store/folders.slice'
+
+import { noteApi } from './queries/notes'
+import { foldersApi } from './queries/folders'
 
 export const store = configureStore({
   reducer: {
@@ -13,7 +15,7 @@ export const store = configureStore({
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware().concat(foldersApi.middleware, noteApi.middleware),
-});
+})
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch
