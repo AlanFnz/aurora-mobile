@@ -9,6 +9,7 @@
       "@hooks/*": ["src/hooks/*"],
       "@utils/*": ["src/utils/*"],
       "@navigation/*": ["src/navigation/*"],
+      "@context/*": ["src/context/*"],
       "@theme/*": ["src/theme/*"],
       "@store/*": ["src/store/*"],
       "@config/*": ["src/config/*"],

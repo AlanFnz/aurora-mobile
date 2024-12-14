@@ -12,6 +12,7 @@ module.exports = {
           '@theme': './src/theme',
           '@hooks': './src/hooks',
           '@utils': './src/utils',
+          '@context': './src/context',
           '@navigation': './src/navigation',
           '@store': './src/store',
           '@config': './src/config',
