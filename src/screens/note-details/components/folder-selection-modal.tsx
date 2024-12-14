@@ -1,5 +1,5 @@
-import React from 'react'
-import { Modal, TouchableOpacity } from 'react-native'
+import React, { useState } from 'react'
+import { Modal, TextInput, TouchableOpacity } from 'react-native'
 import styled from 'styled-components/native'
 
 import { Folder } from '@store/folders.slice'
@@ -9,6 +9,9 @@ interface FolderSelectionModalProps {
   visible: boolean
   folders: Folder[]
   selectedFolderId: number | null
+  allowTitleEdit: boolean
+  noteTitle?: string
+  setNoteTitle?: (title: string) => void
   onFolderSelect: (folderId: number | null) => void
   onConfirm: () => void
   onClose: () => void
@@ -18,10 +21,24 @@ const FolderSelectionModal: React.FC<FolderSelectionModalProps> = ({
   visible,
   folders,
   selectedFolderId,
+  allowTitleEdit = false,
+  noteTitle,
+  setNoteTitle,
   onFolderSelect,
   onConfirm,
   onClose,
 }) => {
+  const [validationError, setValidationError] = useState(false)
+
+  const handleConfirm = () => {
+    if (!selectedFolderId) {
+      setValidationError(true)
+      return
+    }
+    setValidationError(false)
+    onConfirm()
+  }
+
   return (
     <Modal
       transparent
@@ -31,6 +48,14 @@ const FolderSelectionModal: React.FC<FolderSelectionModalProps> = ({
       <Overlay>
         <ModalContainer>
           <ModalTitle>Select a Folder</ModalTitle>
+          {allowTitleEdit && (
+            <TitleInput
+              placeholder="Enter note title"
+              placeholderTextColor={colors.common.lightGray}
+              value={noteTitle}
+              onChangeText={setNoteTitle}
+            />
+          )}
           <Dropdown>
             {folders.map(folder => (
               <DropdownItem
@@ -47,7 +72,10 @@ const FolderSelectionModal: React.FC<FolderSelectionModalProps> = ({
               <NewFolderText>+ Create New Folder</NewFolderText>
             </DropdownItem>
           </Dropdown>
-          <ConfirmButton onPress={onConfirm}>
+          {validationError && (
+            <ValidationErrorText>Please select a folder.</ValidationErrorText>
+          )}
+          <ConfirmButton onPress={handleConfirm}>
             <ConfirmButtonText>Confirm</ConfirmButtonText>
           </ConfirmButton>
         </ModalContainer>
@@ -79,6 +107,16 @@ const ModalTitle = styled.Text`
   color: ${colors.common.offWhite};
 `
 
+const TitleInput = styled(TextInput)`
+  border-width: 1px;
+  border-color: ${colors.common.lightGray};
+  background-color: ${colors.common.black};
+  color: ${colors.common.offWhite};
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+`
+
 const Dropdown = styled.View`
   margin-bottom: 15px;
 `
@@ -98,6 +136,13 @@ const DropdownText = styled.Text<{ isSelected?: boolean }>`
 
 const NewFolderText = styled(DropdownText)`
   color: ${colors.common.lightGray};
+`
+
+const ValidationErrorText = styled.Text`
+  color: ${colors.feedback.negative};
+  font-size: 14px;
+  margin-bottom: 10px;
+  text-align: center;
 `
 
 const ConfirmButton = styled.TouchableOpacity`

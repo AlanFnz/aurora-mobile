@@ -17,16 +17,19 @@ export const useNoteOperations = () => {
   const createNewNote = async ({
     title,
     content,
+    audioUrl,
     folderId,
   }: {
     title: string
     content: string
+    audioUrl?: string
     folderId: number | null
   }) => {
     if (!folderId) return
     const createdNote = await createNote({
       title,
       content,
+      audioUrl,
       folderId,
     }).unwrap()
 

@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
-import Toast from 'react-native-toast-message'
 
 import { useFetchNoteDetailsQuery } from '@store/queries/notes'
 import { useNoteOperations } from '@hooks/use-note-operations'
+
 import { formatTimestampToDateTime } from '@utils/time'
+import { useFolderSelection } from '@root/src/context/folder-selection'
+import { useToast } from '@hooks/use-toast'
 
 export const useNoteDetails = ({
   noteId,
@@ -13,8 +14,9 @@ export const useNoteDetails = ({
   noteId: number
   isNew?: boolean
 }) => {
-  const insets = useSafeAreaInsets()
+  const { showToast } = useToast()
   const { createNewNote, updateNote } = useNoteOperations()
+  const { showModal } = useFolderSelection()
   const { data: note, isLoading } = useFetchNoteDetailsQuery(noteId, {
     skip: isNew,
   })
@@ -22,8 +24,6 @@ export const useNoteDetails = ({
   const [title, setTitle] = useState('')
   const [modifiedDate, setModifiedDate] = useState('')
   const [content, setContent] = useState('')
-  const [isModalVisible, setIsModalVisible] = useState(false)
-  const [selectedFolderId, setSelectedFolderId] = useState<number | null>(null)
 
   useEffect(() => {
     if (note) {
@@ -37,47 +37,34 @@ export const useNoteDetails = ({
     }
   }, [note, isNew])
 
-  const showToast = (isSuccess: boolean) => {
-    Toast.show({
-      type: isSuccess ? 'success' : 'error',
-      text1: isSuccess ? 'Saved successfully!' : 'Something went wrong',
-      position: 'bottom',
-      bottomOffset: insets.bottom * 3,
-      visibilityTime: 1750,
-    })
-  }
-
   const handleSave = async () => {
     if (isNew) {
-      setIsModalVisible(true)
+      showModal(async folderId => {
+        try {
+          await createNewNote({
+            title,
+            content,
+            folderId,
+          })
+          showToast({
+            isSuccess: true,
+            message: 'Note created successfully!',
+          })
+        } catch (error) {
+          console.error(error)
+          showToast({
+            isSuccess: false,
+            message: 'Failed to create note.',
+          })
+        }
+      })
     } else if (note) {
       try {
         await updateNote({ id: note.id, title, content })
-        showToast(true)
+        showToast({ isSuccess: true, message: 'Note updated successfully!' })
       } catch (error) {
         console.error(error)
-        showToast(false)
-      }
-    }
-  }
-
-  const handleFolderSelect = (folderId: number | null) => {
-    setSelectedFolderId(folderId)
-  }
-
-  const handleConfirmFolderSelection = async () => {
-    if (selectedFolderId) {
-      setIsModalVisible(false)
-      try {
-        await createNewNote({
-          title,
-          content,
-          folderId: selectedFolderId,
-        })
-        showToast(true)
-      } catch (error) {
-        console.error(error)
-        showToast(false)
+        showToast({ isSuccess: false, message: 'Failed to update note.' })
       }
     }
   }
@@ -86,14 +73,9 @@ export const useNoteDetails = ({
     title,
     modifiedDate,
     content,
-    selectedFolderId,
-    isModalVisible,
     isLoading,
     setTitle,
     setContent,
-    setIsModalVisible,
     handleSave,
-    handleFolderSelect,
-    handleConfirmFolderSelection,
   }
 }

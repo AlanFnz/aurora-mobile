@@ -2,18 +2,25 @@ import { useRef, useState } from 'react'
 import { Animated } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 
+import { useFolderSelection } from '@context/folder-selection'
 import { NoteDetailScreenNavigationProp } from '@navigation/types'
+import { useNoteOperations } from '@hooks/use-note-operations'
+import { useToast } from '@hooks/use-toast'
+
 import { useAudioRecorder } from './use-audio-recorder'
 import { useFileUpload } from './use-file-upload'
 
 const pressAnimationDuration = 190
 const releaseAnimationDuration = 150
 
-export const useFloatingButtonHandlers = () => {
+export const useCreateNoteButton = () => {
   const navigation = useNavigation<NoteDetailScreenNavigationProp>()
 
-  const { isUploading, uploadFile } = useFileUpload()
   const { startRecording, stopRecording, isRecording } = useAudioRecorder()
+  const { isUploading, uploadFile } = useFileUpload()
+  const { createNewNote } = useNoteOperations()
+  const { showModal } = useFolderSelection()
+  const { showToast } = useToast()
 
   const [isLongPressed, setIsLongPressed] = useState(false)
 
@@ -62,25 +69,6 @@ export const useFloatingButtonHandlers = () => {
   }
 
   const handlePressOut = async () => {
-    if (isLongPressed) {
-      const recordingResult = await stopRecording()
-      if (recordingResult) {
-        try {
-          const uploadedUrl = await uploadFile(recordingResult)
-
-          navigation.navigate('NoteDetails', {
-            isNew: true,
-            preFilledData: {
-              title: `Voice Note - ${new Date().toLocaleString()}`,
-              content: 'Waveform Placeholder',
-              audioUrl: uploadedUrl,
-            },
-          })
-        } catch (error) {
-          console.error('Failed to upload audio file:', error)
-        }
-      }
-    } else handleNewNote()
     Animated.parallel([
       Animated.timing(bottomPositionAnim, {
         toValue: 25,
@@ -104,6 +92,44 @@ export const useFloatingButtonHandlers = () => {
       }),
     ]).start()
     setIsLongPressed(false)
+
+    if (isLongPressed) {
+      const recordingResult = await stopRecording()
+      if (recordingResult) {
+        try {
+          const resultUrl = await uploadFile(recordingResult)
+          showModal(
+            async (folderId, noteTitle) => {
+              try {
+                await createNewNote({
+                  title: noteTitle || 'New audio note',
+                  content: '',
+                  audioUrl: resultUrl,
+                  folderId,
+                })
+                showToast({
+                  isSuccess: true,
+                  message: 'Note created successfully!',
+                })
+              } catch (error) {
+                console.error(error)
+                showToast({
+                  isSuccess: false,
+                  message: 'Failed to create note.',
+                })
+              }
+            },
+            { allowTitleEdit: true },
+          )
+        } catch (error) {
+          console.error('Failed to upload audio file:', error)
+          showToast({
+            isSuccess: false,
+            message: 'Failed to upload file.',
+          })
+        }
+      }
+    } else handleNewNote()
   }
   const animatedStyles = {
     height: heightAnim,

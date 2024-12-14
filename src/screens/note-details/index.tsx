@@ -1,14 +1,11 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 import { StackScreenProps } from '@react-navigation/stack'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { RootStackParamList } from '@navigation/types'
 import BackgroundLayers from '@components/background-layers'
 import Header from '@components/header'
-import { RootState } from '@store/index'
 
-import FolderSelectionModal from './components/folder-selection-modal'
 import SaveButton from './components/save-button'
 import { useNoteDetails } from './hooks/use-note-details'
 import {
@@ -28,21 +25,15 @@ type NoteDetailsScreenProps = StackScreenProps<
 const NoteDetailsScreen: React.FC<NoteDetailsScreenProps> = ({ route }) => {
   const { noteId = 0, isNew } = route.params
   const insets = useSafeAreaInsets()
-  const folders = useSelector((state: RootState) => state.folders)
 
   const {
     title,
     modifiedDate,
     content,
-    selectedFolderId,
-    isModalVisible,
     isLoading,
     setTitle,
     setContent,
-    setIsModalVisible,
     handleSave,
-    handleFolderSelect,
-    handleConfirmFolderSelection,
   } = useNoteDetails({ noteId, isNew })
 
   if (!isNew && isLoading) {
@@ -67,18 +58,9 @@ const NoteDetailsScreen: React.FC<NoteDetailsScreenProps> = ({ route }) => {
           value={content}
           onChangeText={setContent}
           placeholder="Note Content"
-          multiline={true}
+          multiline
         />
       </Container>
-
-      <FolderSelectionModal
-        visible={isModalVisible}
-        folders={folders}
-        selectedFolderId={selectedFolderId}
-        onFolderSelect={handleFolderSelect}
-        onConfirm={handleConfirmFolderSelection}
-        onClose={() => setIsModalVisible(false)}
-      />
     </>
   )
 }

@@ -6,6 +6,7 @@ export interface Note {
   id: number
   title: string
   content?: string
+  audioUrl?: string
   folderId: number
   modifiedDate: number
 }

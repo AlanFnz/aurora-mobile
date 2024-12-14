@@ -39,7 +39,6 @@ export const useAudioRecorder = () => {
       const result = await audioRecorderPlayer.stopRecorder()
       audioRecorderPlayer.removeRecordBackListener()
       setIsRecording(false)
-      console.log('🚀 ~ stopRecording ~ result:', result)
       return result
     } catch (error) {
       console.error('Failed to stop recording:', error)

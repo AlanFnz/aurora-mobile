@@ -1,23 +1,38 @@
 import React from 'react'
-import { TouchableWithoutFeedback } from 'react-native'
-import { useFloatingButtonHandlers } from './hooks/use-floating-button-handlers'
+import { ActivityIndicator, TouchableWithoutFeedback } from 'react-native'
 
 import colors from '@theme/colors'
 
+import { useCreateNoteButton } from './hooks/use-create-note-button'
 import { AnimatedButtonContainer, FullCircleIcon, PlusIcon } from './styles'
 
-interface FloatingButtonProps {
+interface CreateNoteButtonProps {
   testID?: string
 }
 
-const FloatingButton: React.FC<FloatingButtonProps> = ({ testID }) => {
+const CreateNoteButton: React.FC<CreateNoteButtonProps> = ({ testID }) => {
   const {
     isLongPressed,
+    isUploading,
     animatedStyles,
     handlePressIn,
     handlePressOut,
     handleLongPress,
-  } = useFloatingButtonHandlers()
+  } = useCreateNoteButton()
+
+  const renderButton = () => {
+    const stateMap = {
+      uploading: (
+        <ActivityIndicator size="small" color={colors.common.darkGray} />
+      ),
+      longPressed: <FullCircleIcon color={colors.lowOpacity.redMid} />,
+      default: <PlusIcon color={colors.common.darkGray} />,
+    }
+
+    if (isUploading) return stateMap.uploading
+    if (isLongPressed) return stateMap.longPressed
+    return stateMap.default
+  }
 
   return (
     <TouchableWithoutFeedback
@@ -25,14 +40,10 @@ const FloatingButton: React.FC<FloatingButtonProps> = ({ testID }) => {
       onPressOut={handlePressOut}
       onLongPress={handleLongPress}>
       <AnimatedButtonContainer style={animatedStyles} testID={testID}>
-        {isLongPressed ? (
-          <FullCircleIcon color={colors.lowOpacity.redMid} />
-        ) : (
-          <PlusIcon color={colors.common.darkGray} />
-        )}
+        {renderButton()}
       </AnimatedButtonContainer>
     </TouchableWithoutFeedback>
   )
 }
 
-export default FloatingButton
+export default CreateNoteButton
