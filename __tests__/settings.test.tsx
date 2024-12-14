@@ -8,7 +8,7 @@ jest.mock('react-redux', () => ({
   useDispatch: jest.fn(),
 }))
 
-jest.mock('../src/store/authSlice', () => ({
+jest.mock('../src/store/auth.slice', () => ({
   performSignOut: jest.fn(),
 }))
 

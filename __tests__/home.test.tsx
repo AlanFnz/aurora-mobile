@@ -9,16 +9,13 @@ import foldersReducer from '@store/folders.slice'
 import foldersMockData from '@store/mocks/folders.mocks'
 import HomeScreen from '@screens/home'
 
-jest.mock('@screens/HomeScreen/components/FolderList', () => 'FolderList')
+jest.mock('@screens/home/components/folder-list', () => 'FolderList')
 jest.mock(
-  '@screens/HomeScreen/components/NotesResultsList',
+  '@screens/home/components/notes-results-list',
   () => 'NotesResultsList',
 )
-jest.mock(
-  '@screens/HomeScreen/components/FloatingButton',
-  () => 'FloatingButton',
-)
-jest.mock('@components/BackgroundLayers', () => 'BackgroundLayers')
+jest.mock('@screens/home/components/floating-button', () => 'FloatingButton')
+jest.mock('@components/background-layers', () => 'BackgroundLayers')
 
 jest.mock('react-native-safe-area-context', () => ({
   useSafeAreaInsets: jest.fn(),

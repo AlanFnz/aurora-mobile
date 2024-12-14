@@ -1,5 +1,5 @@
 import React from 'react'
-import NoteItem from '@screens/home/components/folder/components/NoteItem'
+import NoteItem from '@screens/home/components/folder/components/note-item'
 import { render, fireEvent } from '@testing-library/react-native'
 import { formatTimestampToDate } from '@root/src/utils'
 import { useNavigation } from '@react-navigation/native'

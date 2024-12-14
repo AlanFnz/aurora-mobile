@@ -7,10 +7,10 @@ import {
   MainContainer,
 } from './styles'
 import { FolderProps } from './types'
-import GradientBackground from './components/GradientBackground'
+import GradientBackground from './components/gradient-background'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import Divider from '@components/divider'
-import NoteItem from './components/NoteItem'
+import NoteItem from './components/note-item'
 import colors from '@theme/colors'
 
 const Folder: React.FC<FolderProps> = ({ folder }) => {
