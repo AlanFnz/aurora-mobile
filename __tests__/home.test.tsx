@@ -1,8 +1,8 @@
 import React from 'react'
-import { configureStore } from '@reduxjs/toolkit'
 import { Provider } from 'react-redux'
-import { NavigationContainer } from '@react-navigation/native'
+import { configureStore } from '@reduxjs/toolkit'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { NavigationContainer } from '@react-navigation/native'
 import { fireEvent, render } from '@testing-library/react-native'
 
 import foldersReducer from '@store/folders.slice'

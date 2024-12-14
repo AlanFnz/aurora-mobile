@@ -1,7 +1,8 @@
 import React from 'react'
-import FolderList from '@screens/home/components/folder-list'
-import { render } from '@testing-library/react-native'
 import { useSelector } from 'react-redux'
+import { render } from '@testing-library/react-native'
+
+import FolderList from '@screens/home/components/folder-list'
 
 jest.mock('react-redux', () => ({
   useSelector: jest.fn(),

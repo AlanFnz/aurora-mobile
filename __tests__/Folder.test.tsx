@@ -1,6 +1,7 @@
 import React from 'react'
-import Folder from '@screens/home/components/folder'
 import { render, fireEvent } from '@testing-library/react-native'
+
+import Folder from '@screens/home/components/folder'
 import { FolderProps } from '@screens/home/components/folder/types'
 
 jest.mock('react-native-vector-icons/FontAwesome', () => 'Icon')
