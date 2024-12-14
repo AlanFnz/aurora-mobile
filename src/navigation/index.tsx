@@ -7,15 +7,15 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 // Store
 import { useSelector, useDispatch } from 'react-redux'
 import { AppDispatch, RootState } from '@store/index'
-import { bootstrapAsync } from '@store/authSlice'
-import { tabNavigatorStyles } from '@navigation/tabNavigatorStyles'
+import { bootstrapAsync } from '@store/auth.slice'
+import { tabNavigatorStyles } from '@navigation/tab-navigator.styles'
 import { RootStackParamList } from './types'
 // Screens
 
-import LoginScreen from '@screens/LoginScreen'
-import HomeScreen from '@screens/HomeScreen'
-import SettingsScreen from '@screens/SettingsScreen'
-import NoteDetailsScreen from '@screens/NoteDetailsScreen'
+import LoginScreen from '@screens/login'
+import HomeScreen from '@screens/home'
+import SettingsScreen from '@screens/settings'
+import NoteDetailsScreen from '@screens/note-details'
 
 const Stack = createStackNavigator<RootStackParamList>()
 const Tab = createBottomTabNavigator()

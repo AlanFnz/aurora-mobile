@@ -5,9 +5,9 @@ import { NavigationContainer } from '@react-navigation/native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { fireEvent, render } from '@testing-library/react-native'
 
-import foldersReducer from '@store/foldersSlice'
-import foldersMockData from '@store/mockData/folders.mockData'
-import HomeScreen from '@screens/HomeScreen'
+import foldersReducer from '@store/folders.slice'
+import foldersMockData from '@store/mocks/folders.mocks'
+import HomeScreen from '@screens/home'
 
 jest.mock('@screens/HomeScreen/components/FolderList', () => 'FolderList')
 jest.mock(

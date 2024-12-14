@@ -1,6 +1,6 @@
 import 'react-native'
 import React from 'react'
-import App from '../App'
+import App from '../app'
 import { act } from 'react-test-renderer'
 import renderer from 'react-test-renderer'
 

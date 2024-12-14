@@ -1,9 +1,9 @@
 import React from 'react'
-import NoteItem from '@screens/HomeScreen/components/Folder/components/NoteItem'
+import NoteItem from '@screens/home/components/folder/components/NoteItem'
 import { render, fireEvent } from '@testing-library/react-native'
 import { formatTimestampToDate } from '@root/src/utils'
 import { useNavigation } from '@react-navigation/native'
-import { NoteListItem } from '@screens/HomeScreen/components/Folder/types'
+import { NoteListItem } from '@screens/home/components/folder/types'
 
 jest.mock('@react-navigation/native', () => ({
   useNavigation: jest.fn(),

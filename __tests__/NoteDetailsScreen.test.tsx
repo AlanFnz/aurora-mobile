@@ -9,12 +9,12 @@ import {
   useNavigation,
 } from '@react-navigation/native'
 
-import foldersReducer from '@store/foldersSlice'
+import foldersReducer from '@store/folders.slice'
 import {
   useFetchNoteDetailsQuery,
   useUpdateNoteMutation,
 } from '@store/queries/notes'
-import NoteDetailsScreen from '@screens/NoteDetailsScreen'
+import NoteDetailsScreen from '@screens/note-details'
 import { RootStackParamList } from '@navigation/types'
 
 jest.mock('@store/queries/notes', () => ({

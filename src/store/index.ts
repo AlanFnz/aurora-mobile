@@ -1,8 +1,8 @@
 import { foldersApi } from './queries/folders'
 import { noteApi } from './queries/notes'
 import { configureStore } from '@reduxjs/toolkit'
-import authReducer from '@store/authSlice'
-import foldersReducer from '@store/foldersSlice'
+import authReducer from '@store/auth.slice'
+import foldersReducer from '@store/folders.slice'
 
 export const store = configureStore({
   reducer: {

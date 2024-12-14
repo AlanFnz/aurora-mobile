@@ -1,5 +1,5 @@
 import React from 'react'
-import FolderList from '@screens/HomeScreen/components/FolderList'
+import FolderList from '@screens/home/components/folder-list'
 import { render } from '@testing-library/react-native'
 import { useSelector } from 'react-redux'
 

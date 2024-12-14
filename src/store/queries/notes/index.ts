@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-import notesMockData from '@store/mockData/notes.mockData'
+import notesMockData from '@store/mocks/notes.mocks'
 
 export interface Note {
   id: number

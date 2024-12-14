@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { Folder } from '@store/foldersSlice'
-import foldersMockData from '@store/mockData/folders.mockData'
+import { Folder } from '@store/folders.slice'
+import foldersMockData from '@store/mocks/folders.mocks'
 
 export const foldersApi = createApi({
   reducerPath: 'foldersApi',

@@ -1,8 +1,8 @@
 import React from 'react'
-import SettingsScreen from '../src/screens/SettingsScreen'
+import SettingsScreen from '../src/screens/settings'
 import { render, fireEvent } from '@testing-library/react-native'
 import { useDispatch } from 'react-redux'
-import { performSignOut } from '../src/store/authSlice'
+import { performSignOut } from '../src/store/auth.slice'
 
 jest.mock('react-redux', () => ({
   useDispatch: jest.fn(),
