@@ -1,14 +1,13 @@
 import { useEffect, useMemo, useState } from 'react'
 import AudioRecorderPlayer from 'react-native-audio-recorder-player'
 
-import { usePermissions } from '@root/src/hooks/usePermissions'
+import { usePermissions } from '@hooks/use-permissions'
 
 export const useAudioRecorder = () => {
   const audioRecorderPlayer = useMemo(() => new AudioRecorderPlayer(), [])
   const { requestAudioPermissions } = usePermissions()
 
   const [isRecording, setIsRecording] = useState(false)
-  const [recordingResult, setRecordingResult] = useState<string | null>(null)
 
   useEffect(() => {
     return () => {
@@ -39,10 +38,9 @@ export const useAudioRecorder = () => {
     try {
       const result = await audioRecorderPlayer.stopRecorder()
       audioRecorderPlayer.removeRecordBackListener()
-
       setIsRecording(false)
-      setRecordingResult(result)
       console.log('🚀 ~ stopRecording ~ result:', result)
+      return result
     } catch (error) {
       console.error('Failed to stop recording:', error)
     }
@@ -52,6 +50,5 @@ export const useAudioRecorder = () => {
     startRecording,
     stopRecording,
     isRecording,
-    recordingResult,
   }
 }

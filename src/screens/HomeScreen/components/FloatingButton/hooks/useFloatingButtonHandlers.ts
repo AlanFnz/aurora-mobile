@@ -13,8 +13,7 @@ export const useFloatingButtonHandlers = () => {
   const navigation = useNavigation<NoteDetailScreenNavigationProp>()
 
   const { isUploading, uploadFile } = useFileUploader()
-  const { startRecording, stopRecording, isRecording, recordingResult } =
-    useAudioRecorder()
+  const { startRecording, stopRecording, isRecording } = useAudioRecorder()
 
   const [isLongPressed, setIsLongPressed] = useState(false)
 
@@ -23,9 +22,8 @@ export const useFloatingButtonHandlers = () => {
   const heightAnim = useRef(new Animated.Value(50)).current
   const translateYAnim = useRef(new Animated.Value(0)).current
 
-  const handleNewNote = () => {
+  const handleNewNote = () =>
     navigation.navigate('NoteDetails', { isNew: true })
-  }
 
   const handlePressIn = () => {
     Animated.timing(opacityAnim, {
@@ -65,8 +63,7 @@ export const useFloatingButtonHandlers = () => {
 
   const handlePressOut = async () => {
     if (isLongPressed) {
-      await stopRecording()
-
+      const recordingResult = await stopRecording()
       if (recordingResult) {
         try {
           const uploadedUrl = await uploadFile(recordingResult)
@@ -82,33 +79,31 @@ export const useFloatingButtonHandlers = () => {
         } catch (error) {
           console.error('Failed to upload audio file:', error)
         }
-      } else handleNewNote()
-
-      Animated.parallel([
-        Animated.timing(bottomPositionAnim, {
-          toValue: 25,
-          duration: releaseAnimationDuration,
-          useNativeDriver: false,
-        }),
-        Animated.timing(translateYAnim, {
-          toValue: 0,
-          duration: pressAnimationDuration,
-          useNativeDriver: false,
-        }),
-        Animated.timing(opacityAnim, {
-          toValue: 0.9,
-          duration: releaseAnimationDuration,
-          useNativeDriver: false,
-        }),
-        Animated.timing(heightAnim, {
-          toValue: 50,
-          duration: releaseAnimationDuration,
-          useNativeDriver: false,
-        }),
-      ]).start()
-
-      setIsLongPressed(false)
-    }
+      }
+    } else handleNewNote()
+    Animated.parallel([
+      Animated.timing(bottomPositionAnim, {
+        toValue: 25,
+        duration: releaseAnimationDuration,
+        useNativeDriver: false,
+      }),
+      Animated.timing(translateYAnim, {
+        toValue: 0,
+        duration: pressAnimationDuration,
+        useNativeDriver: false,
+      }),
+      Animated.timing(opacityAnim, {
+        toValue: 0.9,
+        duration: releaseAnimationDuration,
+        useNativeDriver: false,
+      }),
+      Animated.timing(heightAnim, {
+        toValue: 50,
+        duration: releaseAnimationDuration,
+        useNativeDriver: false,
+      }),
+    ]).start()
+    setIsLongPressed(false)
   }
   const animatedStyles = {
     height: heightAnim,
