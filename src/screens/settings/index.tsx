@@ -1,8 +1,10 @@
 import React from 'react'
-import BackgroundLayers from '@components/background-layers'
-import { performSignOut } from '../../store/auth.slice'
 import { useDispatch } from 'react-redux'
-import { AppDispatch } from '../../store'
+
+import { AppDispatch } from '@store/index'
+import { performSignOut } from '@store/auth.slice'
+import BackgroundLayers from '@components/background-layers'
+
 import { Container, SignOutButton, SignOutText, Title } from './styles'
 
 const SettingsScreen: React.FC = () => {

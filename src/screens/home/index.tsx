@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import styled from 'styled-components/native'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { useSelector } from 'react-redux'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import styled from 'styled-components/native'
+
 import { RootState } from '@store/index'
 
 import BackgroundLayers from '../../components/background-layers'

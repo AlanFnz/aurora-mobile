@@ -1,17 +1,19 @@
 import React, { useState } from 'react'
 import { FlatList } from 'react-native'
+import Icon from 'react-native-vector-icons/FontAwesome'
+
+import Divider from '@components/divider'
+import colors from '@theme/colors'
+
 import {
   FolderContainer,
   FolderHeader,
   FolderTitle,
   MainContainer,
 } from './styles'
-import { FolderProps } from './types'
 import GradientBackground from './components/gradient-background'
-import Icon from 'react-native-vector-icons/FontAwesome'
-import Divider from '@components/divider'
 import NoteItem from './components/note-item'
-import colors from '@theme/colors'
+import { FolderProps } from './types'
 
 const Folder: React.FC<FolderProps> = ({ folder }) => {
   const [expanded, setExpanded] = useState(false)

@@ -2,11 +2,12 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { StackScreenProps } from '@react-navigation/stack'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
-import { RootStackParamList } from '@navigation/types'
 
+import { RootStackParamList } from '@navigation/types'
 import BackgroundLayers from '@components/background-layers'
 import Header from '@components/header'
 import { RootState } from '@store/index'
+
 import FolderSelectionModal from './components/folder-selection-modal'
 import SaveButton from './components/save-button'
 import { useNoteDetails } from './hooks/use-note-details'

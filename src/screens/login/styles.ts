@@ -1,4 +1,5 @@
 import styled from 'styled-components/native'
+
 import colors from '@theme/colors'
 
 const Container = styled.View`

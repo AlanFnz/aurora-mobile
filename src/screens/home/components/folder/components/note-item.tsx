@@ -1,11 +1,13 @@
 import React from 'react'
-import Divider from '@components/divider'
-import styled from 'styled-components/native'
-import colors from '@theme/colors'
-import { NoteListItem } from '../types'
 import { useNavigation } from '@react-navigation/native'
-import { NoteDetailScreenNavigationProp } from '@navigation/types'
+import styled from 'styled-components/native'
+
 import { formatTimestampToDate } from '@root/src/utils'
+import { NoteDetailScreenNavigationProp } from '@navigation/types'
+import Divider from '@components/divider'
+import colors from '@theme/colors'
+
+import { NoteListItem } from '../types'
 
 interface NoteProps {
   index: number

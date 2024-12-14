@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+
 import { NoteListItem } from '@screens/home/components/folder/types'
 
 export interface Folder {

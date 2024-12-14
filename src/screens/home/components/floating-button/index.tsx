@@ -1,7 +1,9 @@
 import React from 'react'
-import colors from '@theme/colors'
 import { TouchableWithoutFeedback } from 'react-native'
 import { useFloatingButtonHandlers } from './hooks/use-floating-button-handlers'
+
+import colors from '@theme/colors'
+
 import { AnimatedButtonContainer, FullCircleIcon, PlusIcon } from './styles'
 
 interface FloatingButtonProps {

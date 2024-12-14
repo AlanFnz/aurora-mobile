@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
-import BackgroundLayers from '@components/background-layers'
 import { useDispatch } from 'react-redux'
+
 import { AppDispatch } from '@store/index'
 import { performSignIn } from '@store/auth.slice'
+import BackgroundLayers from '@components/background-layers'
+
 import { Container, Input, SignInButton, SignInText, Title } from './styles'
 
 const LoginScreen: React.FC = () => {

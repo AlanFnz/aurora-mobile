@@ -1,7 +1,8 @@
 import React from 'react'
-import styled from 'styled-components/native'
-import Folder from '../folder'
 import { FlatList } from 'react-native'
+import styled from 'styled-components/native'
+
+import Folder from '../folder'
 import { Folder as FolderTypes } from '../folder/types'
 
 interface FolderListProps {

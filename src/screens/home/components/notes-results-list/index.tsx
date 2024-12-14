@@ -1,9 +1,10 @@
 import React from 'react'
-import styled from 'styled-components/native'
 import { FlatList } from 'react-native'
-import { NoteListItem } from '../folder/types'
+import styled from 'styled-components/native'
 import { useNavigation } from '@react-navigation/native'
 import { NoteDetailScreenNavigationProp } from '@navigation/types'
+
+import { NoteListItem } from '../folder/types'
 
 interface NotesResultsListProps {
   notes: NoteListItem[]

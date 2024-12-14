@@ -15,6 +15,7 @@ jest.mock('../src/store/auth.slice', () => ({
 describe('SettingsScreen', () => {
   const mockDispatch = jest.fn()
   beforeEach(() => {
+    // FIXME:
     ;(useDispatch as jest.Mock).mockReturnValue(mockDispatch)
   })
 

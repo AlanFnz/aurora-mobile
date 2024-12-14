@@ -1,8 +1,10 @@
 import React from 'react'
-import BackButtonIcon from 'react-native-vector-icons/FontAwesome'
-import colors from '@theme/colors'
 import { useNavigation } from '@react-navigation/native'
+import BackButtonIcon from 'react-native-vector-icons/FontAwesome'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
+
+import colors from '@theme/colors'
+
 import {
   BackButton,
   HeaderContainer,

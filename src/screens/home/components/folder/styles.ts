@@ -1,5 +1,6 @@
-import colors from '@theme/colors'
 import styled from 'styled-components/native'
+
+import colors from '@theme/colors'
 
 const MainContainer = styled.View`
   width: 95%;

@@ -1,8 +1,9 @@
 import React from 'react'
+import { TouchableOpacity } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 import styled from 'styled-components/native'
+
 import colors from '@theme/colors'
-import { TouchableOpacity } from 'react-native'
 
 const SaveButton: React.FC<{ handleSave: any }> = ({ handleSave }) => {
   return (

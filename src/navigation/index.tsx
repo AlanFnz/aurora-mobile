@@ -10,8 +10,8 @@ import { AppDispatch, RootState } from '@store/index'
 import { bootstrapAsync } from '@store/auth.slice'
 import { tabNavigatorStyles } from '@navigation/tab-navigator.styles'
 import { RootStackParamList } from './types'
-// Screens
 
+// Screens
 import LoginScreen from '@screens/login'
 import HomeScreen from '@screens/home'
 import SettingsScreen from '@screens/settings'

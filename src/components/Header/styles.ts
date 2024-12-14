@@ -1,6 +1,7 @@
-import styled from 'styled-components/native'
-import colors from '@theme/colors'
 import { TouchableOpacity } from 'react-native'
+import styled from 'styled-components/native'
+
+import colors from '@theme/colors'
 
 const HeaderContainer = styled.View<{
   insets: { top: number; bottom: number; left: number; right: number }

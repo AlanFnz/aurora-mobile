@@ -1,4 +1,5 @@
 import { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs'
+
 import colors from '@theme/colors'
 
 export const tabNavigatorStyles = (): BottomTabNavigationOptions => ({
