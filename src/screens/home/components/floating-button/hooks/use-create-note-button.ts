@@ -2,13 +2,12 @@ import { useRef, useState } from 'react'
 import { Animated } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 
-import { useFolderSelection } from '@context/folder-selection'
 import { NoteDetailScreenNavigationProp } from '@navigation/types'
+import { useFolderSelection } from '@context/folder-selection'
 import { useNoteOperations } from '@hooks/use-note-operations'
+import { useAudioRecorder } from '@hooks/use-audio-recorder'
+import { useFileUpload } from '@hooks/use-file-upload'
 import { useToast } from '@hooks/use-toast'
-
-import { useAudioRecorder } from './use-audio-recorder'
-import { useFileUpload } from './use-file-upload'
 
 const pressAnimationDuration = 190
 const releaseAnimationDuration = 150
