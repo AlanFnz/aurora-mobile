@@ -8,7 +8,7 @@ interface NoiseLayerProps {
 
 const NoiseLayer: React.FC<NoiseLayerProps> = ({ opacity = 0.1 }) => (
   <Image
-    source={require('@assets/noise.png')}
+    source={require('@assets/noise-layer.png')}
     style={[styles.noiseImage, { opacity }]}
     resizeMode="repeat"
   />
