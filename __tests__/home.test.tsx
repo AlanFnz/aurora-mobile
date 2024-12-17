@@ -14,7 +14,10 @@ jest.mock(
   '@screens/home/components/notes-results-list',
   () => 'NotesResultsList',
 )
-jest.mock('@screens/home/components/floating-button', () => 'FloatingButton')
+jest.mock(
+  '@screens/home/components/create-note-button',
+  () => 'CreateNoteButton',
+)
 jest.mock('@components/background-layers', () => 'BackgroundLayers')
 
 jest.mock('react-native-safe-area-context', () => ({
