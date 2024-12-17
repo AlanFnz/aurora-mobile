@@ -23,8 +23,8 @@ const FolderList: React.FC<FolderListProps> = ({ folders, testID }) => {
 }
 
 const FolderListContainer = styled.View`
+  padding: 10px 10px 0 10px;
   flex: 1;
-  padding: 10px;
   width: 100%;
 `
 

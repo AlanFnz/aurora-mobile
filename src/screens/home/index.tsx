@@ -9,7 +9,7 @@ import BackgroundLayers from '../../components/background-layers'
 import FolderList from './components/folder-list'
 import SearchBox from './components/search-box'
 import NotesResultsList from './components/notes-results-list'
-import FloatingButton from './components/floating-button'
+import CreateNoteButton from './components/create-note-button'
 
 const HomeScreen: React.FC = () => {
   const insets = useSafeAreaInsets()
@@ -31,7 +31,7 @@ const HomeScreen: React.FC = () => {
         ) : (
           <FolderList testID={'folder-list'} folders={folders} />
         )}
-        <FloatingButton testID="new-note-button" />
+        <CreateNoteButton testID="new-note-button" />
       </Container>
     </>
   )

@@ -109,12 +109,14 @@ export const useCreateNoteButton = () => {
                 showToast({
                   isSuccess: true,
                   message: 'Note created successfully!',
+                  additionalOffset: 70,
                 })
               } catch (error) {
                 console.error(error)
                 showToast({
                   isSuccess: false,
                   message: 'Failed to create note.',
+                  additionalOffset: 70,
                 })
               }
             },
@@ -125,6 +127,7 @@ export const useCreateNoteButton = () => {
           showToast({
             isSuccess: false,
             message: 'Failed to upload file.',
+            additionalOffset: 70,
           })
         }
       }
