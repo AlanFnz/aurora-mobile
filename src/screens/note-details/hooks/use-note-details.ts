@@ -15,7 +15,7 @@ export const useNoteDetails = ({
   isNew?: boolean
 }) => {
   const { showToast } = useToast()
-  const { createNewNote, updateNote } = useNoteOperations()
+  const { createNewNote, updateNote, deleteNote } = useNoteOperations()
   const { showModal } = useFolderSelection()
   const { data: note, isLoading } = useFetchNoteDetailsQuery(noteId, {
     skip: isNew,
@@ -69,6 +69,23 @@ export const useNoteDetails = ({
     }
   }
 
+  const handleDelete = async () => {
+    if (!note) return
+    try {
+      await deleteNote(note.id)
+      showToast({
+        isSuccess: true,
+        message: 'Note deleted successfully!',
+      })
+    } catch (error) {
+      console.error(error)
+      showToast({
+        isSuccess: false,
+        message: 'Failed to delete note.',
+      })
+    }
+  }
+
   return {
     title,
     modifiedDate,
@@ -77,5 +94,6 @@ export const useNoteDetails = ({
     setTitle,
     setContent,
     handleSave,
+    handleDelete,
   }
 }
