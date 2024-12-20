@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react'
 import { useSelector } from 'react-redux'
 
-import FolderSelectionModal from '@screens/note-details/components/folder-selection-modal'
+import FolderSelectionModal from '@components/folder-selection-modal/folder-selection-modal'
 import { RootState } from '@store/index'
 
 interface FolderSelectionContextProps {

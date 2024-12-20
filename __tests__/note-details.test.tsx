@@ -22,6 +22,7 @@ jest.mock('@store/queries/notes', () => ({
   useFetchNoteDetailsQuery: jest.fn(),
   useUpdateNoteMutation: jest.fn(() => [jest.fn()]),
   useCreateNoteMutation: jest.fn(() => [jest.fn().mockResolvedValue({})]),
+  useDeleteNoteMutation: jest.fn(() => [jest.fn()]),
 }))
 
 jest.mock('react-native-safe-area-context', () => ({
@@ -143,7 +144,7 @@ describe('NoteDetailsScreen', () => {
     })
     ;(useUpdateNoteMutation as jest.Mock).mockReturnValue([mockUpdateNote])
 
-    const { getByDisplayValue, getByTestId } = renderWithProviders(
+    const { getByDisplayValue, UNSAFE_getByProps } = renderWithProviders(
       <NoteDetailsScreen
         route={mockRoute}
         navigation={mockNavigation as any}
@@ -155,7 +156,7 @@ describe('NoteDetailsScreen', () => {
       getByDisplayValue('This is the content of the note'),
       'Updated Note Content',
     )
-    fireEvent.press(getByTestId('save-button'))
+    fireEvent.press(UNSAFE_getByProps({ iconName: 'save-sharp' }))
 
     await waitFor(() => {
       expect(mockUpdateNote).toHaveBeenCalledWith({
