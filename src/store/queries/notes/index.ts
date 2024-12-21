@@ -61,6 +61,24 @@ export const noteApi = createApi({
       },
       invalidatesTags: (result, error, { id }) => [{ type: 'Note', id }],
     }),
+    deleteNote: builder.mutation<{ success: boolean }, number>({
+      queryFn: noteId => {
+        const index = notesMockData.findIndex(n => n.id === noteId)
+        if (index === -1) {
+          return {
+            error: {
+              status: 404,
+              data: { message: 'Note not found' },
+            },
+          }
+        }
+
+        notesMockData.splice(index, 1)
+
+        return { data: { success: true } }
+      },
+      invalidatesTags: (result, error, id) => [{ type: 'Note', id }],
+    }),
   }),
 })
 
@@ -68,4 +86,5 @@ export const {
   useFetchNoteDetailsQuery,
   useUpdateNoteMutation,
   useCreateNoteMutation,
+  useDeleteNoteMutation,
 } = noteApi

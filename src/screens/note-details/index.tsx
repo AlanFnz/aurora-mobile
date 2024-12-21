@@ -6,7 +6,7 @@ import { RootStackParamList } from '@navigation/types'
 import BackgroundLayers from '@components/background-layers'
 import Header from '@components/header'
 
-import SaveButton from './components/save-button'
+import HeaderButton from './components/header-button'
 import { useNoteDetails } from './hooks/use-note-details'
 import {
   Container,
@@ -34,6 +34,7 @@ const NoteDetailsScreen: React.FC<NoteDetailsScreenProps> = ({ route }) => {
     setTitle,
     setContent,
     handleSave,
+    handleDelete,
   } = useNoteDetails({ noteId, isNew })
 
   if (!isNew && isLoading) {
@@ -44,7 +45,18 @@ const NoteDetailsScreen: React.FC<NoteDetailsScreenProps> = ({ route }) => {
     <>
       <BackgroundLayers />
       <Container insets={insets}>
-        <Header rightColumnContent={<SaveButton handleSave={handleSave} />} />
+        <Header
+          rightColumnContent={
+            <>
+              <HeaderButton
+                containerStyle={{ marginRight: 12 }}
+                onPress={handleDelete}
+                iconName="trash-outline"
+              />
+              <HeaderButton onPress={handleSave} iconName="save-sharp" />
+            </>
+          }
+        />
         <TitleContainer>
           <NoteTitleInput
             value={title}

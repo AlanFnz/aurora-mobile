@@ -6,6 +6,8 @@ import { useNoteOperations } from '@hooks/use-note-operations'
 import { formatTimestampToDateTime } from '@utils/time'
 import { useFolderSelection } from '@root/src/context/folder-selection'
 import { useToast } from '@hooks/use-toast'
+import { NavigationProp, useNavigation } from '@react-navigation/native'
+import { RootStackParamList } from '@navigation/types'
 
 export const useNoteDetails = ({
   noteId,
@@ -14,8 +16,9 @@ export const useNoteDetails = ({
   noteId: number
   isNew?: boolean
 }) => {
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>()
   const { showToast } = useToast()
-  const { createNewNote, updateNote } = useNoteOperations()
+  const { createNewNote, updateNote, deleteNote } = useNoteOperations()
   const { showModal } = useFolderSelection()
   const { data: note, isLoading } = useFetchNoteDetailsQuery(noteId, {
     skip: isNew,
@@ -69,6 +72,25 @@ export const useNoteDetails = ({
     }
   }
 
+  const handleDelete = async () => {
+    if (!note) return
+    try {
+      await deleteNote(note.id)
+      navigation.navigate('Home')
+      showToast({
+        isSuccess: true,
+        message: 'Note deleted successfully!',
+        additionalOffset: 70,
+      })
+    } catch (error) {
+      console.error(error)
+      showToast({
+        isSuccess: false,
+        message: 'Failed to delete note.',
+      })
+    }
+  }
+
   return {
     title,
     modifiedDate,
@@ -77,5 +99,6 @@ export const useNoteDetails = ({
     setTitle,
     setContent,
     handleSave,
+    handleDelete,
   }
 }

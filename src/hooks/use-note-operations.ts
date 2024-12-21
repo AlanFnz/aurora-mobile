@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import {
   useCreateNoteMutation,
+  useDeleteNoteMutation,
   useUpdateNoteMutation,
 } from '@store/queries/notes'
 import { RootState } from '@store/index'
@@ -13,6 +14,7 @@ export const useNoteOperations = () => {
 
   const [createNote] = useCreateNoteMutation()
   const [updateNoteMutation] = useUpdateNoteMutation()
+  const [deleteNoteMutation] = useDeleteNoteMutation()
 
   const createNewNote = async ({
     title,
@@ -85,5 +87,17 @@ export const useNoteOperations = () => {
     return updatedNote
   }
 
-  return { createNewNote, updateNote }
+  const deleteNote = async (noteId: number) => {
+    if (!noteId) return
+    await deleteNoteMutation(noteId)
+
+    const updatedFolders = folders.map(folder => ({
+      ...folder,
+      notes: folder.notes.filter(note => note.id !== noteId),
+    }))
+
+    dispatch(setFolders(updatedFolders))
+  }
+
+  return { createNewNote, updateNote, deleteNote }
 }
