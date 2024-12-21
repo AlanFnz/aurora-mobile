@@ -30,7 +30,7 @@ const Folder: React.FC<FolderProps> = ({ folder }) => {
         />
       </FolderHeader>
       <MainContainer testID="folder-component">
-        {expanded ? (
+        {expanded && folder.notes.length ? (
           <>
             <GradientBackground key={`${expanded}-${folder.notes.length}`} />
             <FolderContainer>
