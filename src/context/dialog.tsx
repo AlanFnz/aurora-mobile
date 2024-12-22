@@ -1,10 +1,13 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react'
 
 import FolderSelectionDialog from '@components/folder-selection-dialog/folder-selection-dialog'
+import ConfirmationDialog from '@components/confirmation-dialog/confirmation-dialog'
 
 interface DialogOptions {
   allowTitleEdit?: boolean
   confirmText?: string
+  cancelText?: string
+  message?: string
 }
 
 interface DialogContextProps {
@@ -98,7 +101,15 @@ export const DialogProvider: React.FC<{ children: ReactNode }> = ({
         />
       )}
       {isDialogVisible && dialogType === DialogType.Confirmation && (
-        <>{/* TODO: confirmation dialog */}</>
+        <ConfirmationDialog
+          visible={isDialogVisible}
+          title={options?.confirmText || 'Confirm Action'}
+          message={options?.message || ''}
+          confirmText={options?.confirmText || 'Confirm'}
+          cancelText={options?.cancelText || 'Cancel'}
+          onConfirm={handleConfirm}
+          onCancel={hideDialog}
+        />
       )}
     </DialogContext.Provider>
   )
