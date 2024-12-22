@@ -6,7 +6,7 @@ import styled from 'styled-components/native'
 import { RootState } from '@store/index'
 import colors from '@theme/colors'
 
-interface FolderSelectionModalProps {
+interface FolderSelectionDialogProps {
   visible: boolean
   selectedFolderId: number | null
   allowTitleEdit: boolean
@@ -17,7 +17,7 @@ interface FolderSelectionModalProps {
   onClose: () => void
 }
 
-const FolderSelectionModal: React.FC<FolderSelectionModalProps> = ({
+const FolderSelectionDialog: React.FC<FolderSelectionDialogProps> = ({
   visible,
   selectedFolderId,
   allowTitleEdit = false,
@@ -46,8 +46,8 @@ const FolderSelectionModal: React.FC<FolderSelectionModalProps> = ({
       visible={visible}
       onRequestClose={onClose}>
       <Overlay>
-        <ModalContainer>
-          <ModalTitle>Select a Folder</ModalTitle>
+        <DialogContainer>
+          <DialogTitle>Select a Folder</DialogTitle>
           {allowTitleEdit && (
             <TitleInput
               placeholder="Enter note title"
@@ -78,7 +78,7 @@ const FolderSelectionModal: React.FC<FolderSelectionModalProps> = ({
           <ConfirmButton onPress={handleConfirm}>
             <ConfirmButtonText>Confirm</ConfirmButtonText>
           </ConfirmButton>
-        </ModalContainer>
+        </DialogContainer>
       </Overlay>
     </Modal>
   )
@@ -91,7 +91,7 @@ const Overlay = styled.View`
   align-items: center;
 `
 
-const ModalContainer = styled.View`
+const DialogContainer = styled.View`
   width: 80%;
   border-width: 0.5px;
   background-color: ${colors.lowOpacity.whiteSuperLow};
@@ -100,7 +100,7 @@ const ModalContainer = styled.View`
   border-radius: 10px;
 `
 
-const ModalTitle = styled.Text`
+const DialogTitle = styled.Text`
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 15px;
@@ -162,4 +162,4 @@ const ConfirmButtonText = styled.Text`
   font-weight: bold;
 `
 
-export default FolderSelectionModal
+export default FolderSelectionDialog

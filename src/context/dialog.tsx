@@ -1,65 +1,65 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react'
 
-import FolderSelectionModal from '@components/folder-selection-modal/folder-selection-modal'
+import FolderSelectionDialog from '@components/folder-selection-dialog/folder-selection-dialog'
 
-interface ModalOptions {
+interface DialogOptions {
   allowTitleEdit?: boolean
   confirmText?: string
 }
 
-interface ModalContextProps {
-  isModalVisible: boolean
-  modalType: ModalType | null
-  options: ModalOptions | null
+interface DialogContextProps {
+  isDialogVisible: boolean
+  dialogType: DialogType | null
+  options: DialogOptions | null
   selectedFolderId: number | null
-  showModal: (
-    type: ModalType,
+  showDialog: (
+    type: DialogType,
     onConfirm: (folderId?: number, title?: string) => void,
-    options?: ModalOptions,
+    options?: DialogOptions,
   ) => void
-  hideModal: () => void
+  hideDialog: () => void
   handleFolderSelect: (folderId: number | null) => void
 }
 
-const ModalContext = createContext<ModalContextProps | null>(null)
+const DialogContext = createContext<DialogContextProps | null>(null)
 
-export enum ModalType {
+export enum DialogType {
   FolderSelection = 'folderSelection',
   Confirmation = 'confirmation',
 }
 
-export const useModal = () => {
-  const context = useContext(ModalContext)
-  if (!context) throw new Error('useModal must be used within ModalProvider')
+export const useDialog = () => {
+  const context = useContext(DialogContext)
+  if (!context) throw new Error('useDialog must be used within DialogProvider')
   return context
 }
 
-export const ModalProvider: React.FC<{ children: ReactNode }> = ({
+export const DialogProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [isModalVisible, setIsModalVisible] = useState(false)
-  const [modalType, setModalType] = useState<ModalType | null>(null)
+  const [isDialogVisible, setIsDialogVisible] = useState(false)
+  const [dialogType, setDialogType] = useState<DialogType | null>(null)
   const [selectedFolderId, setSelectedFolderId] = useState<number | null>(null)
   const [noteTitle, setNoteTitle] = useState<string | undefined>()
-  const [options, setOptions] = useState<ModalOptions | null>(null)
+  const [options, setOptions] = useState<DialogOptions | null>(null)
   const [onConfirmHandler, setOnConfirmHandler] = useState<
     ((folderId?: number | null, title?: string) => void) | null
   >(null)
 
-  const showModal = (
-    type: ModalType,
+  const showDialog = (
+    type: DialogType,
     onConfirm: (folderId?: number, title?: string) => void,
-    options: ModalOptions = {},
+    options: DialogOptions = {},
   ) => {
-    setModalType(type)
+    setDialogType(type)
     setOnConfirmHandler(() => onConfirm)
     setOptions(options)
-    setIsModalVisible(true)
+    setIsDialogVisible(true)
   }
 
-  const hideModal = () => {
-    setIsModalVisible(false)
-    setModalType(null)
+  const hideDialog = () => {
+    setIsDialogVisible(false)
+    setDialogType(null)
     setSelectedFolderId(null)
     setNoteTitle('')
     setOptions(null)
@@ -70,36 +70,36 @@ export const ModalProvider: React.FC<{ children: ReactNode }> = ({
 
   const handleConfirm = () => {
     if (onConfirmHandler) onConfirmHandler(selectedFolderId, noteTitle)
-    hideModal()
+    hideDialog()
   }
 
   return (
-    <ModalContext.Provider
+    <DialogContext.Provider
       value={{
-        isModalVisible,
-        modalType,
+        isDialogVisible,
+        dialogType,
         options,
         selectedFolderId,
-        showModal,
-        hideModal,
+        showDialog,
+        hideDialog,
         handleFolderSelect,
       }}>
       {children}
-      {isModalVisible && modalType === ModalType.FolderSelection && (
-        <FolderSelectionModal
-          visible={isModalVisible}
+      {isDialogVisible && dialogType === DialogType.FolderSelection && (
+        <FolderSelectionDialog
+          visible={isDialogVisible}
           selectedFolderId={selectedFolderId}
           allowTitleEdit={!!options?.allowTitleEdit}
           noteTitle={noteTitle}
           setNoteTitle={setNoteTitle}
           onFolderSelect={handleFolderSelect}
           onConfirm={handleConfirm}
-          onClose={hideModal}
+          onClose={hideDialog}
         />
       )}
-      {isModalVisible && modalType === ModalType.Confirmation && (
+      {isDialogVisible && dialogType === DialogType.Confirmation && (
         <>{/* TODO: confirmation dialog */}</>
       )}
-    </ModalContext.Provider>
+    </DialogContext.Provider>
   )
 }

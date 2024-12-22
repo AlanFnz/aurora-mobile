@@ -16,7 +16,7 @@ import {
 } from '@store/queries/notes'
 import NoteDetailsScreen from '@screens/note-details'
 import { RootStackParamList } from '@navigation/types'
-import { ModalProvider } from '@context/modal'
+import { DialogProvider } from '@context/dialog'
 
 jest.mock('@store/queries/notes', () => ({
   useFetchNoteDetailsQuery: jest.fn(),
@@ -86,9 +86,9 @@ describe('NoteDetailsScreen', () => {
 
     return render(
       <Provider store={store}>
-        <ModalProvider>
+        <DialogProvider>
           <NavigationContainer>{component}</NavigationContainer>
-        </ModalProvider>
+        </DialogProvider>
       </Provider>,
     )
   }
