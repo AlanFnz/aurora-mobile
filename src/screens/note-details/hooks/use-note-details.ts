@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react'
-
-import { useFetchNoteDetailsQuery } from '@store/queries/notes'
-import { useNoteOperations } from '@hooks/use-note-operations'
-
-import { formatTimestampToDateTime } from '@utils/time'
-import { DialogType, useDialog } from '@context/dialog'
-import { useToast } from '@hooks/use-toast'
 import { NavigationProp, useNavigation } from '@react-navigation/native'
+
+import { DialogType, useDialog } from '@context/dialog'
+import { useFetchNoteDetailsQuery } from '@store/queries/notes'
 import { RootStackParamList } from '@navigation/types'
+import { useNoteOperations } from '@hooks/use-note-operations'
+import { useToast } from '@hooks/use-toast'
+import { formatTimestampToDateTime } from '@utils/time'
 
 export const useNoteDetails = ({
   noteId,
@@ -75,21 +74,31 @@ export const useNoteDetails = ({
 
   const handleDelete = async () => {
     if (!note) return
-    try {
-      await deleteNote(note.id)
-      navigation.navigate('Home')
-      showToast({
-        isSuccess: true,
-        message: 'Note deleted successfully!',
-        additionalOffset: 70,
-      })
-    } catch (error) {
-      console.error(error)
-      showToast({
-        isSuccess: false,
-        message: 'Failed to delete note.',
-      })
-    }
+    showDialog(
+      DialogType.Confirmation,
+      async () => {
+        try {
+          await deleteNote(note.id)
+          navigation.navigate('Home')
+          showToast({
+            isSuccess: true,
+            message: 'Note deleted successfully!',
+            additionalOffset: 70,
+          })
+        } catch (error) {
+          console.error(error)
+          showToast({
+            isSuccess: false,
+            message: 'Failed to delete note.',
+          })
+        }
+      },
+      {
+        message: 'Are you sure you want to delete this note?',
+        confirmText: 'Delete',
+        cancelText: 'Cancel',
+      },
+    )
   }
 
   return {

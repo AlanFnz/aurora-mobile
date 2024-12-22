@@ -97,7 +97,7 @@ export const DialogProvider: React.FC<{ children: ReactNode }> = ({
           setNoteTitle={setNoteTitle}
           onFolderSelect={handleFolderSelect}
           onConfirm={handleConfirm}
-          onClose={hideDialog}
+          onCancel={hideDialog}
         />
       )}
       {isDialogVisible && dialogType === DialogType.Confirmation && (

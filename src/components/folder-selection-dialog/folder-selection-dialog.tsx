@@ -1,10 +1,24 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Modal, TextInput, TouchableOpacity } from 'react-native'
-import styled from 'styled-components/native'
+import { Modal } from 'react-native'
 
 import { RootState } from '@store/index'
 import colors from '@theme/colors'
+
+import {
+  ButtonContainer,
+  ButtonGroup,
+  ButtonText,
+  DialogContainer,
+  DialogTitle,
+  Dropdown,
+  DropdownItem,
+  DropdownText,
+  NewFolderText,
+  Overlay,
+  TitleInput,
+  ValidationErrorText,
+} from './folder-selection-dialog.styled'
 
 interface FolderSelectionDialogProps {
   visible: boolean
@@ -14,7 +28,7 @@ interface FolderSelectionDialogProps {
   setNoteTitle?: (title: string) => void
   onFolderSelect: (folderId: number | null) => void
   onConfirm: () => void
-  onClose: () => void
+  onCancel: () => void
 }
 
 const FolderSelectionDialog: React.FC<FolderSelectionDialogProps> = ({
@@ -25,16 +39,13 @@ const FolderSelectionDialog: React.FC<FolderSelectionDialogProps> = ({
   setNoteTitle,
   onFolderSelect,
   onConfirm,
-  onClose,
+  onCancel,
 }) => {
   const [validationError, setValidationError] = useState(false)
   const folders = useSelector((state: RootState) => state.folders)
 
   const handleConfirm = () => {
-    if (!selectedFolderId) {
-      setValidationError(true)
-      return
-    }
+    if (!selectedFolderId) return setValidationError(true)
     setValidationError(false)
     onConfirm()
   }
@@ -44,14 +55,14 @@ const FolderSelectionDialog: React.FC<FolderSelectionDialogProps> = ({
       transparent
       animationType="slide"
       visible={visible}
-      onRequestClose={onClose}>
+      onRequestClose={onCancel}>
       <Overlay>
         <DialogContainer>
           <DialogTitle>Select a Folder</DialogTitle>
           {allowTitleEdit && (
             <TitleInput
               placeholder="Enter note title"
-              placeholderTextColor={colors.common.lightGray}
+              placeholderTextColor={colors.lowOpacity.blackMid}
               value={noteTitle}
               onChangeText={setNoteTitle}
             />
@@ -75,91 +86,18 @@ const FolderSelectionDialog: React.FC<FolderSelectionDialogProps> = ({
           {validationError && (
             <ValidationErrorText>Please select a folder.</ValidationErrorText>
           )}
-          <ConfirmButton onPress={handleConfirm}>
-            <ConfirmButtonText>Confirm</ConfirmButtonText>
-          </ConfirmButton>
+          <ButtonGroup>
+            <ButtonContainer onPress={onCancel}>
+              <ButtonText>Cancel</ButtonText>
+            </ButtonContainer>
+            <ButtonContainer onPress={handleConfirm}>
+              <ButtonText>Confirm</ButtonText>
+            </ButtonContainer>
+          </ButtonGroup>
         </DialogContainer>
       </Overlay>
     </Modal>
   )
 }
-
-const Overlay = styled.View`
-  flex: 1;
-  background-color: rgba(0, 0, 0, 0.5);
-  justify-content: center;
-  align-items: center;
-`
-
-const DialogContainer = styled.View`
-  width: 80%;
-  border-width: 0.5px;
-  background-color: ${colors.lowOpacity.whiteSuperLow};
-  border-color: ${colors.lowOpacity.whiteLow};
-  padding: 20px;
-  border-radius: 10px;
-`
-
-const DialogTitle = styled.Text`
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 15px;
-  color: ${colors.common.offWhite};
-`
-
-const TitleInput = styled(TextInput)`
-  border-width: 1px;
-  border-color: ${colors.common.lightGray};
-  background-color: ${colors.common.black};
-  color: ${colors.common.offWhite};
-  padding: 10px;
-  border-radius: 5px;
-  margin-bottom: 15px;
-`
-
-const Dropdown = styled.View`
-  margin-bottom: 15px;
-`
-
-const DropdownItem = styled(TouchableOpacity)<{ isSelected?: boolean }>`
-  padding: 10px;
-  border-radius: 5px;
-  background-color: ${({ isSelected }) =>
-    isSelected ? colors.common.offWhite : 'transparent'};
-`
-
-const DropdownText = styled.Text<{ isSelected?: boolean }>`
-  font-size: 16px;
-  color: ${({ isSelected }) =>
-    isSelected ? colors.common.black : colors.common.offWhite};
-`
-
-const NewFolderText = styled(DropdownText)`
-  color: ${colors.common.lightGray};
-`
-
-const ValidationErrorText = styled.Text`
-  color: ${colors.feedback.negative};
-  font-size: 14px;
-  margin-bottom: 10px;
-  text-align: center;
-`
-
-const ConfirmButton = styled.TouchableOpacity`
-  width: 100%;
-  background-color: ${colors.lowOpacity.black};
-  margin-top: 18px;
-  padding-vertical: 10px;
-  border-radius: 2px;
-  border-width: 1px;
-  border-color: ${colors.common.primaryGray};
-  justify-content: center;
-  align-items: center;
-`
-
-const ConfirmButtonText = styled.Text`
-  color: white;
-  font-weight: bold;
-`
 
 export default FolderSelectionDialog
