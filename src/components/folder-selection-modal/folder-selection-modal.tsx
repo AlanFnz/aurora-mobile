@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
 import { Modal, TextInput, TouchableOpacity } from 'react-native'
 import styled from 'styled-components/native'
 
-import { Folder } from '@store/folders.slice'
+import { RootState } from '@store/index'
 import colors from '@theme/colors'
 
 interface FolderSelectionModalProps {
   visible: boolean
-  folders: Folder[]
   selectedFolderId: number | null
   allowTitleEdit: boolean
   noteTitle?: string
@@ -19,7 +19,6 @@ interface FolderSelectionModalProps {
 
 const FolderSelectionModal: React.FC<FolderSelectionModalProps> = ({
   visible,
-  folders,
   selectedFolderId,
   allowTitleEdit = false,
   noteTitle,
@@ -29,6 +28,7 @@ const FolderSelectionModal: React.FC<FolderSelectionModalProps> = ({
   onClose,
 }) => {
   const [validationError, setValidationError] = useState(false)
+  const folders = useSelector((state: RootState) => state.folders)
 
   const handleConfirm = () => {
     if (!selectedFolderId) {

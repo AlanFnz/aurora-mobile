@@ -3,7 +3,7 @@ import { Animated } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 
 import { NoteDetailScreenNavigationProp } from '@navigation/types'
-import { useFolderSelection } from '@context/folder-selection'
+import { ModalType, useModal } from '@context/modal'
 import { useNoteOperations } from '@hooks/use-note-operations'
 import { useAudioRecorder } from '@hooks/use-audio-recorder'
 import { useFileUpload } from '@hooks/use-file-upload'
@@ -18,7 +18,7 @@ export const useCreateNoteButton = () => {
   const { startRecording, stopRecording, isRecording } = useAudioRecorder()
   const { isUploading, uploadFile } = useFileUpload()
   const { createNewNote } = useNoteOperations()
-  const { showModal } = useFolderSelection()
+  const { showModal } = useModal()
   const { showToast } = useToast()
 
   const [isLongPressed, setIsLongPressed] = useState(false)
@@ -98,7 +98,9 @@ export const useCreateNoteButton = () => {
         try {
           const resultUrl = await uploadFile(recordingResult)
           showModal(
+            ModalType.FolderSelection,
             async (folderId, noteTitle) => {
+              if (!folderId) return
               try {
                 await createNewNote({
                   title: noteTitle || 'New audio note',

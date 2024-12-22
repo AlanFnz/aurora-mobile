@@ -4,7 +4,7 @@ import { useFetchNoteDetailsQuery } from '@store/queries/notes'
 import { useNoteOperations } from '@hooks/use-note-operations'
 
 import { formatTimestampToDateTime } from '@utils/time'
-import { useFolderSelection } from '@root/src/context/folder-selection'
+import { ModalType, useModal } from '@context/modal'
 import { useToast } from '@hooks/use-toast'
 import { NavigationProp, useNavigation } from '@react-navigation/native'
 import { RootStackParamList } from '@navigation/types'
@@ -19,7 +19,7 @@ export const useNoteDetails = ({
   const navigation = useNavigation<NavigationProp<RootStackParamList>>()
   const { showToast } = useToast()
   const { createNewNote, updateNote, deleteNote } = useNoteOperations()
-  const { showModal } = useFolderSelection()
+  const { showModal } = useModal()
   const { data: note, isLoading } = useFetchNoteDetailsQuery(noteId, {
     skip: isNew,
   })
@@ -42,7 +42,8 @@ export const useNoteDetails = ({
 
   const handleSave = async () => {
     if (isNew) {
-      showModal(async folderId => {
+      showModal(ModalType.FolderSelection, async folderId => {
+        if (!folderId) return
         try {
           await createNewNote({
             title,

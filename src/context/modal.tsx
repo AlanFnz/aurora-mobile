@@ -1,87 +1,95 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react'
-import { useSelector } from 'react-redux'
 
 import FolderSelectionModal from '@components/folder-selection-modal/folder-selection-modal'
-import { RootState } from '@store/index'
 
-interface FolderSelectionContextProps {
+interface ModalOptions {
+  allowTitleEdit?: boolean
+  confirmText?: string
+}
+
+interface ModalContextProps {
   isModalVisible: boolean
+  modalType: ModalType | null
+  options: ModalOptions | null
   selectedFolderId: number | null
   showModal: (
-    onConfirm: (folderId: number, title?: string) => void,
-    options?: { allowTitleEdit?: boolean },
+    type: ModalType,
+    onConfirm: (folderId?: number, title?: string) => void,
+    options?: ModalOptions,
   ) => void
   hideModal: () => void
   handleFolderSelect: (folderId: number | null) => void
 }
 
-const FolderSelectionContext =
-  createContext<FolderSelectionContextProps | null>(null)
+const ModalContext = createContext<ModalContextProps | null>(null)
 
-export const useFolderSelection = () => {
-  const context = useContext(FolderSelectionContext)
-  if (!context) {
-    throw new Error(
-      'useFolderSelection must be used within FolderSelectionProvider',
-    )
-  }
+export enum ModalType {
+  FolderSelection = 'folderSelection',
+  Confirmation = 'confirmation',
+}
+
+export const useModal = () => {
+  const context = useContext(ModalContext)
+  if (!context) throw new Error('useModal must be used within ModalProvider')
   return context
 }
 
-export const FolderSelectionProvider: React.FC<{ children: ReactNode }> = ({
+export const ModalProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [isModalVisible, setIsModalVisible] = useState(false)
+  const [modalType, setModalType] = useState<ModalType | null>(null)
   const [selectedFolderId, setSelectedFolderId] = useState<number | null>(null)
-  const [allowTitleEdit, setAllowTitleEdit] = useState(false)
   const [noteTitle, setNoteTitle] = useState<string | undefined>()
+  const [options, setOptions] = useState<ModalOptions | null>(null)
   const [onConfirmHandler, setOnConfirmHandler] = useState<
-    ((folderId: number, noteTitle?: string) => void) | null
+    ((folderId?: number | null, title?: string) => void) | null
   >(null)
 
-  const folders = useSelector((state: RootState) => state.folders)
-
   const showModal = (
-    onConfirm: (folderId: number, noteTitle?: string) => void,
-    options: { allowTitleEdit?: boolean } = {},
+    type: ModalType,
+    onConfirm: (folderId?: number, title?: string) => void,
+    options: ModalOptions = {},
   ) => {
+    setModalType(type)
     setOnConfirmHandler(() => onConfirm)
-    setAllowTitleEdit(!!options.allowTitleEdit)
+    setOptions(options)
     setIsModalVisible(true)
   }
 
   const hideModal = () => {
     setIsModalVisible(false)
+    setModalType(null)
     setSelectedFolderId(null)
     setNoteTitle('')
+    setOptions(null)
   }
 
   const handleFolderSelect = (folderId: number | null) =>
     setSelectedFolderId(folderId)
 
   const handleConfirm = () => {
-    if (onConfirmHandler && selectedFolderId !== null) {
-      onConfirmHandler(selectedFolderId, noteTitle)
-    }
+    if (onConfirmHandler) onConfirmHandler(selectedFolderId, noteTitle)
     hideModal()
   }
 
   return (
-    <FolderSelectionContext.Provider
+    <ModalContext.Provider
       value={{
         isModalVisible,
+        modalType,
+        options,
         selectedFolderId,
         showModal,
         hideModal,
         handleFolderSelect,
       }}>
       {children}
-      {isModalVisible && (
+      {isModalVisible && modalType === ModalType.FolderSelection && (
         <FolderSelectionModal
           visible={isModalVisible}
           selectedFolderId={selectedFolderId}
-          folders={folders}
-          allowTitleEdit={allowTitleEdit}
+          allowTitleEdit={!!options?.allowTitleEdit}
           noteTitle={noteTitle}
           setNoteTitle={setNoteTitle}
           onFolderSelect={handleFolderSelect}
@@ -89,6 +97,9 @@ export const FolderSelectionProvider: React.FC<{ children: ReactNode }> = ({
           onClose={hideModal}
         />
       )}
-    </FolderSelectionContext.Provider>
+      {isModalVisible && modalType === ModalType.Confirmation && (
+        <>{/* TODO: confirmation dialog */}</>
+      )}
+    </ModalContext.Provider>
   )
 }
