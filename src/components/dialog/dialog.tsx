@@ -38,7 +38,8 @@ export const Dialog: React.FC<DialogProps> = ({
       transparent
       animationType="slide"
       visible={visible}
-      onRequestClose={onRequestClose}>
+      onRequestClose={onRequestClose}
+      testID="Modal">
       <Overlay>
         <DialogContainer>
           <NoiseLayer opacity={0.1} customStyle={{ borderRadius: 10 }} />
