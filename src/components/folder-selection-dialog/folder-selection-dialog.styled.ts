@@ -13,10 +13,14 @@ const Overlay = styled.View`
 const DialogContainer = styled.View`
   width: 80%;
   border-width: 0.5px;
-  background-color: ${colors.lowOpacity.blackMid};
+  background-color: ${colors.lowOpacity.whiteSuperLow};
   border-color: ${colors.lowOpacity.whiteLow};
-  padding: 20px;
   border-radius: 10px;
+`
+
+const BodyContainer = styled.View`
+  width: 100%;
+  padding: 20px;
 `
 
 const DialogTitle = styled.Text`
@@ -89,6 +93,7 @@ const ButtonText = styled.Text`
 export {
   Overlay,
   DialogContainer,
+  BodyContainer,
   DialogTitle,
   TitleInput,
   Dropdown,

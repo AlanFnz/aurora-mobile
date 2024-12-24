@@ -6,6 +6,7 @@ import { RootState } from '@store/index'
 import colors from '@theme/colors'
 
 import {
+  BodyContainer,
   ButtonContainer,
   ButtonGroup,
   ButtonText,
@@ -19,6 +20,7 @@ import {
   TitleInput,
   ValidationErrorText,
 } from './folder-selection-dialog.styled'
+import NoiseLayer from '@components/noise-layer'
 
 interface FolderSelectionDialogProps {
   visible: boolean
@@ -58,42 +60,45 @@ const FolderSelectionDialog: React.FC<FolderSelectionDialogProps> = ({
       onRequestClose={onCancel}>
       <Overlay>
         <DialogContainer>
-          <DialogTitle>Select a Folder</DialogTitle>
-          {allowTitleEdit && (
-            <TitleInput
-              placeholder="Enter note title"
-              placeholderTextColor={colors.lowOpacity.blackMid}
-              value={noteTitle}
-              onChangeText={setNoteTitle}
-            />
-          )}
-          <Dropdown>
-            {folders.map(folder => (
+          <NoiseLayer opacity={0.1} customStyle={{ borderRadius: 10 }} />
+          <BodyContainer>
+            <DialogTitle>Select a Folder</DialogTitle>
+            {allowTitleEdit && (
+              <TitleInput
+                placeholder="Enter note title"
+                placeholderTextColor={colors.lowOpacity.blackMid}
+                value={noteTitle}
+                onChangeText={setNoteTitle}
+              />
+            )}
+            <Dropdown>
+              {folders.map(folder => (
+                <DropdownItem
+                  key={folder.id}
+                  isSelected={selectedFolderId === folder.id}
+                  onPress={() => onFolderSelect(folder.id)}>
+                  <DropdownText isSelected={selectedFolderId === folder.id}>
+                    {folder.folderName}
+                  </DropdownText>
+                </DropdownItem>
+              ))}
               <DropdownItem
-                key={folder.id}
-                isSelected={selectedFolderId === folder.id}
-                onPress={() => onFolderSelect(folder.id)}>
-                <DropdownText isSelected={selectedFolderId === folder.id}>
-                  {folder.folderName}
-                </DropdownText>
+                onPress={() => console.log('Mock: Create New Folder')}>
+                <NewFolderText>+ Create New Folder</NewFolderText>
               </DropdownItem>
-            ))}
-            <DropdownItem
-              onPress={() => console.log('Mock: Create New Folder')}>
-              <NewFolderText>+ Create New Folder</NewFolderText>
-            </DropdownItem>
-          </Dropdown>
-          {validationError && (
-            <ValidationErrorText>Please select a folder.</ValidationErrorText>
-          )}
-          <ButtonGroup>
-            <ButtonContainer onPress={onCancel}>
-              <ButtonText>Cancel</ButtonText>
-            </ButtonContainer>
-            <ButtonContainer onPress={handleConfirm}>
-              <ButtonText>Confirm</ButtonText>
-            </ButtonContainer>
-          </ButtonGroup>
+            </Dropdown>
+            {validationError && (
+              <ValidationErrorText>Please select a folder.</ValidationErrorText>
+            )}
+            <ButtonGroup>
+              <ButtonContainer onPress={onCancel}>
+                <ButtonText>Cancel</ButtonText>
+              </ButtonContainer>
+              <ButtonContainer onPress={handleConfirm}>
+                <ButtonText>Confirm</ButtonText>
+              </ButtonContainer>
+            </ButtonGroup>
+          </BodyContainer>
         </DialogContainer>
       </Overlay>
     </Modal>
