@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, fireEvent } from '@testing-library/react-native'
 
-import { ConfirmationDialog } from '@components/dialog/confirmation-dialog/confirmation-dialog'
+import { ConfirmationDialog } from '@components/dialog/confirmation-dialog'
 
 describe('ConfirmationDialog', () => {
   const mockOnConfirm = jest.fn()

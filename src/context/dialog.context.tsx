@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react'
 
-import { FolderSelectionDialog } from '@components/dialog/folder-selection-dialog/folder-selection-dialog'
-import { ConfirmationDialog } from '@components/dialog/confirmation-dialog/confirmation-dialog'
+import { FolderSelectionDialog } from '@components/dialog/folder-selection-dialog'
+import { ConfirmationDialog } from '@components/dialog/confirmation-dialog'
 
 interface DialogOptions {
   allowTitleEdit?: boolean

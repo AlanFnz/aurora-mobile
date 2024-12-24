@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 
 import { RootState } from '@store/index'
-import { Dialog } from '../dialog'
+import { Dialog } from './dialog'
 
 import {
   Dropdown,

@@ -4,7 +4,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import { fireEvent, render } from '@testing-library/react-native'
 
 import foldersReducer from '@store/folders.slice'
-import { FolderSelectionDialog } from '@components/dialog/folder-selection-dialog/folder-selection-dialog'
+import { FolderSelectionDialog } from '@components/dialog/folder-selection-dialog'
 
 const renderWithProviders = (
   component: React.ReactNode,

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Dialog } from '../dialog'
+import { Dialog } from './dialog'
 import { DialogMessage } from './confirmation-dialog.styled'
 
 interface ConfirmationDialogProps {
