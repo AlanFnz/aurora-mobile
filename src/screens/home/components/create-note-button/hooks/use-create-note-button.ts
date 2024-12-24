@@ -3,7 +3,7 @@ import { Animated } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 
 import { NoteDetailScreenNavigationProp } from '@navigation/types'
-import { DialogType, useDialog } from '@context/dialog'
+import { DialogType, useDialog } from '@context/dialog.context'
 import { useNoteOperations } from '@hooks/use-note-operations'
 import { useAudioRecorder } from '@hooks/use-audio-recorder'
 import { useFileUpload } from '@hooks/use-file-upload'

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { NavigationProp, useNavigation } from '@react-navigation/native'
 
-import { DialogType, useDialog } from '@context/dialog'
+import { DialogType, useDialog } from '@context/dialog.context'
 import { useFetchNoteDetailsQuery } from '@store/queries/notes'
 import { RootStackParamList } from '@navigation/types'
 import { useNoteOperations } from '@hooks/use-note-operations'
