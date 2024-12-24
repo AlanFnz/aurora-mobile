@@ -42,7 +42,7 @@ export const Dialog: React.FC<DialogProps> = ({
       testID="Modal">
       <Overlay>
         <DialogContainer>
-          <NoiseLayer opacity={0.1} customStyle={{ borderRadius: 10 }} />
+          <NoiseLayer opacity={0.15} customStyle={{ borderRadius: 10 }} />
           <BodyContainer>
             <DialogTitle>{title}</DialogTitle>
             {children}
