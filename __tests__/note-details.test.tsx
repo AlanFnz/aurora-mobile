@@ -16,7 +16,7 @@ import {
 } from '@store/queries/notes'
 import NoteDetailsScreen from '@screens/note-details'
 import { RootStackParamList } from '@navigation/types'
-import { FolderSelectionProvider } from '@context/folder-selection'
+import { DialogProvider } from '@context/dialog.context'
 
 jest.mock('@store/queries/notes', () => ({
   useFetchNoteDetailsQuery: jest.fn(),
@@ -86,9 +86,9 @@ describe('NoteDetailsScreen', () => {
 
     return render(
       <Provider store={store}>
-        <FolderSelectionProvider>
+        <DialogProvider>
           <NavigationContainer>{component}</NavigationContainer>
-        </FolderSelectionProvider>
+        </DialogProvider>
       </Provider>,
     )
   }

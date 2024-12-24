@@ -4,7 +4,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context'
 import Toast from 'react-native-toast-message'
 
 import Navigation from '@navigation/index'
-import { FolderSelectionProvider } from '@context/folder-selection'
+import { DialogProvider } from '@context/dialog.context'
 import { store } from '@store/index'
 import toastConfig from '@config/toast.config'
 import AppInitializer from '@root/app-initializer'
@@ -13,11 +13,11 @@ const App: React.FC = () => {
   return (
     <SafeAreaProvider>
       <ReduxProvider store={store}>
-        <FolderSelectionProvider>
+        <DialogProvider>
           <AppInitializer />
           <Navigation />
           <Toast config={toastConfig} />
-        </FolderSelectionProvider>
+        </DialogProvider>
       </ReduxProvider>
     </SafeAreaProvider>
   )

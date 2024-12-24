@@ -43,7 +43,7 @@ const AnimatedButtonContainer = styled(Animated.View)`
   border-radius: 35px;
   justify-content: center;
   align-items: center;
-  shadow-color: ${colors.lowOpacity.black};
+  shadow-color: ${colors.lowOpacity.blackLow};
   shadow-offset: 0px 2px;
   shadow-opacity: 0.8;
   shadow-radius: 2px;

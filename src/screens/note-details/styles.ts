@@ -69,7 +69,7 @@ const ButtonText = styled.Text`
 
 const Button = styled.TouchableOpacity`
   width: 100%;
-  background-color: ${colors.lowOpacity.black};
+  background-color: ${colors.lowOpacity.blackLow};
   margin-bottom: 15px;
   padding-vertical: 10px;
   border-radius: 2px;

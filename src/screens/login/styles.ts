@@ -35,7 +35,7 @@ const Input = styled.TextInput.attrs({
 
 const SignInButton = styled.TouchableOpacity`
   width: 100%;
-  background-color: ${colors.lowOpacity.black};
+  background-color: ${colors.lowOpacity.blackLow};
   margin-top: 18px;
   padding-vertical: 10px;
   border-radius: 2px;
