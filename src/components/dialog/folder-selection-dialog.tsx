@@ -2,12 +2,15 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 
 import { RootState } from '@store/index'
-import { Dialog } from './dialog'
+import colors from '@theme/colors'
 
+import { Dialog, Emphasis } from './dialog'
 import {
+  Divider,
   Dropdown,
   DropdownItem,
   DropdownText,
+  ListContainer,
   NewFolderText,
   TitleInput,
   ValidationErrorText,
@@ -50,26 +53,36 @@ export const FolderSelectionDialog: React.FC<FolderSelectionDialogProps> = ({
       onRequestClose={onCancel}
       buttons={[
         { text: 'Cancel', onPress: onCancel },
-        { text: 'Confirm', onPress: handleConfirm },
+        {
+          text: 'Confirm',
+          onPress: handleConfirm,
+          emphasis: Emphasis.POSITIVE,
+        },
       ]}>
       {allowTitleEdit && (
         <TitleInput
           placeholder="Enter note title"
           value={noteTitle}
           onChangeText={setNoteTitle}
+          placeholderTextColor={colors.lowOpacity.whiteLow}
         />
       )}
       <Dropdown>
-        {folders.map(folder => (
-          <DropdownItem
-            key={folder.id}
-            isSelected={selectedFolderId === folder.id}
-            onPress={() => onFolderSelect(folder.id)}>
-            <DropdownText isSelected={selectedFolderId === folder.id}>
-              {folder.folderName}
-            </DropdownText>
-          </DropdownItem>
-        ))}
+        <ListContainer>
+          {folders.map((folder, index) => (
+            <>
+              <DropdownItem
+                key={folder.id}
+                isSelected={selectedFolderId === folder.id}
+                onPress={() => onFolderSelect(folder.id)}>
+                <DropdownText isSelected={selectedFolderId === folder.id}>
+                  {folder.folderName}
+                </DropdownText>
+              </DropdownItem>
+              {index !== folders.length - 1 && <Divider />}
+            </>
+          ))}
+        </ListContainer>
         <DropdownItem onPress={() => console.log('Mock: Create New Folder')}>
           <NewFolderText>+ Create New Folder</NewFolderText>
         </DropdownItem>

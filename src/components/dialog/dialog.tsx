@@ -13,9 +13,16 @@ import {
   Overlay,
 } from './dialog.styled'
 
-interface ButtonConfig {
+export enum Emphasis {
+  POSITIVE = 'positive',
+  NEGATIVE = 'negative',
+}
+
+export interface ButtonConfig {
   text: string
   onPress: () => void
+  emphasis?: Emphasis
+  warning?: boolean
 }
 
 interface DialogProps {
@@ -48,7 +55,11 @@ export const Dialog: React.FC<DialogProps> = ({
             {children}
             <ButtonGroup>
               {buttons.map((button, index) => (
-                <ButtonContainer key={index} onPress={button.onPress}>
+                <ButtonContainer
+                  key={index}
+                  onPress={button.onPress}
+                  emphasis={button.emphasis}
+                  warning={button.warning}>
                   <ButtonText>{button.text}</ButtonText>
                 </ButtonContainer>
               ))}
