@@ -63,6 +63,13 @@ export const FolderSelectionDialog: React.FC<FolderSelectionDialogProps> = ({
     setNewFolderName('')
   }
 
+  const handleSelectFolder = (folderId: number) => {
+    setIsCreatingNewFolder(false)
+    setValidationError(false)
+    if (setNewFolderName) setNewFolderName('')
+    onFolderSelect(folderId)
+  }
+
   return (
     <Dialog
       visible={visible}
@@ -91,7 +98,7 @@ export const FolderSelectionDialog: React.FC<FolderSelectionDialogProps> = ({
               <DropdownItem
                 key={folder.id}
                 isSelected={selectedFolderId === folder.id}
-                onPress={() => onFolderSelect(folder.id)}>
+                onPress={() => handleSelectFolder(folder.id)}>
                 <DropdownText isSelected={selectedFolderId === folder.id}>
                   {folder.folderName}
                 </DropdownText>
