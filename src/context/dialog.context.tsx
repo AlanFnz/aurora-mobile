@@ -17,7 +17,15 @@ interface DialogContextProps {
   selectedFolderId: number | null
   showDialog: (
     type: DialogType,
-    onConfirm: (folderId?: number, title?: string) => void,
+    onConfirm: ({
+      folderId,
+      noteTitle,
+      newFolderName,
+    }: {
+      folderId: number | null
+      noteTitle?: string
+      newFolderName?: string
+    }) => void,
     options?: DialogOptions,
   ) => void
   hideDialog: () => void
@@ -43,15 +51,33 @@ export const DialogProvider: React.FC<{ children: ReactNode }> = ({
   const [isDialogVisible, setIsDialogVisible] = useState(false)
   const [dialogType, setDialogType] = useState<DialogType | null>(null)
   const [selectedFolderId, setSelectedFolderId] = useState<number | null>(null)
+  const [newFolderName, setNewFolderName] = useState<string | undefined>()
   const [noteTitle, setNoteTitle] = useState<string | undefined>()
   const [options, setOptions] = useState<DialogOptions | null>(null)
   const [onConfirmHandler, setOnConfirmHandler] = useState<
-    ((folderId?: number | null, title?: string) => void) | null
+    | (({
+        folderId,
+        noteTitle,
+        newFolderName,
+      }: {
+        folderId: number | null
+        noteTitle?: string
+        newFolderName?: string
+      }) => void)
+    | null
   >(null)
 
   const showDialog = (
     type: DialogType,
-    onConfirm: (folderId?: number, title?: string) => void,
+    onConfirm: ({
+      folderId,
+      noteTitle,
+      newFolderName,
+    }: {
+      folderId: number | null
+      noteTitle?: string
+      newFolderName?: string
+    }) => void,
     options: DialogOptions = {},
   ) => {
     setDialogType(type)
@@ -68,11 +94,14 @@ export const DialogProvider: React.FC<{ children: ReactNode }> = ({
     setOptions(null)
   }
 
-  const handleFolderSelect = (folderId: number | null) =>
-    setSelectedFolderId(folderId)
+  const handleFolderSelect = (folderId: number | null, folderName?: string) => {
+    if (folderId) setSelectedFolderId(folderId)
+    if (folderName) setNewFolderName(folderName)
+  }
 
   const handleConfirm = () => {
-    if (onConfirmHandler) onConfirmHandler(selectedFolderId, noteTitle)
+    if (onConfirmHandler)
+      onConfirmHandler({ folderId: selectedFolderId, noteTitle, newFolderName })
     hideDialog()
   }
 
@@ -94,6 +123,8 @@ export const DialogProvider: React.FC<{ children: ReactNode }> = ({
           selectedFolderId={selectedFolderId}
           allowTitleEdit={!!options?.allowTitleEdit}
           noteTitle={noteTitle}
+          newFolderName={newFolderName}
+          setNewFolderName={setNewFolderName}
           setNoteTitle={setNoteTitle}
           onFolderSelect={handleFolderSelect}
           onConfirm={handleConfirm}

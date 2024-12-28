@@ -41,26 +41,29 @@ export const useNoteDetailsScreen = ({
 
   const handleSave = async () => {
     if (isNew) {
-      showDialog(DialogType.FolderSelection, async folderId => {
-        if (!folderId) return
-        try {
-          await createNewNote({
-            title,
-            content,
-            folderId,
-          })
-          showToast({
-            isSuccess: true,
-            message: 'Note created successfully!',
-          })
-        } catch (error) {
-          console.error(error)
-          showToast({
-            isSuccess: false,
-            message: 'Failed to create note.',
-          })
-        }
-      })
+      showDialog(
+        DialogType.FolderSelection,
+        async ({ folderId, newFolderName }) => {
+          try {
+            await createNewNote({
+              title,
+              content,
+              folderId: folderId || null,
+              newFolderName,
+            })
+            showToast({
+              isSuccess: true,
+              message: 'Note created successfully!',
+            })
+          } catch (error) {
+            console.error(error)
+            showToast({
+              isSuccess: false,
+              message: 'Failed to create note.',
+            })
+          }
+        },
+      )
     } else if (note) {
       try {
         await updateNote({ id: note.id, title, content })

@@ -15,7 +15,7 @@ export const foldersApi = createApi({
     createFolder: builder.mutation<Folder, { folderName: string }>({
       queryFn: ({ folderName }) => {
         const newFolder: Folder = {
-          id: foldersMockData.length + 1,
+          id: Math.floor(Math.random() * 10000),
           folderName,
           notes: [],
         }

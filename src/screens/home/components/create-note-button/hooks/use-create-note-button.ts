@@ -99,14 +99,14 @@ export const useCreateNoteButton = () => {
           const resultUrl = await uploadFile(recordingResult)
           showDialog(
             DialogType.FolderSelection,
-            async (folderId, noteTitle) => {
-              if (!folderId) return
+            async ({ folderId, noteTitle, newFolderName }) => {
               try {
                 await createNewNote({
                   title: noteTitle || 'New audio note',
                   content: '',
                   audioUrl: resultUrl,
-                  folderId,
+                  folderId: folderId || null,
+                  newFolderName,
                 })
                 showToast({
                   isSuccess: true,
