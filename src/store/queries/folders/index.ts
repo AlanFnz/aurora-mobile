@@ -12,7 +12,17 @@ export const foldersApi = createApi({
         return { data: foldersMockData }
       },
     }),
+    createFolder: builder.mutation<Folder, { folderName: string }>({
+      queryFn: ({ folderName }) => {
+        const newFolder: Folder = {
+          id: foldersMockData.length + 1,
+          folderName,
+          notes: [],
+        }
+        return { data: newFolder }
+      },
+    }),
   }),
 })
 
-export const { useFetchFoldersQuery } = foldersApi
+export const { useFetchFoldersQuery, useCreateFolderMutation } = foldersApi
