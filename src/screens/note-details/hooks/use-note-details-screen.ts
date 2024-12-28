@@ -8,7 +8,7 @@ import { useNoteOperations } from '@hooks/use-note-operations'
 import { useToast } from '@hooks/use-toast'
 import { formatTimestampToDateTime } from '@utils/time'
 
-export const useNoteDetails = ({
+export const useNoteDetailsScreen = ({
   noteId,
   isNew,
 }: {
