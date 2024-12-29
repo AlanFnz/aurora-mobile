@@ -60,6 +60,9 @@ describe('useFolderSelectionDialog', () => {
       result.current.showDialog(mockOnConfirm)
       result.current.dialogProps.onFolderSelect(2, 'Another Folder')
       result.current.dialogProps.setNoteTitle?.('Test Note Title')
+    })
+
+    act(() => {
       result.current.dialogProps.onConfirm()
     })
 
