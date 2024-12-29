@@ -16,7 +16,7 @@ import {
   ValidationErrorText,
 } from './folder-selection-dialog.styled'
 
-interface FolderSelectionDialogProps {
+export interface FolderSelectionDialogProps {
   visible: boolean
   selectedFolderId: number | null
   allowTitleEdit: boolean
