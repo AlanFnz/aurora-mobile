@@ -30,7 +30,10 @@ const NoteItem: React.FC<NoteProps> = ({
 
   return (
     <>
-      <NoteItemContainer onPress={navigateToNoteDetail} testID={testID}>
+      <NoteItemContainer
+        onPress={navigateToNoteDetail}
+        testID={testID}
+        marginTop={notesLength > 1}>
         <NoteText>{`${item.title}${item.snippet && `: ${item.snippet}`}`}</NoteText>
         <DateText>{formatTimestampToDate(item.modifiedDate)}</DateText>
       </NoteItemContainer>
@@ -47,8 +50,8 @@ const NoteItem: React.FC<NoteProps> = ({
   )
 }
 
-const NoteItemContainer = styled.TouchableOpacity`
-  margin-top: 5px;
+const NoteItemContainer = styled.TouchableOpacity<{ marginTop: boolean }>`
+  margin-top: ${({ marginTop }) => (marginTop ? '5px' : '0')};
   padding: 8px;
   border-radius: 3px;
 `
