@@ -16,7 +16,7 @@ import {
 } from '@store/queries/notes'
 import NoteDetailsScreen from '@screens/note-details'
 import { RootStackParamList } from '@navigation/types'
-import { DialogProvider } from '@context/dialog.context'
+import { DialogProvider } from '@context/dialog'
 
 jest.mock('@store/queries/notes', () => ({
   useFetchNoteDetailsQuery: jest.fn(),

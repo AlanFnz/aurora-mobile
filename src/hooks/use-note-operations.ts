@@ -6,7 +6,8 @@ import {
   useUpdateNoteMutation,
 } from '@store/queries/notes'
 import { RootState } from '@store/index'
-import { addNoteToFolder, setFolders } from '@store/folders.slice'
+import { addFolder, addNoteToFolder, setFolders } from '@store/folders.slice'
+import { useCreateFolderMutation } from '@store/queries/folders'
 
 export const useNoteOperations = () => {
   const dispatch = useDispatch()
@@ -16,28 +17,51 @@ export const useNoteOperations = () => {
   const [updateNoteMutation] = useUpdateNoteMutation()
   const [deleteNoteMutation] = useDeleteNoteMutation()
 
+  const [createFolder] = useCreateFolderMutation()
+
   const createNewNote = async ({
     title,
     content,
     audioUrl,
     folderId,
+    newFolderName,
   }: {
     title: string
     content: string
     audioUrl?: string
     folderId: number | null
+    newFolderName?: string
   }) => {
-    if (!folderId) return
+    let targetFolderId = folderId
+
+    if (!folderId && newFolderName) {
+      const createdFolder = await createFolder({
+        folderName: newFolderName,
+      }).unwrap()
+      targetFolderId = createdFolder.id
+
+      dispatch(
+        addFolder({
+          id: createdFolder.id,
+          folderName: createdFolder.folderName,
+          notes: [],
+        }),
+      )
+    }
+
+    if (!targetFolderId)
+      throw new Error('Folder ID or new folder name is required')
+
     const createdNote = await createNote({
       title,
       content,
       audioUrl,
-      folderId,
+      folderId: targetFolderId,
     }).unwrap()
 
     dispatch(
       addNoteToFolder({
-        folderId,
+        folderId: targetFolderId,
         note: {
           id: createdNote.id,
           title: createdNote.title,

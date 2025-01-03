@@ -3,38 +3,18 @@ import styled from 'styled-components/native'
 
 import colors from '@theme/colors'
 
-const Overlay = styled.View`
-  flex: 1;
-  background-color: rgba(0, 0, 0, 0.5);
-  justify-content: center;
-  align-items: center;
-`
-
-const DialogContainer = styled.View`
-  width: 80%;
-  border-width: 0.5px;
-  background-color: ${colors.lowOpacity.whiteSuperLow};
+const ListContainer = styled.View`
+  border-width: 1px;
+  border-radius: 5px;
   border-color: ${colors.lowOpacity.whiteLow};
-  border-radius: 10px;
-`
-
-const BodyContainer = styled.View`
-  width: 100%;
-  padding: 20px;
-`
-
-const DialogTitle = styled.Text`
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 15px;
-  color: ${colors.common.offWhite};
+  padding: 10px;
 `
 
 const TitleInput = styled(TextInput)`
   border-width: 1px;
-  border-color: ${colors.common.lightGray};
-  background-color: ${colors.lowOpacity.whiteMid};
-  color: ${colors.common.black};
+  border-color: ${colors.lowOpacity.whiteLow};
+  background-color: ${colors.lowOpacity.blackSuperLow};
+  color: ${colors.common.offWhite};
   padding: 10px;
   border-radius: 5px;
   margin-bottom: 15px;
@@ -57,6 +37,12 @@ const DropdownText = styled.Text<{ isSelected?: boolean }>`
     isSelected ? colors.common.black : colors.common.offWhite};
 `
 
+const Divider = styled.View`
+  height: 1px;
+  background-color: ${colors.lowOpacity.whitePointOne};
+  margin: 0 12%;
+`
+
 const NewFolderText = styled(DropdownText)`
   color: ${colors.common.lightGray};
 `
@@ -68,40 +54,13 @@ const ValidationErrorText = styled.Text`
   text-align: center;
 `
 
-const ButtonGroup = styled.View`
-  flex-direction: row;
-  justify-content: space-between;
-`
-
-const ButtonContainer = styled.TouchableOpacity`
-  flex: 1;
-  margin-left: 10px;
-  background-color: ${colors.lowOpacity.blackLow};
-  padding-vertical: 10px;
-  border-radius: 2px;
-  border-width: 1px;
-  border-color: ${colors.common.primaryGray};
-  justify-content: center;
-  align-items: center;
-`
-
-const ButtonText = styled.Text`
-  color: white;
-  font-weight: bold;
-`
-
 export {
-  Overlay,
-  DialogContainer,
-  BodyContainer,
-  DialogTitle,
+  ListContainer,
   TitleInput,
   Dropdown,
   DropdownItem,
   DropdownText,
+  Divider,
   NewFolderText,
   ValidationErrorText,
-  ButtonGroup,
-  ButtonContainer,
-  ButtonText,
 }

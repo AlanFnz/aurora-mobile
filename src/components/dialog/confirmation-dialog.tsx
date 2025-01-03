@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Dialog } from './dialog'
+import { Dialog, Emphasis } from './dialog'
 import { DialogMessage } from './confirmation-dialog.styled'
 
 interface ConfirmationDialogProps {
@@ -29,7 +29,12 @@ export const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
       onRequestClose={onCancel}
       buttons={[
         { text: cancelText, onPress: onCancel },
-        { text: confirmText, onPress: onConfirm },
+        {
+          text: confirmText,
+          onPress: onConfirm,
+          emphasis: Emphasis.POSITIVE,
+          warning: true,
+        },
       ]}>
       {message && <DialogMessage>{message}</DialogMessage>}
     </Dialog>

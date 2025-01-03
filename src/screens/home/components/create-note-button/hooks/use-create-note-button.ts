@@ -3,7 +3,7 @@ import { Animated } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 
 import { NoteDetailScreenNavigationProp } from '@navigation/types'
-import { DialogType, useDialog } from '@context/dialog.context'
+import { DialogType, useDialog } from '@context/dialog'
 import { useNoteOperations } from '@hooks/use-note-operations'
 import { useAudioRecorder } from '@hooks/use-audio-recorder'
 import { useFileUpload } from '@hooks/use-file-upload'
@@ -99,14 +99,14 @@ export const useCreateNoteButton = () => {
           const resultUrl = await uploadFile(recordingResult)
           showDialog(
             DialogType.FolderSelection,
-            async (folderId, noteTitle) => {
-              if (!folderId) return
+            async ({ folderId, noteTitle, newFolderName }) => {
               try {
                 await createNewNote({
                   title: noteTitle || 'New audio note',
                   content: '',
                   audioUrl: resultUrl,
-                  folderId,
+                  folderId: folderId || null,
+                  newFolderName,
                 })
                 showToast({
                   isSuccess: true,

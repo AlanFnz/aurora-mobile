@@ -2,6 +2,8 @@ import styled from 'styled-components/native'
 
 import colors from '@theme/colors'
 
+import { Emphasis } from './dialog'
+
 const Overlay = styled.View`
   flex: 1;
   background-color: rgba(0, 0, 0, 0.5);
@@ -12,7 +14,7 @@ const Overlay = styled.View`
 const DialogContainer = styled.View`
   width: 80%;
   border-width: 0.5px;
-  background-color: ${colors.lowOpacity.whiteSuperLow};
+  background-color: ${colors.lowOpacity.blackMid};
   border-color: ${colors.lowOpacity.whiteLow};
   border-radius: 10px;
 `
@@ -34,14 +36,21 @@ const ButtonGroup = styled.View`
   justify-content: space-between;
 `
 
-const ButtonContainer = styled.TouchableOpacity`
+const ButtonContainer = styled.TouchableOpacity<{
+  emphasis?: Emphasis
+  warning?: boolean
+}>`
   flex: 1;
   margin-left: 10px;
-  background-color: ${colors.lowOpacity.blackLow};
+  background-color: ${({ emphasis }) =>
+    emphasis === Emphasis.POSITIVE
+      ? colors.lowOpacity.whiteMid
+      : colors.lowOpacity.whiteSuperLow};
   padding-vertical: 10px;
   border-radius: 2px;
   border-width: 1px;
-  border-color: ${colors.common.primaryGray};
+  border-color: ${({ warning }) =>
+    warning ? colors.feedback.negative : colors.lowOpacity.blackLow};
   justify-content: center;
   align-items: center;
 `

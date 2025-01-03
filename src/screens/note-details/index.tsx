@@ -7,7 +7,7 @@ import BackgroundLayers from '@components/background-layers'
 import Header from '@components/header'
 
 import HeaderButton from './components/header-button'
-import { useNoteDetails } from './hooks/use-note-details'
+import { useNoteDetailsScreen } from './hooks/use-note-details-screen'
 import {
   Container,
   DateText,
@@ -35,7 +35,7 @@ const NoteDetailsScreen: React.FC<NoteDetailsScreenProps> = ({ route }) => {
     setContent,
     handleSave,
     handleDelete,
-  } = useNoteDetails({ noteId, isNew })
+  } = useNoteDetailsScreen({ noteId, isNew })
 
   if (!isNew && isLoading) {
     return <StyledText>Loading...</StyledText>

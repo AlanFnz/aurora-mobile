@@ -2,24 +2,29 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 
 import { RootState } from '@store/index'
-import { Dialog } from './dialog'
+import colors from '@theme/colors'
 
+import { Dialog, Emphasis } from './dialog'
 import {
+  Divider,
   Dropdown,
   DropdownItem,
   DropdownText,
+  ListContainer,
   NewFolderText,
   TitleInput,
   ValidationErrorText,
 } from './folder-selection-dialog.styled'
 
-interface FolderSelectionDialogProps {
+export interface FolderSelectionDialogProps {
   visible: boolean
   selectedFolderId: number | null
   allowTitleEdit: boolean
   noteTitle?: string
+  newFolderName?: string
   setNoteTitle?: (title: string) => void
-  onFolderSelect: (folderId: number | null) => void
+  setNewFolderName?: (name: string) => void
+  onFolderSelect: (folderId: number | null, newFolderName?: string) => void
   onConfirm: () => void
   onCancel: () => void
 }
@@ -29,18 +34,40 @@ export const FolderSelectionDialog: React.FC<FolderSelectionDialogProps> = ({
   selectedFolderId,
   allowTitleEdit = false,
   noteTitle,
+  newFolderName,
+  setNewFolderName,
   setNoteTitle,
   onFolderSelect,
   onConfirm,
   onCancel,
 }) => {
   const [validationError, setValidationError] = useState(false)
+  const [isCreatingNewFolder, setIsCreatingNewFolder] = useState(false)
   const folders = useSelector((state: RootState) => state.folders)
 
   const handleConfirm = () => {
-    if (!selectedFolderId) return setValidationError(true)
+    if (
+      (!isCreatingNewFolder && !selectedFolderId) ||
+      (isCreatingNewFolder && !newFolderName?.trim())
+    )
+      return setValidationError(true)
+
     setValidationError(false)
     onConfirm()
+  }
+
+  const handleCreateNewFolder = () => {
+    if (!setNewFolderName) return
+    setIsCreatingNewFolder(true)
+    setValidationError(false)
+    setNewFolderName('')
+  }
+
+  const handleSelectFolder = (folderId: number) => {
+    setIsCreatingNewFolder(false)
+    setValidationError(false)
+    if (setNewFolderName) setNewFolderName('')
+    onFolderSelect(folderId)
   }
 
   return (
@@ -50,32 +77,59 @@ export const FolderSelectionDialog: React.FC<FolderSelectionDialogProps> = ({
       onRequestClose={onCancel}
       buttons={[
         { text: 'Cancel', onPress: onCancel },
-        { text: 'Confirm', onPress: handleConfirm },
+        {
+          text: 'Confirm',
+          onPress: handleConfirm,
+          emphasis: Emphasis.POSITIVE,
+        },
       ]}>
       {allowTitleEdit && (
         <TitleInput
           placeholder="Enter note title"
           value={noteTitle}
           onChangeText={setNoteTitle}
+          placeholderTextColor={colors.lowOpacity.whiteLow}
         />
       )}
       <Dropdown>
-        {folders.map(folder => (
-          <DropdownItem
-            key={folder.id}
-            isSelected={selectedFolderId === folder.id}
-            onPress={() => onFolderSelect(folder.id)}>
-            <DropdownText isSelected={selectedFolderId === folder.id}>
-              {folder.folderName}
-            </DropdownText>
+        <ListContainer>
+          {folders.map((folder, index) => (
+            <>
+              <DropdownItem
+                key={folder.id}
+                isSelected={selectedFolderId === folder.id}
+                onPress={() => handleSelectFolder(folder.id)}>
+                <DropdownText isSelected={selectedFolderId === folder.id}>
+                  {folder.folderName}
+                </DropdownText>
+              </DropdownItem>
+              {index !== folders.length - 1 && <Divider />}
+            </>
+          ))}
+          {isCreatingNewFolder && (
+            <DropdownItem>
+              <TitleInput
+                autoFocus
+                placeholder="Enter folder name"
+                value={newFolderName}
+                onChangeText={setNewFolderName}
+                placeholderTextColor={colors.lowOpacity.whiteLow}
+              />
+            </DropdownItem>
+          )}
+        </ListContainer>
+        {!isCreatingNewFolder && (
+          <DropdownItem onPress={handleCreateNewFolder}>
+            <NewFolderText>+ Create New Folder</NewFolderText>
           </DropdownItem>
-        ))}
-        <DropdownItem onPress={() => console.log('Mock: Create New Folder')}>
-          <NewFolderText>+ Create New Folder</NewFolderText>
-        </DropdownItem>
+        )}
       </Dropdown>
       {validationError && (
-        <ValidationErrorText>Please select a folder.</ValidationErrorText>
+        <ValidationErrorText>
+          {isCreatingNewFolder
+            ? 'Please enter a folder name.'
+            : 'Please select a folder.'}
+        </ValidationErrorText>
       )}
     </Dialog>
   )
