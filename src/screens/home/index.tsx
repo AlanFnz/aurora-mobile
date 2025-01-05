@@ -11,7 +11,7 @@ import SearchBox from './components/search-box'
 import NotesResultsList from './components/notes-results-list'
 import CreateNoteButton from './components/create-note-button'
 
-const HomeScreen: React.FC = () => {
+const Home: React.FC = () => {
   const insets = useSafeAreaInsets()
   const folders = useSelector((state: RootState) => state.folders)
   const [searchQuery, setSearchQuery] = useState('')
@@ -47,4 +47,4 @@ const Container = styled.View<{
   padding-right: ${props => props.insets.right - 2}px;
 `
 
-export default HomeScreen
+export default Home

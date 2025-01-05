@@ -7,7 +7,7 @@ import BackgroundLayers from '@components/background-layers'
 
 import { Container, SignOutButton, SignOutText, Title } from './styles'
 
-const SettingsScreen: React.FC = () => {
+const Settings: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>()
 
   const handleSignOut = () => {
@@ -27,4 +27,4 @@ const SettingsScreen: React.FC = () => {
   )
 }
 
-export default SettingsScreen
+export default Settings

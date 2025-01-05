@@ -14,7 +14,7 @@ import {
   useFetchNoteDetailsQuery,
   useUpdateNoteMutation,
 } from '@store/queries/notes'
-import NoteDetailsScreen from '@screens/note-details'
+import NoteDetails from '@screens/note-details'
 import { RootStackParamList } from '@navigation/types'
 import { DialogProvider } from '@context/dialog'
 
@@ -54,7 +54,7 @@ const mockRoute: RouteProp<RootStackParamList, 'NoteDetails'> = {
   params: { noteId: 1, isNew: false },
 }
 
-describe('NoteDetailsScreen', () => {
+describe('NoteDetails', () => {
   const mockedDate = new Date('2024-10-13T11:34:00').getTime()
 
   beforeEach(() => {
@@ -100,7 +100,7 @@ describe('NoteDetailsScreen', () => {
     })
 
     const { getByText } = renderWithProviders(
-      <NoteDetailsScreen
+      <NoteDetails
         route={mockRoute}
         navigation={mockNavigation as any}
       />,
@@ -121,7 +121,7 @@ describe('NoteDetailsScreen', () => {
     })
 
     const { getByDisplayValue } = renderWithProviders(
-      <NoteDetailsScreen
+      <NoteDetails
         route={mockRoute}
         navigation={mockNavigation as any}
       />,
@@ -145,7 +145,7 @@ describe('NoteDetailsScreen', () => {
     ;(useUpdateNoteMutation as jest.Mock).mockReturnValue([mockUpdateNote])
 
     const { getByDisplayValue, UNSAFE_getByProps } = renderWithProviders(
-      <NoteDetailsScreen
+      <NoteDetails
         route={mockRoute}
         navigation={mockNavigation as any}
       />,
@@ -179,7 +179,7 @@ describe('NoteDetailsScreen', () => {
     })
 
     const { getByText } = renderWithProviders(
-      <NoteDetailsScreen
+      <NoteDetails
         route={mockRoute}
         navigation={mockNavigation as any}
       />,

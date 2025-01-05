@@ -22,7 +22,7 @@ type NoteDetailsScreenProps = StackScreenProps<
   'NoteDetails'
 >
 
-const NoteDetailsScreen: React.FC<NoteDetailsScreenProps> = ({ route }) => {
+const NoteDetails: React.FC<NoteDetailsScreenProps> = ({ route }) => {
   const { noteId = 0, isNew } = route.params
   const insets = useSafeAreaInsets()
 
@@ -77,4 +77,4 @@ const NoteDetailsScreen: React.FC<NoteDetailsScreenProps> = ({ route }) => {
   )
 }
 
-export default NoteDetailsScreen
+export default NoteDetails

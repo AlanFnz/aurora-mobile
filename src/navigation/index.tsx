@@ -12,10 +12,10 @@ import { tabNavigatorStyles } from '@navigation/tab-navigator.styles'
 import { RootStackParamList } from './types'
 
 // Screens
-import LoginScreen from '@screens/login'
-import HomeScreen from '@screens/home'
-import SettingsScreen from '@screens/settings'
-import NoteDetailsScreen from '@screens/note-details'
+import Login from '@screens/login'
+import Home from '@screens/home'
+import Settings from '@screens/settings'
+import NoteDetails from '@screens/note-details'
 
 const Stack = createStackNavigator<RootStackParamList>()
 const Tab = createBottomTabNavigator()
@@ -23,8 +23,8 @@ const Tab = createBottomTabNavigator()
 function HomeStack() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen name="NoteDetails" component={NoteDetailsScreen} />
+      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="NoteDetails" component={NoteDetails} />
     </Stack.Navigator>
   )
 }
@@ -45,7 +45,7 @@ function HomeTabs() {
 
       <Tab.Screen
         name="SettingsTab"
-        component={SettingsScreen}
+        component={Settings}
         options={{
           tabBarLabel: 'Settings',
           tabBarIcon: ({ color }) => (
@@ -75,7 +75,7 @@ export default function Navigation() {
         {userToken == null ? (
           <Stack.Screen
             name="SignIn"
-            component={LoginScreen}
+            component={Login}
             options={{ title: 'Sign in', headerShown: false }}
           />
         ) : (

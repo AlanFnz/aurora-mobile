@@ -7,7 +7,7 @@ import { fireEvent, render } from '@testing-library/react-native'
 
 import foldersReducer from '@store/folders.slice'
 import foldersMockData from '@store/mocks/folders.mocks'
-import HomeScreen from '@screens/home'
+import Home from '@screens/home'
 
 jest.mock('@screens/home/components/folder-list', () => 'FolderList')
 jest.mock(
@@ -24,7 +24,7 @@ jest.mock('react-native-safe-area-context', () => ({
   useSafeAreaInsets: jest.fn(),
 }))
 
-describe('HomeScreen', () => {
+describe('Home', () => {
   const initialState = {
     folders: foldersMockData,
   }
@@ -61,12 +61,12 @@ describe('HomeScreen', () => {
   }
 
   it('renders the background layers', () => {
-    const { getByTestId } = renderWithProviders(<HomeScreen />)
+    const { getByTestId } = renderWithProviders(<Home />)
     expect(getByTestId('background-layers')).toBeTruthy()
   })
 
   it('renders the container with correct insets', () => {
-    const { getByTestId } = renderWithProviders(<HomeScreen />)
+    const { getByTestId } = renderWithProviders(<Home />)
     const container = getByTestId('container')
     expect(container.props.style.paddingTop).toBe(20)
     expect(container.props.style.paddingLeft).toBe(0)
@@ -74,12 +74,12 @@ describe('HomeScreen', () => {
   })
 
   it('renders the folder list', () => {
-    const { getByTestId } = renderWithProviders(<HomeScreen />)
+    const { getByTestId } = renderWithProviders(<Home />)
     expect(getByTestId('folder-list')).toBeTruthy()
   })
 
   it('renders the notes results list when there is a search query', () => {
-    const { getByTestId } = renderWithProviders(<HomeScreen />)
+    const { getByTestId } = renderWithProviders(<Home />)
 
     const searchInput = getByTestId('search-input')
     fireEvent.changeText(searchInput, 'Sample Note')
