@@ -2,14 +2,14 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { render, fireEvent } from '@testing-library/react-native'
 
-import LoginScreen from '../src/screens/login'
-import { performSignIn } from '../src/store/auth.slice'
+import LoginScreen from '.'
+import { performSignIn } from '../../store/auth.slice'
 
 jest.mock('react-redux', () => ({
   useDispatch: jest.fn(),
 }))
 
-jest.mock('../src/store/auth.slice', () => ({
+jest.mock('@store/auth.slice', () => ({
   performSignIn: jest.fn(),
 }))
 
