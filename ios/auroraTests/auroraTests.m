@@ -7,11 +7,11 @@
 #define TIMEOUT_SECONDS 600
 #define TEXT_TO_LOOK_FOR @"Welcome to React"
 
-@interface kiByteTests : XCTestCase
+@interface auroraTests : XCTestCase
 
 @end
 
-@implementation kiByteTests
+@implementation auroraTests
 
 - (BOOL)findSubviewInView:(UIView *)view matching:(BOOL (^)(UIView *view))test
 {
