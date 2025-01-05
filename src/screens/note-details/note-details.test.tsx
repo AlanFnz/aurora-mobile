@@ -100,10 +100,7 @@ describe('NoteDetails', () => {
     })
 
     const { getByText } = renderWithProviders(
-      <NoteDetails
-        route={mockRoute}
-        navigation={mockNavigation as any}
-      />,
+      <NoteDetails route={mockRoute} navigation={mockNavigation as any} />,
     )
 
     expect(getByText('Loading...')).toBeTruthy()
@@ -121,10 +118,7 @@ describe('NoteDetails', () => {
     })
 
     const { getByDisplayValue } = renderWithProviders(
-      <NoteDetails
-        route={mockRoute}
-        navigation={mockNavigation as any}
-      />,
+      <NoteDetails route={mockRoute} navigation={mockNavigation as any} />,
     )
 
     expect(getByDisplayValue('Test Note')).toBeTruthy()
@@ -145,10 +139,7 @@ describe('NoteDetails', () => {
     ;(useUpdateNoteMutation as jest.Mock).mockReturnValue([mockUpdateNote])
 
     const { getByDisplayValue, UNSAFE_getByProps } = renderWithProviders(
-      <NoteDetails
-        route={mockRoute}
-        navigation={mockNavigation as any}
-      />,
+      <NoteDetails route={mockRoute} navigation={mockNavigation as any} />,
     )
 
     fireEvent.changeText(getByDisplayValue('Test Note'), 'Updated Note Title')
@@ -179,10 +170,7 @@ describe('NoteDetails', () => {
     })
 
     const { getByText } = renderWithProviders(
-      <NoteDetails
-        route={mockRoute}
-        navigation={mockNavigation as any}
-      />,
+      <NoteDetails route={mockRoute} navigation={mockNavigation as any} />,
     )
 
     expect(getByText('Oct 13, 2024 at 11:34 AM')).toBeTruthy()
