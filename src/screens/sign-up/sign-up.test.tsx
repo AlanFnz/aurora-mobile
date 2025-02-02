@@ -3,15 +3,15 @@ import { render, fireEvent, waitFor } from '@testing-library/react-native'
 import { useDispatch } from 'react-redux'
 import { useNavigation } from '@react-navigation/native'
 
-import { performSignIn } from '@store/slices'
-import { SignIn } from './sign-in'
+import { performSignUp } from '@store/slices/auth.slice'
+import { SignUp } from './sign-up'
 
 jest.mock('react-redux', () => ({
   useDispatch: jest.fn(),
 }))
 
-jest.mock('@store/slices', () => ({
-  performSignIn: jest.fn(),
+jest.mock('@store/slices/auth.slice', () => ({
+  performSignUp: jest.fn(),
 }))
 
 jest.mock('@react-navigation/native', () => ({
@@ -24,7 +24,7 @@ jest.mock('@hooks/use-toast', () => ({
   }),
 }))
 
-describe('SignIn', () => {
+describe('SignUp', () => {
   const mockDispatch = jest.fn(() => Promise.resolve())
   const mockNavigate = jest.fn()
 
@@ -35,43 +35,42 @@ describe('SignIn', () => {
   })
 
   it('renders correctly', () => {
-    const { getByPlaceholderText, getByText } = render(<SignIn />)
+    const { getByPlaceholderText, getByText } = render(<SignUp />)
 
     expect(getByPlaceholderText('Username')).toBeTruthy()
     expect(getByPlaceholderText('Password')).toBeTruthy()
-    expect(getByText('Sign In')).toBeTruthy()
-    expect(getByText("Don't have an account?")).toBeTruthy()
     expect(getByText('Sign Up')).toBeTruthy()
+    expect(getByText('Already have an account?')).toBeTruthy()
+    expect(getByText('Sign In')).toBeTruthy()
   })
 
-  it('dispatches performSignIn on button press', async () => {
-    const { getByPlaceholderText, getByText } = render(<SignIn />)
+  it('dispatches performSignUp on button press', async () => {
+    const { getByPlaceholderText, getByText } = render(<SignUp />)
 
     const usernameInput = getByPlaceholderText('Username')
     const passwordInput = getByPlaceholderText('Password')
+    fireEvent.changeText(usernameInput, 'newuser')
+    fireEvent.changeText(passwordInput, 'newpassword')
 
-    fireEvent.changeText(usernameInput, 'testuser')
-    fireEvent.changeText(passwordInput, 'testpassword')
-
-    const signInButton = getByText('Sign In')
-    fireEvent.press(signInButton)
+    const signUpButton = getByText('Sign Up')
+    fireEvent.press(signUpButton)
 
     await waitFor(() => {
-      expect(performSignIn).toHaveBeenCalledWith({
-        username: 'testuser',
-        password: 'testpassword',
+      expect(performSignUp).toHaveBeenCalledWith({
+        username: 'newuser',
+        password: 'newpassword',
       })
 
       expect(mockDispatch).toHaveBeenCalled()
     })
   })
 
-  it('navigates to SignUp on prompt press', () => {
-    const { getByText } = render(<SignIn />)
+  it('navigates to the SignIn screen on prompt press', () => {
+    const { getByText } = render(<SignUp />)
 
-    const signUpPromptLink = getByText('Sign Up')
-    fireEvent.press(signUpPromptLink)
+    const signInPromptLink = getByText('Sign In')
+    fireEvent.press(signInPromptLink)
 
-    expect(mockNavigate).toHaveBeenCalledWith('SignUp')
+    expect(mockNavigate).toHaveBeenCalledWith('SignIn')
   })
 })
