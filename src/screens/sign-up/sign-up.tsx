@@ -1,29 +1,29 @@
 import { Formik } from 'formik'
 import React from 'react'
-import { useDispatch } from 'react-redux'
 import { TouchableOpacity } from 'react-native'
+import { useDispatch } from 'react-redux'
+import { NoteDetailScreenNavigationProp } from '@navigation/types'
 import { useNavigation } from '@react-navigation/native'
 import * as Yup from 'yup'
 
 import BackgroundLayers from '@components/background-layers'
-import { performSignIn } from '@store/slices/auth.slice'
+import { performSignUp } from '@store/slices/auth.slice'
 import { AppDispatch } from '@store/store'
-import { useToast } from '@hooks/use-toast'
-import { NoteDetailScreenNavigationProp } from '@navigation/types'
 
+import { useToast } from '@hooks/use-toast'
 import {
   Container,
-  ErrorMessage,
-  FooterContainer,
   Input,
+  Title,
+  ErrorMessage,
   SignInButton,
   SignInText,
-  SignUpPromptLink,
-  SignUpPromptText,
-  Title,
-} from './sign-in.styled'
+  FooterContainer,
+  SignInPromptText,
+  SignInPromptLink,
+} from './sign-up.styled'
 
-export const SignIn: React.FC = () => {
+export const SignUp: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>()
   const navigation = useNavigation<NoteDetailScreenNavigationProp>()
   const { showToast } = useToast()
@@ -37,17 +37,17 @@ export const SignIn: React.FC = () => {
     <>
       <BackgroundLayers />
       <Container>
-        <Title>Sign In Screen</Title>
+        <Title>Sign Up Screen</Title>
         <Formik
           initialValues={{ username: '', password: '' }}
           validationSchema={validationSchema}
           onSubmit={async values => {
             try {
-              await dispatch(performSignIn(values.username, values.password))
+              await dispatch(performSignUp(values.username, values.password))
             } catch {
               showToast({
                 isSuccess: false,
-                message: 'Wrong user or password.',
+                message: 'Sign up failed. Please try again.',
                 visibilityTime: 3000,
               })
             }
@@ -82,16 +82,16 @@ export const SignIn: React.FC = () => {
                 <ErrorMessage>{errors.password}</ErrorMessage>
               )}
 
-              <SignInButton onPress={() => handleSubmit()}>
-                <SignInText>Sign In</SignInText>
+              <SignInButton onPress={() => handleSubmit}>
+                <SignInText>Sign Up</SignInText>
               </SignInButton>
             </>
           )}
         </Formik>
         <FooterContainer>
-          <SignUpPromptText>{`Don't have an account?`}</SignUpPromptText>
-          <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
-            <SignUpPromptLink>Sign Up</SignUpPromptLink>
+          <SignInPromptText>{`Already have an account?`}</SignInPromptText>
+          <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>
+            <SignInPromptLink>Sign In</SignInPromptLink>
           </TouchableOpacity>
         </FooterContainer>
       </Container>

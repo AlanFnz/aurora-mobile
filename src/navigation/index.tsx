@@ -13,6 +13,7 @@ import { RootStackParamList } from './types'
 
 // Screens
 import { SignIn } from '@screens/sign-in'
+import { SignUp } from '@screens/sign-up'
 import Home from '@screens/home'
 import Settings from '@screens/settings'
 import NoteDetails from '@screens/note-details'
@@ -73,11 +74,18 @@ export default function Navigation() {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         {userToken == null ? (
-          <Stack.Screen
-            name="SignIn"
-            component={SignIn}
-            options={{ title: 'Sign in', headerShown: false }}
-          />
+          <>
+            <Stack.Screen
+              name="SignIn"
+              component={SignIn}
+              options={{ title: 'Sign in', headerShown: false }}
+            />
+            <Stack.Screen
+              name="SignUp"
+              component={SignUp}
+              options={{ title: 'Sign Up', headerShown: false }}
+            />
+          </>
         ) : (
           <Stack.Screen name="AuthStack" component={HomeTabs} />
         )}

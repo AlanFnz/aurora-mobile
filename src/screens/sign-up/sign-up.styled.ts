@@ -60,12 +60,12 @@ const SignInText = styled.Text`
   text-transform: uppercase;
 `
 
-const SignUpPromptText = styled.Text`
+const SignInPromptText = styled.Text`
   color: ${colors.common.offWhite};
   font-size: 16px;
 `
 
-const SignUpPromptLink = styled.Text`
+const SignInPromptLink = styled.Text`
   color: ${colors.common.lightGray};
   font-size: 16px;
   font-weight: bold;
@@ -85,7 +85,7 @@ export {
   Input,
   SignInButton,
   SignInText,
-  SignUpPromptText,
-  SignUpPromptLink,
+  SignInPromptText,
+  SignInPromptLink,
   ErrorMessage,
 }

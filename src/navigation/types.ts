@@ -4,6 +4,7 @@ import { StackNavigationProp } from '@react-navigation/stack'
 export type RootStackParamList = {
   Home: undefined
   SignIn: undefined
+  SignUp: undefined
   AuthStack: undefined
   NoteDetails: {
     noteId?: number
