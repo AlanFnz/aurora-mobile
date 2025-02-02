@@ -1,8 +1,8 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 
-import { AppDispatch } from '@store/index'
-import { performSignOut } from '@store/auth.slice'
+import { AppDispatch } from '@store/store'
+import { performSignOut } from '@store/slices/auth.slice'
 import BackgroundLayers from '@components/background-layers'
 
 import { Container, SignOutButton, SignOutText, Title } from './styles'

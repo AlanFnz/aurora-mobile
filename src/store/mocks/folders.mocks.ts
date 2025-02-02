@@ -1,6 +1,6 @@
 import { Folder } from '@screens/home/components/folder/types'
 
-const foldersMockData: Folder[] = [
+export const foldersMockData: Folder[] = [
   {
     id: 1,
     folderName: 'Personal',
@@ -38,5 +38,3 @@ const foldersMockData: Folder[] = [
     ],
   },
 ]
-
-export default foldersMockData

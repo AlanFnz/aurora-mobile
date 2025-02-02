@@ -9,16 +9,16 @@ import {
   useNavigation,
 } from '@react-navigation/native'
 
-import foldersReducer from '@store/folders.slice'
+import foldersReducer from '@store/slices/folders.slice'
 import {
   useFetchNoteDetailsQuery,
   useUpdateNoteMutation,
-} from '@store/queries/notes'
+} from '@store/queries/notes.queries'
 import NoteDetails from '@screens/note-details'
 import { RootStackParamList } from '@navigation/types'
 import { DialogProvider } from '@context/dialog'
 
-jest.mock('@store/queries/notes', () => ({
+jest.mock('@store/queries/notes.queries', () => ({
   useFetchNoteDetailsQuery: jest.fn(),
   useUpdateNoteMutation: jest.fn(() => [jest.fn()]),
   useCreateNoteMutation: jest.fn(() => [jest.fn().mockResolvedValue({})]),

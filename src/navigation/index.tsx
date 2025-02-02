@@ -6,13 +6,13 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 
 // Store
 import { useSelector, useDispatch } from 'react-redux'
-import { AppDispatch, RootState } from '@store/index'
-import { bootstrapAsync } from '@store/auth.slice'
+import { AppDispatch, RootState } from '@store/store'
+import { bootstrapAsync } from '@store/slices/auth.slice'
 import { tabNavigatorStyles } from '@navigation/tab-navigator.styles'
 import { RootStackParamList } from './types'
 
 // Screens
-import Login from '@screens/login'
+import { SignIn } from '@screens/sign-in'
 import Home from '@screens/home'
 import Settings from '@screens/settings'
 import NoteDetails from '@screens/note-details'
@@ -75,7 +75,7 @@ export default function Navigation() {
         {userToken == null ? (
           <Stack.Screen
             name="SignIn"
-            component={Login}
+            component={SignIn}
             options={{ title: 'Sign in', headerShown: false }}
           />
         ) : (

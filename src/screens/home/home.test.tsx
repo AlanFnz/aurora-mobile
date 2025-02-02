@@ -5,7 +5,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { NavigationContainer } from '@react-navigation/native'
 import { fireEvent, render } from '@testing-library/react-native'
 
-import foldersReducer from '@store/folders.slice'
+import foldersReducer from '@store/slices/folders.slice'
 import foldersMockData from '@store/mocks/folders.mocks'
 import Home from '@screens/home'
 

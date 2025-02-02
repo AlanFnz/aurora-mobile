@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import styled from 'styled-components/native'
 
-import { RootState } from '@store/index'
+import { RootState } from '@store/store'
 
 import BackgroundLayers from '../../components/background-layers'
 import FolderList from './components/folder-list'

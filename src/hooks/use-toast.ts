@@ -5,6 +5,7 @@ type ToastOptions = {
   isSuccess: boolean
   message: string
   additionalOffset?: number
+  visibilityTime?: number
 }
 
 export const useToast = () => {
@@ -14,13 +15,14 @@ export const useToast = () => {
     isSuccess,
     message,
     additionalOffset = 0,
+    visibilityTime = 1750,
   }: ToastOptions) => {
     Toast.show({
       type: isSuccess ? 'success' : 'error',
       text1: message,
       position: 'bottom',
       bottomOffset: insets.bottom * 3 + additionalOffset,
-      visibilityTime: 1750,
+      visibilityTime,
     })
   }
 

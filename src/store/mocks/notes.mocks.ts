@@ -1,6 +1,6 @@
-import { Note } from '@store/queries/notes'
+import { Note } from '@store/queries/notes.queries'
 
-const notesMockData: Note[] = [
+export const notesMockData: Note[] = [
   {
     id: 1,
     title: 'Meeting Notes',
@@ -33,5 +33,3 @@ const notesMockData: Note[] = [
     modifiedDate: 1696636800000,
   },
 ]
-
-export default notesMockData

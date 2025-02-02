@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 
-import { RootState } from '@store/index'
+import { RootState } from '@store/store'
 import colors from '@theme/colors'
 
 import { Dialog, Emphasis } from './dialog'
