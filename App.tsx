@@ -5,7 +5,7 @@ import Toast from 'react-native-toast-message'
 
 import Navigation from '@navigation/index'
 import { DialogProvider } from '@context/dialog'
-import { store } from '@store/index'
+import { store } from '@store/.'
 import toastConfig from '@config/toast.config'
 import AppInitializer from '@root/app-initializer'
 
