@@ -1,6 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
+import { AppDispatch } from '@store/store'
+
 interface AuthState {
   isLoading: boolean
   isSignout: boolean
@@ -44,7 +46,54 @@ export const bootstrapAsync = () => async (dispatch: any) => {
   dispatch(restoreToken(userToken))
 }
 
+// TODO: use axios
+export const performSignUp =
+  (username: string, password: string) => async (dispatch: AppDispatch) => {
+    try {
+      const baseUrl = process.env.API_URL || 'http://localhost:8080'
+      const response = await fetch(`${baseUrl}/api/users/register`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+      })
+
+      const data = await response.json()
+      if (!response.ok) {
+        console.error('Signup error:', data)
+      } else {
+        console.log('Signup successful:', data)
+        dispatch(signIn(data.token))
+      }
+    } catch (error) {
+      console.error('Error during sign up:', error)
+    }
+  }
+
 export const performSignIn =
+  (username: string, password: string) => async (dispatch: any) => {
+    const baseUrl = process.env.API_URL || 'http://localhost:8080'
+    const response = await fetch(`${baseUrl}/api/users/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ username, password }),
+    })
+
+    const data = await response.json()
+    if (response.ok && data.token) {
+      await AsyncStorage.setItem('userToken', data.token)
+      dispatch(signIn(data.token))
+    } else {
+      console.error('Login error:', data.error || data)
+      throw new Error(data.error || 'Login failed')
+    }
+  }
+
+// TODO: remove
+export const performMockSignIn =
   (username: string, password: string) => async (dispatch: any) => {
     if (username === 'user' && password === 'password') {
       const userToken = 'dummy-auth-token'
