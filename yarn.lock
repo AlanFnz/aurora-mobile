@@ -3903,6 +3903,7 @@ __metadata:
     react: 18.3.1
     react-native: 0.75.3
     react-native-audio-recorder-player: ^3.6.12
+    react-native-dotenv: ^3.4.11
     react-native-gesture-handler: ^2.19.0
     react-native-paper: ^5.12.5
     react-native-permissions: ^5.2.1
@@ -4977,6 +4978,13 @@ __metadata:
     domelementtype: ^2.3.0
     domhandler: ^5.0.3
   checksum: e5757456ddd173caa411cfc02c2bb64133c65546d2c4081381a3bafc8a57411a41eed70494551aa58030be9e58574fcc489828bebd673863d39924fb4878f416
+  languageName: node
+  linkType: hard
+
+"dotenv@npm:^16.4.5":
+  version: 16.4.7
+  resolution: "dotenv@npm:16.4.7"
+  checksum: c27419b5875a44addcc56cc69b7dc5b0e6587826ca85d5b355da9303c6fc317fc9989f1f18366a16378c9fdd9532d14117a1abe6029cc719cdbbef6eaef2cea4
   languageName: node
   linkType: hard
 
@@ -9129,6 +9137,17 @@ __metadata:
     react: "*"
     react-native: "*"
   checksum: a0c74694fe54eacd8f705b38d77d8ee35ddb9e964243ac0a727483d001e7ad24178b5ed3edcb0b4ddccf87d65af3233a823d5dd73fc98099ddbe0602134586e7
+  languageName: node
+  linkType: hard
+
+"react-native-dotenv@npm:^3.4.11":
+  version: 3.4.11
+  resolution: "react-native-dotenv@npm:3.4.11"
+  dependencies:
+    dotenv: ^16.4.5
+  peerDependencies:
+    "@babel/runtime": ^7.20.6
+  checksum: 3ebac2c2ed79dd7e4920fd3fc2da9187413b7190231618e4858b46c47833677838b96d531afe7bd5c4b0a60454dba40cb8708722210df5d522e30aefbf41da05
   languageName: node
   linkType: hard
 

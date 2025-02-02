@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 import { AppDispatch } from '@store/store'
+import { API_URL } from '@env'
 
 interface AuthState {
   isLoading: boolean
@@ -50,8 +51,7 @@ export const bootstrapAsync = () => async (dispatch: any) => {
 export const performSignUp =
   (username: string, password: string) => async (dispatch: AppDispatch) => {
     try {
-      const baseUrl = process.env.API_URL || 'http://localhost:8080'
-      const response = await fetch(`${baseUrl}/api/users/register`, {
+      const response = await fetch(`${API_URL}/api/users/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -73,8 +73,7 @@ export const performSignUp =
 
 export const performSignIn =
   (username: string, password: string) => async (dispatch: any) => {
-    const baseUrl = process.env.API_URL || 'http://localhost:8080'
-    const response = await fetch(`${baseUrl}/api/users/login`, {
+    const response = await fetch(`${API_URL}/api/users/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
