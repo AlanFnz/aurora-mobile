@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native'
 import * as Yup from 'yup'
 
 import BackgroundLayers from '@components/background-layers'
-import { performSignIn } from '@store/slices/auth.slice'
+import { performSignIn } from '@store/slices'
 import { AppDispatch } from '@store/store'
 import { useToast } from '@hooks/use-toast'
 import { NoteDetailScreenNavigationProp } from '@navigation/types'
@@ -43,7 +43,12 @@ export const SignIn: React.FC = () => {
           validationSchema={validationSchema}
           onSubmit={async values => {
             try {
-              await dispatch(performSignIn(values.username, values.password))
+              await dispatch(
+                performSignIn({
+                  username: values.username,
+                  password: values.password,
+                }),
+              )
             } catch {
               showToast({
                 isSuccess: false,

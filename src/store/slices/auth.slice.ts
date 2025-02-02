@@ -49,30 +49,30 @@ export const bootstrapAsync = () => async (dispatch: any) => {
 
 // TODO: use axios
 export const performSignUp =
-  (username: string, password: string) => async (dispatch: AppDispatch) => {
-    try {
-      const response = await fetch(`${API_URL}/api/users/register`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, password }),
-      })
+  ({ username, password }: { username: string; password: string }) =>
+  async (dispatch: AppDispatch) => {
+    const response = await fetch(`${API_URL}/api/users/register`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ username, password }),
+    })
 
-      const data = await response.json()
-      if (!response.ok) {
-        console.error('Signup error:', data)
-      } else {
-        console.log('Signup successful:', data)
-        dispatch(signIn(data.token))
-      }
-    } catch (error) {
-      console.error('Error during sign up:', error)
+    const data = await response.json()
+
+    // TODO: refine error handling
+    if (!response.ok) {
+      console.error('Signup error:', data)
+    } else {
+      console.log('Signup successful:', data)
+      dispatch(signIn(data.token))
     }
   }
 
 export const performSignIn =
-  (username: string, password: string) => async (dispatch: any) => {
+  ({ username, password }: { username: string; password: string }) =>
+  async (dispatch: any) => {
     const response = await fetch(`${API_URL}/api/users/login`, {
       method: 'POST',
       headers: {
@@ -82,6 +82,8 @@ export const performSignIn =
     })
 
     const data = await response.json()
+
+    // TODO: refine error handling
     if (response.ok && data.token) {
       await AsyncStorage.setItem('userToken', data.token)
       dispatch(signIn(data.token))
