@@ -66,7 +66,7 @@ export const performSignUp =
       console.error('Signup error:', data)
     } else {
       console.log('Signup successful:', data)
-      dispatch(signIn(data.token))
+      performSignIn({ username, password })(dispatch)
     }
   }
 
