@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 
 import { AppDispatch } from '@store/store'
 import { performSignOut } from '@store/slices/auth.slice'
-import BackgroundLayers from '@components/background-layers'
+import { BackgroundLayers } from '@components/background-layers'
 
 import { Container, SignOutButton, SignOutText, Title } from './styles'
 

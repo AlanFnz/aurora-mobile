@@ -1,7 +1,7 @@
 import React from 'react'
 import { Modal } from 'react-native'
 
-import NoiseLayer from '@components/noise-layer'
+import { NoiseLayer } from '@components/noise-layer'
 
 import {
   BodyContainer,

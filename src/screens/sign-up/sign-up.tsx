@@ -6,7 +6,7 @@ import { NoteDetailScreenNavigationProp } from '@navigation/types'
 import { useNavigation } from '@react-navigation/native'
 import * as Yup from 'yup'
 
-import BackgroundLayers from '@components/background-layers'
+import { BackgroundLayers } from '@components/background-layers'
 import { performSignUp } from '@store/slices'
 import { AppDispatch } from '@store/store'
 

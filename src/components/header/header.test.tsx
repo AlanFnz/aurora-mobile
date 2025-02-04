@@ -3,7 +3,7 @@ import { useNavigation } from '@react-navigation/native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { render, fireEvent } from '@testing-library/react-native'
 
-import Header from '@components/header'
+import { Header } from '@components/header'
 
 jest.mock('@react-navigation/native', () => ({
   useNavigation: jest.fn(),

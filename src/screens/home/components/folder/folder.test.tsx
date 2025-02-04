@@ -5,15 +5,11 @@ import Folder from '@screens/home/components/folder'
 import { FolderProps } from '@screens/home/components/folder/types'
 
 jest.mock('react-native-vector-icons/FontAwesome', () => 'Icon')
-jest.mock(
-  '@screens/home/components/folder/components/gradient-background',
-  () => 'GradientBackground',
-)
+
 jest.mock(
   '@screens/home/components/folder/components/note-item',
   () => 'NoteItem',
 )
-jest.mock('@components/divider', () => 'Divider')
 
 const folderData: FolderProps = {
   folder: {

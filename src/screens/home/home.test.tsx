@@ -6,10 +6,9 @@ import { NavigationContainer } from '@react-navigation/native'
 import { fireEvent, render } from '@testing-library/react-native'
 
 import foldersReducer from '@store/slices/folders.slice'
-import foldersMockData from '@store/mocks/folders.mocks'
+import { foldersMockData } from '@store/mocks/folders.mocks'
 import Home from '@screens/home'
 
-jest.mock('@screens/home/components/folder-list', () => 'FolderList')
 jest.mock(
   '@screens/home/components/notes-results-list',
   () => 'NotesResultsList',
@@ -18,7 +17,6 @@ jest.mock(
   '@screens/home/components/create-note-button',
   () => 'CreateNoteButton',
 )
-jest.mock('@components/background-layers', () => 'BackgroundLayers')
 
 jest.mock('react-native-safe-area-context', () => ({
   useSafeAreaInsets: jest.fn(),

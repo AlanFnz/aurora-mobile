@@ -12,7 +12,7 @@ interface DividerProps {
   testID?: string
 }
 
-const Divider: React.FC<DividerProps> = ({
+export const Divider: React.FC<DividerProps> = ({
   color = colors.common.lightGray,
   opacity = 1,
   height = 1,
@@ -39,5 +39,3 @@ const DividerLine = styled.View<DividerProps>`
   margin: ${({ marginVertical }) => marginVertical}px
     ${({ marginHorizontal }) => marginHorizontal}px;
 `
-
-export default Divider

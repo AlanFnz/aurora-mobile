@@ -7,7 +7,7 @@ interface NoiseLayerProps {
   customStyle?: StyleProp<ImageStyle>
 }
 
-const NoiseLayer: React.FC<NoiseLayerProps> = ({
+export const NoiseLayer: React.FC<NoiseLayerProps> = ({
   opacity = 0.1,
   customStyle,
 }) => (
@@ -25,5 +25,3 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
 })
-
-export default NoiseLayer

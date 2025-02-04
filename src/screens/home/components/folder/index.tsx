@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { FlatList } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
-import Divider from '@components/divider'
+import { Divider } from '@components/divider'
 import colors from '@theme/colors'
 
 import {

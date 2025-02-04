@@ -5,7 +5,7 @@ import styled from 'styled-components/native'
 
 import { RootState } from '@store/store'
 
-import BackgroundLayers from '../../components/background-layers'
+import { BackgroundLayers } from '../../components/background-layers'
 import FolderList from './components/folder-list'
 import SearchBox from './components/search-box'
 import NotesResultsList from './components/notes-results-list'

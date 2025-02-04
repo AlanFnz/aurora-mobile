@@ -10,9 +10,9 @@ import {
   HeaderContainer,
   HeaderTitle,
   TitleContainer,
-} from './styles'
+} from './header.styled'
 
-const Header: React.FC<{
+export const Header: React.FC<{
   title?: string
   showBackButton?: boolean
   rightColumnContent?: any
@@ -42,5 +42,3 @@ const Header: React.FC<{
     </HeaderContainer>
   )
 }
-
-export default Header

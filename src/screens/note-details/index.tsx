@@ -3,8 +3,8 @@ import { StackScreenProps } from '@react-navigation/stack'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { RootStackParamList } from '@navigation/types'
-import BackgroundLayers from '@components/background-layers'
-import Header from '@components/header'
+import { BackgroundLayers } from '@components/background-layers'
+import { Header } from '@components/header'
 
 import HeaderButton from './components/header-button'
 import { useNoteDetailsScreen } from './hooks/use-note-details-screen'

@@ -5,13 +5,13 @@ import { Defs, LinearGradient, Rect, Stop, Svg } from 'react-native-svg'
 
 import colors from '@theme/colors'
 
-import NoiseLayer from '../noise-layer'
+import { NoiseLayer } from '../noise-layer'
 
 interface BackgroundLayersProps {
   testID?: string
 }
 
-const BackgroundLayers: React.FC<BackgroundLayersProps> = ({
+export const BackgroundLayers: React.FC<BackgroundLayersProps> = ({
   testID = 'background-layers',
 }) => {
   return (
@@ -52,5 +52,3 @@ const styles = StyleSheet.create({
     opacity: 0.5,
   },
 })
-
-export default BackgroundLayers
