@@ -59,4 +59,3 @@ jest.mock('react-native-gesture-handler', () => {
   }
 })
 
-jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper')
