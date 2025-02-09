@@ -14,9 +14,9 @@ import { RootStackParamList } from './types'
 // Screens
 import { SignIn } from '@screens/sign-in'
 import { SignUp } from '@screens/sign-up'
-import Home from '@screens/home'
-import Settings from '@screens/settings'
-import NoteDetails from '@screens/note-details'
+import { Home } from '@screens/home'
+import { Settings } from '@screens/settings'
+import { NoteDetails } from '@screens/note-details'
 
 const Stack = createStackNavigator<RootStackParamList>()
 const Tab = createBottomTabNavigator()
@@ -58,7 +58,7 @@ function HomeTabs() {
   )
 }
 
-export default function Navigation() {
+export function Navigation() {
   const dispatch = useDispatch<AppDispatch>()
   const { isLoading, userToken } = useSelector((state: RootState) => state.auth)
 

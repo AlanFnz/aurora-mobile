@@ -4,14 +4,14 @@ import styled from 'styled-components/native'
 import { useNavigation } from '@react-navigation/native'
 import { NoteDetailScreenNavigationProp } from '@navigation/types'
 
-import { NoteListItem } from '../folder/types'
+import { NoteListItem } from '../folder/folder.types'
 
 interface NotesResultsListProps {
   notes: NoteListItem[]
   testID: string
 }
 
-const NotesResultsList: React.FC<NotesResultsListProps> = ({
+export const NotesResultsList: React.FC<NotesResultsListProps> = ({
   notes,
   testID,
 }) => {
@@ -51,5 +51,3 @@ const NoteText = styled.Text`
   font-size: 16px;
   color: #f6f6f6;
 `
-
-export default NotesResultsList

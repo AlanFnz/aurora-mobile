@@ -3,7 +3,7 @@ import { Provider as ReduxProvider } from 'react-redux'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import Toast from 'react-native-toast-message'
 
-import Navigation from '@navigation/index'
+import { Navigation } from '@navigation/index'
 import { DialogProvider } from '@context/dialog'
 import { store } from '@store/.'
 import toastConfig from '@config/toast.config'

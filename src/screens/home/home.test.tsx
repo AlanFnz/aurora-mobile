@@ -1,32 +1,15 @@
+import { fireEvent } from '@testing-library/react-native'
 import React from 'react'
-import { Provider } from 'react-redux'
-import { configureStore } from '@reduxjs/toolkit'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
-import { NavigationContainer } from '@react-navigation/native'
-import { fireEvent, render } from '@testing-library/react-native'
 
-import foldersReducer from '@store/slices/folders.slice'
-import { foldersMockData } from '@store/mocks/folders.mocks'
-import Home from '@screens/home'
-
-jest.mock(
-  '@screens/home/components/notes-results-list',
-  () => 'NotesResultsList',
-)
-jest.mock(
-  '@screens/home/components/create-note-button',
-  () => 'CreateNoteButton',
-)
+import { renderWithProviders } from '@root/src/test-utils'
+import { Home } from './home'
 
 jest.mock('react-native-safe-area-context', () => ({
   useSafeAreaInsets: jest.fn(),
 }))
 
 describe('Home', () => {
-  const initialState = {
-    folders: foldersMockData,
-  }
-
   beforeEach(() => {
     ;(useSafeAreaInsets as jest.Mock).mockReturnValue({
       top: 20,
@@ -39,24 +22,6 @@ describe('Home', () => {
   afterEach(() => {
     jest.clearAllMocks()
   })
-
-  const createTestStore = (preloadedState = initialState) =>
-    configureStore({
-      reducer: {
-        folders: foldersReducer,
-      },
-      preloadedState,
-    })
-
-  const renderWithProviders = (component: React.ReactNode) => {
-    const store = createTestStore(initialState)
-
-    return render(
-      <Provider store={store}>
-        <NavigationContainer>{component}</NavigationContainer>
-      </Provider>,
-    )
-  }
 
   it('renders the background layers', () => {
     const { getByTestId } = renderWithProviders(<Home />)

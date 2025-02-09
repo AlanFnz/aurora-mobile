@@ -1,4 +1,4 @@
-import { Folder } from '@screens/home/components/folder/types'
+import { Folder } from '@screens/home/components/folder/folder.types'
 
 export const foldersMockData: Folder[] = [
   {

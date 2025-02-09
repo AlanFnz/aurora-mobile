@@ -6,12 +6,12 @@ import styled from 'styled-components/native'
 import { RootState } from '@store/store'
 
 import { BackgroundLayers } from '../../components/background-layers'
-import FolderList from './components/folder-list'
-import SearchBox from './components/search-box'
-import NotesResultsList from './components/notes-results-list'
-import CreateNoteButton from './components/create-note-button'
+import { FolderList } from './components/folder-list'
+import { SearchBox } from './components/search-box'
+import { NotesResultsList } from './components/notes-results-list'
+import { CreateNoteButton } from './components/create-note-button'
 
-const Home: React.FC = () => {
+export const Home: React.FC = () => {
   const insets = useSafeAreaInsets()
   const folders = useSelector((state: RootState) => state.folders)
   const [searchQuery, setSearchQuery] = useState('')
@@ -46,5 +46,3 @@ const Container = styled.View<{
   padding-left: ${props => props.insets.left}px;
   padding-right: ${props => props.insets.right - 2}px;
 `
-
-export default Home

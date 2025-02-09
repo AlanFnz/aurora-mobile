@@ -4,13 +4,19 @@ import { ActivityIndicator, TouchableWithoutFeedback } from 'react-native'
 import colors from '@theme/colors'
 
 import { useCreateNoteButton } from './hooks/use-create-note-button'
-import { AnimatedButtonContainer, FullCircleIcon, PlusIcon } from './styles'
+import {
+  AnimatedButtonContainer,
+  FullCircleIcon,
+  PlusIcon,
+} from './create-note-button.styled'
 
 interface CreateNoteButtonProps {
   testID?: string
 }
 
-const CreateNoteButton: React.FC<CreateNoteButtonProps> = ({ testID }) => {
+export const CreateNoteButton: React.FC<CreateNoteButtonProps> = ({
+  testID,
+}) => {
   const {
     isLongPressed,
     isUploading,
@@ -45,5 +51,3 @@ const CreateNoteButton: React.FC<CreateNoteButtonProps> = ({ testID }) => {
     </TouchableWithoutFeedback>
   )
 }
-
-export default CreateNoteButton

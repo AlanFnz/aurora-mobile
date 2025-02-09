@@ -2,15 +2,15 @@ import React from 'react'
 import { FlatList } from 'react-native'
 import styled from 'styled-components/native'
 
-import Folder from '../folder'
-import { Folder as FolderTypes } from '../folder/types'
+import { Folder } from '../folder'
+import { Folder as FolderTypes } from '../folder/folder.types'
 
 interface FolderListProps {
   folders: FolderTypes[]
   testID?: string
 }
 
-const FolderList: React.FC<FolderListProps> = ({ folders, testID }) => {
+export const FolderList: React.FC<FolderListProps> = ({ folders, testID }) => {
   return (
     <FolderListContainer testID={testID}>
       <FlatList
@@ -27,5 +27,3 @@ const FolderListContainer = styled.View`
   flex: 1;
   width: 100%;
 `
-
-export default FolderList

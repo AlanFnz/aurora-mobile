@@ -9,7 +9,7 @@ interface SearchBoxProps {
   setSearchQuery: (query: string) => void
 }
 
-const SearchBox: React.FC<SearchBoxProps> = ({
+export const SearchBox: React.FC<SearchBoxProps> = ({
   searchQuery,
   setSearchQuery,
 }) => {
@@ -65,5 +65,3 @@ const ClearButton = styled.TouchableOpacity`
   padding: 10px;
   margin-right: 10px;
 `
-
-export default SearchBox

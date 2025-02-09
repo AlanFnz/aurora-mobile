@@ -15,14 +15,14 @@ import {
   StyledText,
   TextArea,
   TitleContainer,
-} from './styles'
+} from './note-details.styled'
 
 type NoteDetailsScreenProps = StackScreenProps<
   RootStackParamList,
   'NoteDetails'
 >
 
-const NoteDetails: React.FC<NoteDetailsScreenProps> = ({ route }) => {
+export const NoteDetails: React.FC<NoteDetailsScreenProps> = ({ route }) => {
   const { noteId = 0, isNew } = route.params
   const insets = useSafeAreaInsets()
 
@@ -76,5 +76,3 @@ const NoteDetails: React.FC<NoteDetailsScreenProps> = ({ route }) => {
     </>
   )
 }
-
-export default NoteDetails

@@ -7,7 +7,7 @@ import { NoteDetailScreenNavigationProp } from '@navigation/types'
 import { Divider } from '@components/divider'
 import colors from '@theme/colors'
 
-import { NoteListItem } from '../types'
+import { NoteListItem } from '../folder.types'
 
 interface NoteProps {
   index: number

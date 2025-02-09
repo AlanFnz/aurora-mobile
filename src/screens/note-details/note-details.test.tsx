@@ -1,24 +1,25 @@
 import React from 'react'
-import { Provider } from 'react-redux'
-import { configureStore } from '@reduxjs/toolkit'
-import { render, fireEvent, waitFor } from '@testing-library/react-native'
+import { RouteProp, useNavigation } from '@react-navigation/native'
+import { fireEvent, waitFor } from '@testing-library/react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
-import {
-  NavigationContainer,
-  RouteProp,
-  useNavigation,
-} from '@react-navigation/native'
 
-import foldersReducer from '@store/slices/folders.slice'
+import { RootStackParamList } from '@navigation/types'
 import {
   useFetchNoteDetailsQuery,
   useUpdateNoteMutation,
 } from '@store/queries/notes.queries'
-import NoteDetails from '@screens/note-details'
-import { RootStackParamList } from '@navigation/types'
-import { DialogProvider } from '@context/dialog'
+import { renderWithProviders } from '@root/src/test-utils'
+
+import { NoteDetails } from './note-details'
+import { Action, Middleware } from '@reduxjs/toolkit'
 
 jest.mock('@store/queries/notes.queries', () => ({
+  noteApi: {
+    reducerPath: 'noteApi',
+    reducer: (state = {}) => state,
+    middleware: (() => (next: (action: Action) => void) => (action: Action) =>
+      next(action)) as Middleware,
+  },
   useFetchNoteDetailsQuery: jest.fn(),
   useUpdateNoteMutation: jest.fn(() => [jest.fn()]),
   useCreateNoteMutation: jest.fn(() => [jest.fn().mockResolvedValue({})]),
@@ -36,15 +37,6 @@ jest.mock('@react-navigation/native', () => {
     useNavigation: jest.fn(),
   }
 })
-
-const createTestStore = (preloadedState = {}) => {
-  return configureStore({
-    reducer: {
-      folders: foldersReducer,
-    },
-    preloadedState,
-  })
-}
 
 const mockNavigate = jest.fn()
 const mockNavigation = { navigate: mockNavigate }
@@ -72,26 +64,6 @@ describe('NoteDetails', () => {
   afterEach(() => {
     jest.restoreAllMocks()
   })
-
-  const renderWithProviders = (component: React.ReactNode) => {
-    const store = createTestStore({
-      folders: [
-        {
-          id: 1,
-          folderName: 'Test Folder',
-          notes: [],
-        },
-      ],
-    })
-
-    return render(
-      <Provider store={store}>
-        <DialogProvider>
-          <NavigationContainer>{component}</NavigationContainer>
-        </DialogProvider>
-      </Provider>,
-    )
-  }
 
   it('renders loading state initially', () => {
     ;(useFetchNoteDetailsQuery as jest.Mock).mockReturnValue({

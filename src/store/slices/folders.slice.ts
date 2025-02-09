@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import { NoteListItem } from '@screens/home/components/folder/types'
+import { NoteListItem } from '@screens/home/components/folder/folder.types'
 
 export interface Folder {
   id: number

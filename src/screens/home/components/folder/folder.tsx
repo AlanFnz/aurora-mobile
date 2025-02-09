@@ -10,12 +10,12 @@ import {
   FolderHeader,
   FolderTitle,
   MainContainer,
-} from './styles'
+} from './folder.styled'
 import GradientBackground from './components/gradient-background'
 import NoteItem from './components/note-item'
-import { FolderProps } from './types'
+import { FolderProps } from './folder.types'
 
-const Folder: React.FC<FolderProps> = ({ folder }) => {
+export const Folder: React.FC<FolderProps> = ({ folder }) => {
   const [expanded, setExpanded] = useState(false)
 
   return (
@@ -63,5 +63,3 @@ const Folder: React.FC<FolderProps> = ({ folder }) => {
     </>
   )
 }
-
-export default Folder
