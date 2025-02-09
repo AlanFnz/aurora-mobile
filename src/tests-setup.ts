@@ -58,4 +58,3 @@ jest.mock('react-native-gesture-handler', () => {
     DrawerLayout: jest.fn(() => null),
   }
 })
-
