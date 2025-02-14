@@ -89,7 +89,6 @@ export const performSignIn =
       dispatch(signIn(data.token))
     } else {
       console.error('Login error:', data.error || data)
-      throw new Error(data.error || 'Login failed')
     }
   }
 
