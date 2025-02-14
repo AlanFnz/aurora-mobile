@@ -3,6 +3,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
+      "react": ["./node_modules/@types/react"],
       "@assets/*": ["src/assets/*"],
       "@components/*": ["src/components/*"],
       "@screens/*": ["src/screens/*"],
