@@ -92,16 +92,6 @@ export const performSignIn =
     }
   }
 
-// TODO: remove
-export const performMockSignIn =
-  (username: string, password: string) => async (dispatch: any) => {
-    if (username === 'user' && password === 'password') {
-      const userToken = 'dummy-auth-token'
-      await AsyncStorage.setItem('userToken', userToken)
-      dispatch(signIn(userToken))
-    }
-  }
-
 export const performSignOut = () => async (dispatch: any) => {
   await AsyncStorage.removeItem('userToken')
   dispatch(signOut())
