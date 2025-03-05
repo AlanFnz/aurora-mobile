@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 import { AppDispatch } from '@store/store'
-import { API_URL } from '@env'
+import { axiosInstance, handleApiError } from '@api/api'
 
 interface AuthState {
   isLoading: boolean
@@ -47,48 +47,31 @@ export const bootstrapAsync = () => async (dispatch: any) => {
   dispatch(restoreToken(userToken))
 }
 
-// TODO: use axios
 export const performSignUp =
   ({ username, password }: { username: string; password: string }) =>
   async (dispatch: AppDispatch) => {
-    const response = await fetch(`${API_URL}/api/users/register`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ username, password }),
-    })
-
-    const data = await response.json()
-
-    // TODO: refine error handling
-    if (!response.ok) {
-      console.error('Signup error:', data)
-    } else {
-      console.log('Signup successful:', data)
-      performSignIn({ username, password })(dispatch)
+    try {
+      await axiosInstance.post('/register', { username, password })
+      dispatch(performSignIn({ username, password }))
+    } catch (error) {
+      handleApiError(error)
     }
   }
 
 export const performSignIn =
   ({ username, password }: { username: string; password: string }) =>
-  async (dispatch: any) => {
-    const response = await fetch(`${API_URL}/api/users/login`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ username, password }),
-    })
-
-    const data = await response.json()
-
-    // TODO: refine error handling
-    if (response.ok && data.token) {
-      await AsyncStorage.setItem('userToken', data.token)
-      dispatch(signIn(data.token))
-    } else {
-      console.error('Login error:', data.error || data)
+  async (dispatch: AppDispatch) => {
+    try {
+      const { data } = await axiosInstance.post('/login', {
+        username,
+        password,
+      })
+      if (data.token) {
+        await AsyncStorage.setItem('userToken', data.token)
+        dispatch(signIn(data.token))
+      }
+    } catch (error) {
+      handleApiError(error)
     }
   }
 
