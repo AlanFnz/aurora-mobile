@@ -7,13 +7,13 @@ import { RootStackParamList } from '@navigation/types'
 import {
   useFetchNoteDetailsQuery,
   useUpdateNoteMutation,
-} from '@store/queries/notes.queries'
+} from '@store/queries/note'
 import { renderWithProviders } from '@root/src/test-utils'
 
 import { NoteDetails } from './note-details'
 import { Action, Middleware } from '@reduxjs/toolkit'
 
-jest.mock('@store/queries/notes.queries', () => ({
+jest.mock('@store/queries/note', () => ({
   noteApi: {
     reducerPath: 'noteApi',
     reducer: (state = {}) => state,

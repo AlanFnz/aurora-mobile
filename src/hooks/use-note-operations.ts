@@ -4,14 +4,14 @@ import {
   useCreateNoteMutation,
   useDeleteNoteMutation,
   useUpdateNoteMutation,
-} from '@store/queries/notes.queries'
+} from '@store/queries/note'
 import { RootState } from '@store/store'
 import {
   addFolder,
   addNoteToFolder,
   setFolders,
-} from '@store/slices/folders.slice'
-import { useCreateFolderMutation } from '@store/queries/folders.queries'
+} from '@store/slices/folder'
+import { useCreateFolderMutation } from '@store/queries/folder'
 
 export const useNoteOperations = () => {
   const dispatch = useDispatch()

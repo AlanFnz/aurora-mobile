@@ -1,2 +1,2 @@
-export * from './auth.slice'
-export * from './folders.slice'
+export * from './auth'
+export * from './folder'

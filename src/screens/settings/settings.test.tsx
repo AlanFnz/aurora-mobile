@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { render, fireEvent } from '@testing-library/react-native'
 
-import { performSignOut } from '@store/slices/auth.slice'
+import { performSignOut } from '@store/slices/auth'
 
 import { Settings } from './settings'
 
@@ -10,7 +10,7 @@ jest.mock('react-redux', () => ({
   useDispatch: jest.fn(),
 }))
 
-jest.mock('@store/slices/auth.slice', () => ({
+jest.mock('@store/slices/auth', () => ({
   performSignOut: jest.fn(),
 }))
 

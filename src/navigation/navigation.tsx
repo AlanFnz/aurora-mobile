@@ -7,7 +7,7 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 // Store
 import { useSelector, useDispatch } from 'react-redux'
 import { AppDispatch, RootState } from '@store/store'
-import { bootstrapAsync } from '@store/slices/auth.slice'
+import { bootstrapAsync } from '@store/slices/auth'
 import { tabNavigatorStyles } from '@navigation/tab-navigator.styles'
 import { RootStackParamList } from './types'
 

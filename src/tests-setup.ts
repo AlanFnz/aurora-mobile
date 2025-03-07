@@ -6,7 +6,7 @@ import { Action, Middleware } from '@reduxjs/toolkit'
  *
  * TODO: use network interceptors and deprecate this
  */
-jest.mock('@store/queries/notes.queries', () => ({
+jest.mock('@store/queries/note', () => ({
   noteApi: {
     reducerPath: 'noteApi',
     reducer: (state = {}) => state,
@@ -22,7 +22,7 @@ jest.mock('@store/queries/notes.queries', () => ({
   useDeleteNoteMutation: () => [jest.fn().mockResolvedValue({})],
 }))
 
-jest.mock('@store/queries/folders.queries', () => ({
+jest.mock('@store/queries/folder', () => ({
   foldersApi: {
     reducerPath: 'foldersApi',
     reducer: (state = {}) => state,

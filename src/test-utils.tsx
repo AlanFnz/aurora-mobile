@@ -7,10 +7,10 @@ import { configureStore } from '@reduxjs/toolkit'
 import { DialogProvider } from '@context/dialog'
 
 import { foldersMockData } from '@store/mocks'
-import { foldersApi } from '@store/queries/folders.queries'
-import { noteApi } from '@store/queries/notes.queries'
-import authReducer from '@store/slices/auth.slice'
-import foldersReducer from '@store/slices/folders.slice'
+import { foldersApi } from '@store/queries/folder'
+import { noteApi } from '@store/queries/note'
+import authReducer from '@store/slices/auth'
+import foldersReducer from '@store/slices/folder'
 
 const rootReducer = {
   auth: authReducer,

@@ -1,4 +1,4 @@
-import { Note } from '@store/queries/notes.queries'
+import { Note } from '@store/queries/note'
 
 export const notesMockData: Note[] = [
   {

@@ -3,14 +3,14 @@ import { render, fireEvent, waitFor } from '@testing-library/react-native'
 import { useDispatch } from 'react-redux'
 import { useNavigation } from '@react-navigation/native'
 
-import { performSignUp } from '@store/slices/auth.slice'
+import { performSignUp } from '@store/slices/auth'
 import { SignUp } from './sign-up'
 
 jest.mock('react-redux', () => ({
   useDispatch: jest.fn(),
 }))
 
-jest.mock('@store/slices/auth.slice', () => ({
+jest.mock('@store/slices/auth', () => ({
   performSignUp: jest.fn(),
 }))
 
