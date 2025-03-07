@@ -51,7 +51,7 @@ export const performSignUp =
   ({ username, password }: { username: string; password: string }) =>
   async (dispatch: AppDispatch) => {
     try {
-      await axiosInstance.post('/register', { username, password })
+      await axiosInstance.post('users/register', { username, password })
       dispatch(performSignIn({ username, password }))
     } catch (error) {
       handleApiError(error)
@@ -62,7 +62,7 @@ export const performSignIn =
   ({ username, password }: { username: string; password: string }) =>
   async (dispatch: AppDispatch) => {
     try {
-      const { data } = await axiosInstance.post('/login', {
+      const { data } = await axiosInstance.post('users/login', {
         username,
         password,
       })
