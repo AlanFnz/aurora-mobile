@@ -15,6 +15,7 @@ module.exports = {
           '@context': './src/context',
           '@navigation': './src/navigation',
           '@store': './src/store',
+          '@services': './src/services',
           '@api': './src/api',
           '@config': './src/config',
           '@root': './',
