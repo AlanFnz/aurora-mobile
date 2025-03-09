@@ -18,8 +18,8 @@ axiosInstance.interceptors.request.use(async config => {
 export const handleApiError = (error: any) => {
   if (axios.isAxiosError(error) && error.response) {
     console.error('API error:', error.response.data)
-    return error.response.data
+    throw new Error(error.response.data?.error || 'API request failed')
   }
   console.error('Unexpected error:', error)
-  return { error: 'Unexpected error occurred' }
+  throw new Error('Unexpected error occurred')
 }
