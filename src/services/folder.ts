@@ -1,4 +1,11 @@
+import { NoteListItem } from '@screens/home/components/folder/folder.types'
 import { axiosInstance, handleApiError } from '../api'
+
+export interface Folder {
+  id: number
+  folderName: string
+  notes: NoteListItem[]
+}
 
 export const fetchFolders = async () => {
   try {

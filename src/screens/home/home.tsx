@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useState } from 'react'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import styled from 'styled-components/native'
 
-import { AppDispatch, RootState } from '@store/store'
-import { fetchFolders } from '@services/folder'
-import { setFolders } from '@store/slices'
+import { Folder } from '@services/folder'
+import { Note } from '@services/note'
+import { useFetchFolders } from '@hooks/use-folders'
 import { useToast } from '@hooks/use-toast'
 
 import { BackgroundLayers } from '../../components/background-layers'
@@ -16,43 +15,34 @@ import { CreateNoteButton } from './components/create-note-button'
 
 export const Home: React.FC = () => {
   const insets = useSafeAreaInsets()
-  const dispatch = useDispatch<AppDispatch>()
-  const folders = useSelector((state: RootState) => state.folders) || []
-  const [searchQuery, setSearchQuery] = useState('')
   const { showToast } = useToast()
+  const [searchQuery, setSearchQuery] = useState('')
 
-  const allNotes = folders.flatMap(folder => folder.notes)
-  const filteredNotes = allNotes.filter(note =>
+  const { data: folders = [], isLoading, isError } = useFetchFolders()
+
+  if (isError) {
+    showToast({
+      isSuccess: false,
+      message: 'Failed to load folders.',
+      additionalOffset: 70,
+    })
+  }
+
+  const allNotes = folders.flatMap((folder: Folder) => folder.notes)
+  const filteredNotes = allNotes.filter((note: Note) =>
     note.title.toLowerCase().includes(searchQuery.toLowerCase()),
   )
-
-  // TODO: Replace with react query
-  useEffect(() => {
-    const loadFolders = async () => {
-      try {
-        const folders = await fetchFolders()
-        dispatch(setFolders(folders))
-      } catch (error) {
-        console.error('Failed to load folders:', error)
-        dispatch(setFolders([]))
-        showToast({
-          isSuccess: false,
-          message: 'Failed to load folders.',
-          additionalOffset: 70,
-        })
-      }
-    }
-
-    loadFolders()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
 
   return (
     <>
       <BackgroundLayers testID={'background-layers'} />
       <Container testID={'container'} insets={insets}>
         <SearchBox searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-        {searchQuery ? (
+        {isLoading ? (
+          <LoadingTextContainer>
+            <LoadingText>Loading...</LoadingText>
+          </LoadingTextContainer>
+        ) : searchQuery ? (
           <NotesResultsList testID={'notes-results'} notes={filteredNotes} />
         ) : (
           <FolderList testID={'folder-list'} folders={folders} />
@@ -78,4 +68,17 @@ const Container = styled.View<ContainerProps>`
   padding-top: ${(props: ContainerProps) => props.insets.top}px;
   padding-left: ${(props: ContainerProps) => props.insets.left}px;
   padding-right: ${(props: ContainerProps) => props.insets.right - 2}px;
+`
+
+const LoadingTextContainer = styled.View`
+  flex: 1;
+  padding: 10px;
+  width: 100%;
+`
+
+const LoadingText = styled.Text`
+  text-align: center;
+  font-size: 18px;
+  margin-top: 20px;
+  color: white;
 `

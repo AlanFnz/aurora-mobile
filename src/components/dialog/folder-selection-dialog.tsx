@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
 
-import { RootState } from '@store/store'
+import { Folder } from '@services/folder'
+import { useFetchFolders } from '@hooks/use-folders'
 import colors from '@theme/colors'
 
 import { Dialog, Emphasis } from './dialog'
@@ -43,7 +43,7 @@ export const FolderSelectionDialog: React.FC<FolderSelectionDialogProps> = ({
 }) => {
   const [validationError, setValidationError] = useState(false)
   const [isCreatingNewFolder, setIsCreatingNewFolder] = useState(false)
-  const folders = useSelector((state: RootState) => state.folders)
+  const { data: folders = [], isLoading, isError } = useFetchFolders()
 
   const handleConfirm = () => {
     if (
@@ -93,19 +93,25 @@ export const FolderSelectionDialog: React.FC<FolderSelectionDialogProps> = ({
       )}
       <Dropdown>
         <ListContainer>
-          {folders.map((folder, index) => (
-            <>
-              <DropdownItem
-                key={folder.id}
-                isSelected={selectedFolderId === folder.id}
-                onPress={() => handleSelectFolder(folder.id)}>
-                <DropdownText isSelected={selectedFolderId === folder.id}>
-                  {folder.folderName}
-                </DropdownText>
-              </DropdownItem>
-              {index !== folders.length - 1 && <Divider />}
-            </>
-          ))}
+          {isLoading ? (
+            <DropdownText>Loading folders...</DropdownText>
+          ) : isError ? (
+            <DropdownText>Error loading folders</DropdownText>
+          ) : (
+            folders.map((folder: Folder, index: number) => (
+              <>
+                <DropdownItem
+                  key={folder.id}
+                  isSelected={selectedFolderId === folder.id}
+                  onPress={() => handleSelectFolder(folder.id)}>
+                  <DropdownText isSelected={selectedFolderId === folder.id}>
+                    {folder.folderName}
+                  </DropdownText>
+                </DropdownItem>
+                {index !== folders.length - 1 && <Divider />}
+              </>
+            ))
+          )}
           {isCreatingNewFolder && (
             <DropdownItem>
               <TitleInput

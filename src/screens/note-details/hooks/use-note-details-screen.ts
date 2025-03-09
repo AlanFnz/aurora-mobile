@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react'
 import { NavigationProp, useNavigation } from '@react-navigation/native'
+import { useEffect, useState } from 'react'
 
 import { DialogType, useDialog } from '@context/dialog'
-import { useFetchNoteDetailsQuery } from '@store/queries/note'
-import { RootStackParamList } from '@navigation/types'
 import { useNoteOperations } from '@hooks/use-note-operations'
+import { useFetchNote } from '@hooks/use-notes'
 import { useToast } from '@hooks/use-toast'
+import { RootStackParamList } from '@navigation/types'
 import { formatTimestampToDateTime } from '@utils/time'
 
 export const useNoteDetailsScreen = ({
@@ -19,9 +19,7 @@ export const useNoteDetailsScreen = ({
   const { showToast } = useToast()
   const { createNewNote, updateNote, deleteNote } = useNoteOperations()
   const { showDialog } = useDialog()
-  const { data: note, isLoading } = useFetchNoteDetailsQuery(noteId, {
-    skip: isNew,
-  })
+  const { data: note, isLoading } = useFetchNote(noteId, isNew)
 
   const [title, setTitle] = useState('')
   const [modifiedDate, setModifiedDate] = useState('')

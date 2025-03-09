@@ -1,23 +1,15 @@
-import { useDispatch, useSelector } from 'react-redux'
+import { useQueryClient } from '@tanstack/react-query'
+import { useCreateNote, useDeleteNote, useUpdateNote } from '@hooks/use-notes'
 
-import {
-  useCreateNoteMutation,
-  useDeleteNoteMutation,
-  useUpdateNoteMutation,
-} from '@store/queries/note'
-import { RootState } from '@store/store'
-import { addFolder, addNoteToFolder, setFolders } from '@store/slices/folder'
-import { useCreateFolderMutation } from '@store/queries/folder'
+import { useCreateFolder } from './use-folders'
 
 export const useNoteOperations = () => {
-  const dispatch = useDispatch()
-  const folders = useSelector((state: RootState) => state.folders)
+  const queryClient = useQueryClient()
 
-  const [createNote] = useCreateNoteMutation()
-  const [updateNoteMutation] = useUpdateNoteMutation()
-  const [deleteNoteMutation] = useDeleteNoteMutation()
-
-  const [createFolder] = useCreateFolderMutation()
+  const { mutateAsync: createNote } = useCreateNote()
+  const { mutateAsync: updateNote } = useUpdateNote()
+  const { mutateAsync: deleteNote } = useDeleteNote()
+  const { mutateAsync: createFolder } = useCreateFolder()
 
   const createNewNote = async ({
     title,
@@ -35,18 +27,9 @@ export const useNoteOperations = () => {
     let targetFolderId = folderId
 
     if (!folderId && newFolderName) {
-      const createdFolder = await createFolder({
-        folderName: newFolderName,
-      }).unwrap()
+      const createdFolder = await createFolder(newFolderName)
       targetFolderId = createdFolder.id
-
-      dispatch(
-        addFolder({
-          id: createdFolder.id,
-          folderName: createdFolder.folderName,
-          notes: [],
-        }),
-      )
+      await queryClient.invalidateQueries({ queryKey: ['folders'] }) // refresh folder list
     }
 
     if (!targetFolderId)
@@ -57,24 +40,14 @@ export const useNoteOperations = () => {
       content,
       audioUrl,
       folderId: targetFolderId,
-    }).unwrap()
+    })
 
-    dispatch(
-      addNoteToFolder({
-        folderId: targetFolderId,
-        note: {
-          id: createdNote.id,
-          title: createdNote.title,
-          snippet: createdNote.content ? createdNote.content.slice(0, 50) : '',
-          modifiedDate: createdNote.modifiedDate,
-        },
-      }),
-    )
+    await queryClient.invalidateQueries({ queryKey: ['folders'] })
 
     return createdNote
   }
 
-  const updateNote = async ({
+  const updateNoteDetails = async ({
     id,
     title,
     content,
@@ -84,44 +57,21 @@ export const useNoteOperations = () => {
     content: string
   }) => {
     if (!id) return
-    const updatedNote = await updateNoteMutation({
-      id,
-      title,
-      content,
-    }).unwrap()
+    await updateNote({ id, title, content })
 
-    const updatedFolders = folders.map(folder => ({
-      ...folder,
-      notes: folder.notes.map(note =>
-        note.id === id
-          ? {
-              ...note,
-              title: updatedNote.title,
-              snippet: updatedNote.content
-                ? updatedNote.content.slice(0, 50)
-                : '',
-              modifiedDate: updatedNote.modifiedDate,
-            }
-          : note,
-      ),
-    }))
-
-    dispatch(setFolders(updatedFolders))
-
-    return updatedNote
+    await queryClient.invalidateQueries({ queryKey: ['note', id] }) // refresh note details
+    await queryClient.invalidateQueries({ queryKey: ['folders'] })
   }
 
-  const deleteNote = async (noteId: number) => {
+  const deleteNoteById = async (noteId: number) => {
     if (!noteId) return
-    await deleteNoteMutation(noteId)
-
-    const updatedFolders = folders.map(folder => ({
-      ...folder,
-      notes: folder.notes.filter(note => note.id !== noteId),
-    }))
-
-    dispatch(setFolders(updatedFolders))
+    await deleteNote(noteId)
+    await queryClient.invalidateQueries({ queryKey: ['folders'] })
   }
 
-  return { createNewNote, updateNote, deleteNote }
+  return {
+    createNewNote,
+    updateNote: updateNoteDetails,
+    deleteNote: deleteNoteById,
+  }
 }
