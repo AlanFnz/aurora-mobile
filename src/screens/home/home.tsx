@@ -63,12 +63,19 @@ export const Home: React.FC = () => {
   )
 }
 
-const Container = styled.View<{
-  insets: { top: number; bottom: number; left: number; right: number }
-}>`
+interface ContainerProps {
+  insets: {
+    top: number
+    bottom: number
+    left: number
+    right: number
+  }
+}
+
+const Container = styled.View<ContainerProps>`
   flex: 1;
   justify-content: center;
-  padding-top: ${props => props.insets.top}px;
-  padding-left: ${props => props.insets.left}px;
-  padding-right: ${props => props.insets.right - 2}px;
+  padding-top: ${(props: ContainerProps) => props.insets.top}px;
+  padding-left: ${(props: ContainerProps) => props.insets.left}px;
+  padding-right: ${(props: ContainerProps) => props.insets.right - 2}px;
 `
