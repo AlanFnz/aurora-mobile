@@ -18,6 +18,7 @@
       "@config/*": ["src/config/*"],
       "@root/*": ["./*"]
     },
+    "types": ["@types/styled-components-react-native"],
     "isolatedModules": false
   },
   "exclude": ["node_modules", "build", "dist"]
