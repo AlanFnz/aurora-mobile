@@ -6,11 +6,7 @@ import {
   useUpdateNoteMutation,
 } from '@store/queries/note'
 import { RootState } from '@store/store'
-import {
-  addFolder,
-  addNoteToFolder,
-  setFolders,
-} from '@store/slices/folder'
+import { addFolder, addNoteToFolder, setFolders } from '@store/slices/folder'
 import { useCreateFolderMutation } from '@store/queries/folder'
 
 export const useNoteOperations = () => {
