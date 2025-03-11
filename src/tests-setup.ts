@@ -1,42 +1,10 @@
+import { server } from '@root/mocks/server'
+import { jest, beforeAll, afterEach, afterAll } from '@jest/globals'
 import 'react-native-gesture-handler/jestSetup'
 
-import { Action, Middleware } from '@reduxjs/toolkit'
-
-/**
- *
- * TODO: use network interceptors and deprecate this
- */
-jest.mock('@store/queries/note', () => ({
-  noteApi: {
-    reducerPath: 'noteApi',
-    reducer: (state = {}) => state,
-    middleware: (() => (next: (action: Action) => void) => (action: Action) =>
-      next(action)) as Middleware,
-  },
-  useCreateNoteMutation: () => [
-    jest.fn().mockResolvedValue({ id: 1, title: 'Test Note' }),
-  ],
-  useUpdateNoteMutation: () => [
-    jest.fn().mockResolvedValue({ id: 1, title: 'Updated Note' }),
-  ],
-  useDeleteNoteMutation: () => [jest.fn().mockResolvedValue({})],
-}))
-
-jest.mock('@store/queries/folder', () => ({
-  foldersApi: {
-    reducerPath: 'foldersApi',
-    reducer: (state = {}) => state,
-    middleware: (() => (next: (action: Action) => void) => (action: Action) =>
-      next(action)) as Middleware,
-  },
-  useCreateFolderMutation: () => [
-    jest.fn().mockResolvedValue({ id: 1, folderName: 'Test Folder' }),
-  ],
-}))
-/**
- * ////////////////////
- * ////////////////////
- */
+beforeAll(() => server.listen())
+afterEach(() => server.resetHandlers())
+afterAll(() => server.close())
 
 jest.mock('@react-native-async-storage/async-storage', () => ({
   __esModule: true,
@@ -49,7 +17,9 @@ jest.mock('@react-native-async-storage/async-storage', () => ({
 }))
 
 jest.mock('react-native-gesture-handler', () => {
-  const gestureHandler = jest.requireActual('react-native-gesture-handler')
+  const gestureHandler = jest.requireActual<
+    typeof import('react-native-gesture-handler')
+  >('react-native-gesture-handler')
 
   return {
     ...gestureHandler,
