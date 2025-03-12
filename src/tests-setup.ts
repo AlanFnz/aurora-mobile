@@ -1,6 +1,7 @@
-import { server } from '@root/mocks/server'
-import { jest, beforeAll, afterEach, afterAll } from '@jest/globals'
 import 'react-native-gesture-handler/jestSetup'
+import { jest, beforeAll, afterEach, afterAll } from '@jest/globals'
+
+import { server } from '@root/mocks/server'
 
 beforeAll(() => server.listen())
 afterEach(() => server.resetHandlers())

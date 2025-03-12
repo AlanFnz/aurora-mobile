@@ -3,27 +3,27 @@ import { render } from '@testing-library/react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import { Provider as ReduxProvider } from 'react-redux'
 import { configureStore } from '@reduxjs/toolkit'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 import { DialogProvider } from '@context/dialog'
-
-import { foldersMockData } from '@store/mocks'
-import { foldersApi } from '@store/queries/folder'
-import { noteApi } from '@store/queries/note'
 import authReducer from '@store/slices/auth'
-import foldersReducer from '@store/slices/folder'
 
 const rootReducer = {
   auth: authReducer,
-  folders: foldersReducer,
-  [foldersApi.reducerPath]: foldersApi.reducer,
-  [noteApi.reducerPath]: noteApi.reducer,
 }
+
+const createTestQueryClient = () =>
+  new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: false,
+      },
+    },
+  })
 
 const createTestStore = (preloadedState = {}) =>
   configureStore({
     reducer: rootReducer,
-    middleware: getDefaultMiddleware =>
-      getDefaultMiddleware().concat(foldersApi.middleware, noteApi.middleware),
     preloadedState,
   })
 
@@ -33,17 +33,18 @@ interface RenderWithProvidersOptions {
 
 export const renderWithProviders = (
   children: React.ReactNode,
-  {
-    initialState = { folders: foldersMockData },
-  }: RenderWithProvidersOptions = {},
+  { initialState }: RenderWithProvidersOptions = {},
 ) => {
   const store = createTestStore(initialState)
+  const queryClient = createTestQueryClient()
 
   return render(
-    <ReduxProvider store={store}>
-      <NavigationContainer>
-        <DialogProvider>{children}</DialogProvider>
-      </NavigationContainer>
-    </ReduxProvider>,
+    <QueryClientProvider client={queryClient}>
+      <ReduxProvider store={store}>
+        <NavigationContainer>
+          <DialogProvider>{children}</DialogProvider>
+        </NavigationContainer>
+      </ReduxProvider>
+    </QueryClientProvider>,
   )
 }
