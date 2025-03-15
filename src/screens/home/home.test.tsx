@@ -1,4 +1,4 @@
-import { fireEvent } from '@testing-library/react-native'
+import { fireEvent, waitFor } from '@testing-library/react-native'
 import React from 'react'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
@@ -36,17 +36,17 @@ describe('Home', () => {
     expect(container.props.style.paddingRight).toBe(-2)
   })
 
-  it('renders the folder list', () => {
+  it('renders the folder list', async () => {
     const { getByTestId } = renderWithProviders(<Home />)
-    expect(getByTestId('folder-list')).toBeTruthy()
+    await waitFor(() => expect(getByTestId('folder-list')).toBeTruthy())
   })
 
-  it('renders the notes results list when there is a search query', () => {
+  it('renders the notes results list when there is a search query', async () => {
     const { getByTestId } = renderWithProviders(<Home />)
 
     const searchInput = getByTestId('search-input')
     fireEvent.changeText(searchInput, 'Sample Note')
 
-    expect(getByTestId('notes-results')).toBeTruthy()
+    await waitFor(() => expect(getByTestId('notes-results')).toBeTruthy())
   })
 })

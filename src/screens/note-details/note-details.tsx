@@ -52,8 +52,13 @@ export const NoteDetails: React.FC<NoteDetailsScreenProps> = ({ route }) => {
                 containerStyle={{ marginRight: 12 }}
                 onPress={handleDelete}
                 iconName="trash-outline"
+                testID="delete-button"
               />
-              <HeaderButton onPress={handleSave} iconName="save-sharp" />
+              <HeaderButton
+                onPress={handleSave}
+                iconName="save-sharp"
+                testID="save-button"
+              />
             </>
           }
         />

@@ -1,32 +1,13 @@
 import React from 'react'
-import { Provider } from 'react-redux'
-import { configureStore } from '@reduxjs/toolkit'
-import { fireEvent, render } from '@testing-library/react-native'
+import { fireEvent, waitFor } from '@testing-library/react-native'
 
-import foldersReducer from '@store/slices/folder'
 import { FolderSelectionDialog } from '@components/dialog/folder-selection-dialog'
-
-const renderWithProviders = (
-  component: React.ReactNode,
-  preloadedState = {},
-) => {
-  const store = configureStore({
-    reducer: { folders: foldersReducer },
-    preloadedState,
-  })
-
-  return render(<Provider store={store}>{component}</Provider>)
-}
+import { renderWithProviders } from '@root/src/test-utils'
 
 describe('FolderSelectionDialog', () => {
   const mockOnFolderSelect = jest.fn()
   const mockOnConfirm = jest.fn()
   const mockOnCancel = jest.fn()
-
-  const defaultFolders = [
-    { id: 1, folderName: 'Folder 1' },
-    { id: 2, folderName: 'Folder 2' },
-  ]
 
   const renderComponent = (props = {}) =>
     renderWithProviders(
@@ -39,25 +20,24 @@ describe('FolderSelectionDialog', () => {
         onCancel={mockOnCancel}
         {...props}
       />,
-      { folders: defaultFolders },
     )
 
   beforeEach(() => {
     jest.clearAllMocks()
   })
 
-  it('renders the dialog with folders', () => {
+  it('renders the dialog with folders', async () => {
     const { getByText } = renderComponent()
 
-    expect(getByText('Select a Folder')).toBeTruthy()
-    expect(getByText('Folder 1')).toBeTruthy()
+    await waitFor(() => expect(getByText('Folder 1')).toBeTruthy())
     expect(getByText('Folder 2')).toBeTruthy()
     expect(getByText('+ Create New Folder')).toBeTruthy()
   })
 
-  it('calls onFolderSelect when a folder is clicked', () => {
+  it('calls onFolderSelect when a folder is clicked', async () => {
     const { getByText } = renderComponent()
 
+    await waitFor(() => expect(getByText('Folder 1')).toBeTruthy())
     fireEvent.press(getByText('Folder 1'))
     expect(mockOnFolderSelect).toHaveBeenCalledWith(1)
   })

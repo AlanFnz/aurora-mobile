@@ -9,12 +9,10 @@ const HeaderButton: React.FC<{
   onPress: () => void
   iconName: string
   containerStyle?: StyleProp<ViewStyle>
-}> = ({ onPress, iconName, containerStyle }) => {
+  testID?: string
+}> = ({ onPress, iconName, containerStyle, testID }) => {
   return (
-    <ButtonContainer
-      style={containerStyle}
-      onPress={onPress}
-      testID="save-button">
+    <ButtonContainer style={containerStyle} onPress={onPress} testID={testID}>
       <Icon name={iconName} size={20} color={colors.common.offWhite} />
     </ButtonContainer>
   )

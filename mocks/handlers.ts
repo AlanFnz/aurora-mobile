@@ -4,8 +4,8 @@ import { Note } from '@services/note'
 import { API_URL } from '@env'
 
 const mockFolders: Folder[] = [
-  { id: 1, folderName: 'Work', notes: [] },
-  { id: 2, folderName: 'Personal', notes: [] },
+  { id: 1, folderName: 'Folder 1', notes: [] },
+  { id: 2, folderName: 'Folder 2', notes: [] },
 ]
 
 const mockNotes: Note[] = [
@@ -14,14 +14,14 @@ const mockNotes: Note[] = [
     title: 'Meeting Notes',
     content: 'Discuss project updates',
     folderId: 1,
-    modifiedDate: Date.now(),
+    modifiedDate: 1728812040000,
   },
   {
     id: 2,
     title: 'Grocery List',
     content: 'Milk, eggs, bread',
     folderId: 2,
-    modifiedDate: Date.now(),
+    modifiedDate: 1728812040000,
   },
 ]
 
