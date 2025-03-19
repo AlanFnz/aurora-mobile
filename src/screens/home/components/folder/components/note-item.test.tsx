@@ -18,7 +18,6 @@ describe('NoteItem', () => {
   const mockedDate = new Date('2024-10-13T11:34:00').getTime()
 
   beforeAll(() => {
-    process.env.TZ = 'Europe/Madrid'
     jest.useFakeTimers()
     jest.setSystemTime(new Date('2024-10-13T11:34:00'))
   })

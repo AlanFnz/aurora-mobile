@@ -28,15 +28,8 @@ const mockRoute: RouteProp<RootStackParamList, 'NoteDetails'> = {
 }
 
 describe('NoteDetails', () => {
-  const mockedDate = new Date('2024-10-13T11:34:00').getTime()
-
-  beforeAll(() => {
-    process.env.TZ = 'Europe/Madrid'
-  })
-
   beforeEach(() => {
     jest.clearAllMocks()
-    jest.spyOn(global.Date, 'now').mockImplementation(() => mockedDate)
     ;(useSafeAreaInsets as jest.Mock).mockReturnValue({
       top: 10,
       bottom: 10,
