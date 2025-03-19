@@ -30,6 +30,17 @@ const mockRoute: RouteProp<RootStackParamList, 'NoteDetails'> = {
 describe('NoteDetails', () => {
   const mockedDate = new Date('2024-10-13T11:34:00').getTime()
 
+  beforeAll(() => {
+    jest
+      .spyOn(Intl.DateTimeFormat.prototype, 'resolvedOptions')
+      .mockReturnValue({
+        timeZone: 'Europe/Madrid',
+        locale: 'en-US',
+        calendar: 'gregory',
+        numberingSystem: 'latn',
+      })
+  })
+
   beforeEach(() => {
     jest.clearAllMocks()
     jest.spyOn(global.Date, 'now').mockImplementation(() => mockedDate)
@@ -43,6 +54,10 @@ describe('NoteDetails', () => {
   ;(useNavigation as jest.Mock).mockReturnValue(mockNavigation)
 
   afterEach(() => {
+    jest.restoreAllMocks()
+  })
+
+  afterAll(() => {
     jest.restoreAllMocks()
   })
 
