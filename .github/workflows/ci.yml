@@ -14,6 +14,7 @@ jobs:
 
     env:
       API_URL: ${{ secrets.API_URL }}
+      TZ: Europe/Madrid
 
     steps:
       - name: Checkout code
