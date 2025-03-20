@@ -1,22 +1,21 @@
-import React, { useEffect } from 'react'
-import { NavigationContainer } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
+import React from 'react'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 // Store
-import { useSelector, useDispatch } from 'react-redux'
-import { AppDispatch, RootState } from '@store/store'
-import { bootstrapAsync } from '@store/slices/auth'
 import { tabNavigatorStyles } from '@navigation/tab-navigator.styles'
+import { RootState } from '@store/store'
+import { useSelector } from 'react-redux'
 import { RootStackParamList } from './types'
 
 // Screens
+import { Home } from '@screens/home'
+import { NoteDetails } from '@screens/note-details'
+import { Settings } from '@screens/settings'
 import { SignIn } from '@screens/sign-in'
 import { SignUp } from '@screens/sign-up'
-import { Home } from '@screens/home'
-import { Settings } from '@screens/settings'
-import { NoteDetails } from '@screens/note-details'
 
 const Stack = createStackNavigator<RootStackParamList>()
 const Tab = createBottomTabNavigator()
