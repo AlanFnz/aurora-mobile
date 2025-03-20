@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { AppState, AppStateStatus } from 'react-native'
 import { useDispatch } from 'react-redux'
 
 import { AppDispatch } from '@store/.'
@@ -9,6 +10,19 @@ const AppInitializer: React.FC = () => {
 
   useEffect(() => {
     dispatch(bootstrapAsync())
+
+    const subscription = AppState.addEventListener(
+      'change',
+      (state: AppStateStatus) => {
+        if (state === 'active') {
+          dispatch(bootstrapAsync())
+        }
+      },
+    )
+
+    return () => {
+      subscription.remove()
+    }
   }, [dispatch])
 
   return null

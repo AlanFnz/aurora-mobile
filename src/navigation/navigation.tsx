@@ -59,16 +59,9 @@ function HomeTabs() {
 }
 
 export function Navigation() {
-  const dispatch = useDispatch<AppDispatch>()
   const { isLoading, userToken } = useSelector((state: RootState) => state.auth)
 
-  useEffect(() => {
-    dispatch(bootstrapAsync())
-  }, [dispatch])
-
-  if (isLoading) {
-    return <></>
-  }
+  if (isLoading) return <></> // TODO: add activity indicator or something
 
   return (
     <NavigationContainer>
