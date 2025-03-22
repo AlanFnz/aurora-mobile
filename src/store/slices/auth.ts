@@ -7,30 +7,44 @@ import { axiosInstance, handleApiError } from '@api/api'
 interface AuthState {
   isLoading: boolean
   isSignout: boolean
-  userToken: string | null
+  accessToken: string | null
+  refreshToken: string | null
 }
 
 const initialState: AuthState = {
   isLoading: true,
   isSignout: false,
-  userToken: null,
+  accessToken: null,
+  refreshToken: null,
 }
 
 const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    restoreToken: (state, action: PayloadAction<string | null>) => {
-      state.userToken = action.payload
+    restoreToken: (
+      state,
+      action: PayloadAction<{
+        accessToken: string | null
+        refreshToken: string | null
+      }>,
+    ) => {
+      state.accessToken = action.payload.accessToken
+      state.refreshToken = action.payload.refreshToken
       state.isLoading = false
     },
-    signIn: (state, action: PayloadAction<string>) => {
+    signIn: (
+      state,
+      action: PayloadAction<{ accessToken: string; refreshToken: string }>,
+    ) => {
       state.isSignout = false
-      state.userToken = action.payload
+      state.accessToken = action.payload.accessToken
+      state.refreshToken = action.payload.refreshToken
     },
     signOut: state => {
       state.isSignout = true
-      state.userToken = null
+      state.accessToken = null
+      state.refreshToken = null
     },
   },
 })
@@ -38,13 +52,14 @@ const authSlice = createSlice({
 export const { restoreToken, signIn, signOut } = authSlice.actions
 
 export const bootstrapAsync = () => async (dispatch: any) => {
-  let userToken = null
   try {
-    userToken = await AsyncStorage.getItem('userToken')
+    const accessToken = await AsyncStorage.getItem('accessToken')
+    const refreshToken = await AsyncStorage.getItem('refreshToken')
+    dispatch(restoreToken({ accessToken, refreshToken }))
   } catch (e) {
     console.error(e)
+    dispatch(restoreToken({ accessToken: null, refreshToken: null }))
   }
-  dispatch(restoreToken(userToken))
 }
 
 export const performSignUp =
@@ -55,6 +70,7 @@ export const performSignUp =
       dispatch(performSignIn({ username, password }))
     } catch (error) {
       handleApiError(error)
+      cleanup()
     }
   }
 
@@ -62,21 +78,36 @@ export const performSignIn =
   ({ username, password }: { username: string; password: string }) =>
   async (dispatch: AppDispatch) => {
     try {
-      const { data } = await axiosInstance.post('users/login', {
+      const { data } = await axiosInstance.post('auth/login', {
         username,
         password,
       })
-      if (data.token) {
-        await AsyncStorage.setItem('userToken', data.token)
-        dispatch(signIn(data.token))
+      if (data.accessToken && data.refreshToken) {
+        await AsyncStorage.setItem('accessToken', data.accessToken)
+        await AsyncStorage.setItem('refreshToken', data.refreshToken)
+
+        dispatch(
+          signIn({
+            accessToken: data.accessToken,
+            refreshToken: data.refreshToken,
+          }),
+        )
       }
     } catch (error) {
       handleApiError(error)
+      cleanup()
     }
   }
 
 export const performSignOut = () => async (dispatch: any) => {
-  await AsyncStorage.removeItem('userToken')
+  await AsyncStorage.removeItem('accessToken')
+  await AsyncStorage.removeItem('refreshToken')
+  dispatch(signOut())
+}
+
+const cleanup = () => async (dispatch: any) => {
+  await AsyncStorage.removeItem('accessToken')
+  await AsyncStorage.removeItem('refreshToken')
   dispatch(signOut())
 }
 

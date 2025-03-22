@@ -58,14 +58,16 @@ function HomeTabs() {
 }
 
 export function Navigation() {
-  const { isLoading, userToken } = useSelector((state: RootState) => state.auth)
+  const { isLoading, accessToken } = useSelector(
+    (state: RootState) => state.auth,
+  )
 
   if (isLoading) return <></> // TODO: add activity indicator or something
 
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        {userToken == null ? (
+        {accessToken == null ? (
           <>
             <Stack.Screen
               name="SignIn"
