@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 import { AppDispatch } from '@store/store'
-import { axiosInstance, handleApiError } from '@api/api'
+import { axiosInstance, handleApiError } from '@api/index'
 
 interface AuthState {
   isLoading: boolean

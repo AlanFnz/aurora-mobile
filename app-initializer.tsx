@@ -4,11 +4,13 @@ import { useDispatch } from 'react-redux'
 
 import { AppDispatch } from '@store/.'
 import { bootstrapAsync } from '@store/slices'
+import { setupInterceptors } from '@api/interceptors'
 
 const AppInitializer: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>()
-
+  
   useEffect(() => {
+    setupInterceptors()
     dispatch(bootstrapAsync())
 
     const subscription = AppState.addEventListener(
