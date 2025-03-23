@@ -8,7 +8,7 @@ import { setupInterceptors } from '@api/interceptors'
 
 const AppInitializer: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>()
-  
+
   useEffect(() => {
     setupInterceptors()
     dispatch(bootstrapAsync())
