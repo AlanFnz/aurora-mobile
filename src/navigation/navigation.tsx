@@ -16,6 +16,7 @@ import { NoteDetails } from '@screens/note-details'
 import { Settings } from '@screens/settings'
 import { SignIn } from '@screens/sign-in'
 import { SignUp } from '@screens/sign-up'
+import { Loading } from '@screens/loading'
 
 const Stack = createStackNavigator<RootStackParamList>()
 const Tab = createBottomTabNavigator()
@@ -62,7 +63,7 @@ export function Navigation() {
     (state: RootState) => state.auth,
   )
 
-  if (isLoading) return <></> // TODO: add activity indicator or something
+  if (isLoading) return <Loading />
 
   return (
     <NavigationContainer>
