@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import React, { act, useRef, useState } from 'react'
 import { FlatList } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
+import { ActionSheetRef } from 'react-native-actions-sheet'
 
 import { Divider } from '@components/divider'
+import { ActionMenu } from '@components/action-sheet'
 import colors from '@theme/colors'
 
 import {
@@ -16,23 +18,27 @@ import NoteItem from './components/note-item'
 import { FolderProps } from './folder.types'
 
 export const Folder: React.FC<FolderProps> = ({ folder }) => {
-  const [expanded, setExpanded] = useState(false)
+  const [isExpanded, setExpanded] = useState(false)
+  const actionSheetRef = useRef<ActionSheetRef>(null)
 
   return (
     <>
-      <FolderHeader onPress={() => setExpanded(!expanded)}>
+      <ActionMenu ref={actionSheetRef} />
+      <FolderHeader
+        onPress={() => setExpanded(!isExpanded)}
+        onLongPress={() => actionSheetRef.current?.show()}>
         <FolderTitle>{folder.folderName}</FolderTitle>
         <Icon
-          name={expanded ? 'angle-down' : 'angle-left'}
-          style={!expanded ? { marginRight: 4 } : {}}
+          name={isExpanded ? 'angle-down' : 'angle-left'}
+          style={!isExpanded ? { marginRight: 4 } : {}}
           size={20}
           color={colors.common.offWhite}
         />
       </FolderHeader>
       <MainContainer testID="folder-component">
-        {expanded && folder.notes.length ? (
+        {isExpanded && folder.notes.length ? (
           <>
-            <GradientBackground key={`${expanded}-${folder.notes.length}`} />
+            <GradientBackground key={`${isExpanded}-${folder.notes.length}`} />
             <FolderContainer>
               <FlatList
                 data={folder.notes}
