@@ -58,6 +58,7 @@ export const FolderSelectionDialog: React.FC<FolderSelectionDialogProps> = ({
 
   const handleCreateNewFolder = () => {
     if (!setNewFolderName) return
+    onFolderSelect(null)
     setIsCreatingNewFolder(true)
     setValidationError(false)
     setNewFolderName('')
