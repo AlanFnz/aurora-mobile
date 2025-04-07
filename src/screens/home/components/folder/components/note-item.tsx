@@ -51,7 +51,8 @@ const NoteItem: React.FC<NoteProps> = ({
 }
 
 const NoteItemContainer = styled.TouchableOpacity<{ marginTop: boolean }>`
-  margin-top: ${({ marginTop }) => (marginTop ? '5px' : '0')};
+  margin-top: ${({ marginTop }: { marginTop: boolean }) =>
+    marginTop ? '5px' : '0'};
   padding: 8px;
   border-radius: 3px;
 `
