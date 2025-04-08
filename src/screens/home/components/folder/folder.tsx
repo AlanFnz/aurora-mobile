@@ -1,32 +1,26 @@
-import React, { act, useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { FlatList } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
-import { ActionSheetRef } from 'react-native-actions-sheet'
 
 import { Divider } from '@components/divider'
-import { ActionMenu } from '@components/action-sheet'
 import colors from '@theme/colors'
 
+import GradientBackground from './components/gradient-background'
+import NoteItem from './components/note-item'
 import {
   FolderContainer,
   FolderHeader,
   FolderTitle,
   MainContainer,
 } from './folder.styled'
-import GradientBackground from './components/gradient-background'
-import NoteItem from './components/note-item'
 import { FolderProps } from './folder.types'
 
 export const Folder: React.FC<FolderProps> = ({ folder }) => {
   const [isExpanded, setExpanded] = useState(false)
-  const actionSheetRef = useRef<ActionSheetRef>(null)
 
   return (
     <>
-      <ActionMenu ref={actionSheetRef} />
-      <FolderHeader
-        onPress={() => setExpanded(!isExpanded)}
-        onLongPress={() => actionSheetRef.current?.show()}>
+      <FolderHeader onPress={() => setExpanded(!isExpanded)}>
         <FolderTitle>{folder.folderName}</FolderTitle>
         <Icon
           name={isExpanded ? 'angle-down' : 'angle-left'}
