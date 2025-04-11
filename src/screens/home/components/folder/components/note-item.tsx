@@ -1,13 +1,15 @@
-import React from 'react'
 import { useNavigation } from '@react-navigation/native'
+import React from 'react'
+import Swipeable from 'react-native-gesture-handler/ReanimatedSwipeable'
 import styled from 'styled-components/native'
 
-import { formatTimestampToDate } from '@root/src/utils'
-import { NoteDetailScreenNavigationProp } from '@navigation/types'
 import { Divider } from '@components/divider'
+import { NoteDetailScreenNavigationProp } from '@navigation/types'
+import { formatTimestampToDate } from '@root/src/utils'
 import colors from '@theme/colors'
 
 import { NoteListItem } from '../folder.types'
+import { NoteSwipeActions } from './note-swipe-actions'
 
 interface NoteProps {
   index: number
@@ -28,8 +30,26 @@ const NoteItem: React.FC<NoteProps> = ({
     navigation.navigate('NoteDetails', { noteId: item.id })
   }
 
+  const onEdit = (noteId: number) => {
+    // handle edit action here
+    console.log(`Edit note with ID: ${noteId}`)
+  }
+  const onDelete = (noteId: number) => {
+    // handle delete action here
+    console.log(`Delete note with ID: ${noteId}`)
+  }
+
   return (
-    <>
+    <Swipeable
+      friction={2}
+      rightThreshold={40}
+      renderRightActions={(progress, dragX) => (
+        <NoteSwipeActions
+          dragX={dragX}
+          onEdit={() => onEdit(item.id)}
+          onDelete={() => onDelete(item.id)}
+        />
+      )}>
       <NoteItemContainer
         onPress={navigateToNoteDetail}
         testID={testID}
@@ -46,7 +66,7 @@ const NoteItem: React.FC<NoteProps> = ({
           marginHorizontal={9}
         />
       )}
-    </>
+    </Swipeable>
   )
 }
 
