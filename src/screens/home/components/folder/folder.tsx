@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { FlatList } from 'react-native'
+import Swipeable from 'react-native-gesture-handler/ReanimatedSwipeable'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 import { Divider } from '@components/divider'
@@ -15,20 +16,42 @@ import {
 } from './folder.styled'
 import { FolderProps } from './folder.types'
 
+import { FolderSwipeActions } from './components/folder-swipe-actions'
+
 export const Folder: React.FC<FolderProps> = ({ folder }) => {
   const [isExpanded, setExpanded] = useState(false)
 
+  const onEdit = () => {
+    // handle edit action here
+    console.log(`Edit folder`)
+  }
+  const onDelete = () => {
+    // handle delete action here
+    console.log(`Delete folder`)
+  }
+
   return (
     <>
-      <FolderHeader onPress={() => setExpanded(!isExpanded)}>
-        <FolderTitle>{folder.folderName}</FolderTitle>
-        <Icon
-          name={isExpanded ? 'angle-down' : 'angle-left'}
-          style={!isExpanded ? { marginRight: 4 } : {}}
-          size={20}
-          color={colors.common.offWhite}
-        />
-      </FolderHeader>
+      <Swipeable
+        friction={2}
+        rightThreshold={40}
+        renderRightActions={(progress, dragX) => (
+          <FolderSwipeActions
+            dragX={dragX}
+            onEdit={onEdit}
+            onDelete={onDelete}
+          />
+        )}>
+        <FolderHeader onPress={() => setExpanded(!isExpanded)}>
+          <FolderTitle>{folder.folderName}</FolderTitle>
+          <Icon
+            name={isExpanded ? 'angle-down' : 'angle-left'}
+            style={!isExpanded ? { marginRight: 4 } : {}}
+            size={20}
+            color={colors.common.offWhite}
+          />
+        </FolderHeader>
+      </Swipeable>
       <MainContainer testID="folder-component">
         {isExpanded && folder.notes.length ? (
           <>
