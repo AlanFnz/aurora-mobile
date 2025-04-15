@@ -30,10 +30,6 @@ const NoteItem: React.FC<NoteProps> = ({
     navigation.navigate('NoteDetails', { noteId: item.id })
   }
 
-  const onEdit = (noteId: number) => {
-    // handle edit action here
-    console.log(`Edit note with ID: ${noteId}`)
-  }
   const onDelete = (noteId: number) => {
     // handle delete action here
     console.log(`Delete note with ID: ${noteId}`)
@@ -44,11 +40,7 @@ const NoteItem: React.FC<NoteProps> = ({
       friction={2}
       rightThreshold={40}
       renderRightActions={(progress, dragX) => (
-        <NoteSwipeActions
-          dragX={dragX}
-          onEdit={() => onEdit(item.id)}
-          onDelete={() => onDelete(item.id)}
-        />
+        <NoteSwipeActions dragX={dragX} onDelete={() => onDelete(item.id)} />
       )}>
       <NoteItemContainer
         onPress={navigateToNoteDetail}

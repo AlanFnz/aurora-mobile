@@ -12,13 +12,11 @@ import colors from '@theme/colors'
 
 interface NoteSwipeActionsProps {
   dragX: SharedValue<number>
-  onEdit: () => void
   onDelete: () => void
 }
 
 export const NoteSwipeActions: React.FC<NoteSwipeActionsProps> = ({
   dragX,
-  onEdit,
   onDelete,
 }) => {
   const animatedStyle = useAnimatedStyle(() => {
@@ -35,9 +33,6 @@ export const NoteSwipeActions: React.FC<NoteSwipeActionsProps> = ({
 
   return (
     <AnimatedActionsContainer style={animatedStyle}>
-      <ActionButton onPress={onEdit}>
-        <Icon name="pencil" />
-      </ActionButton>
       <ActionButton onPress={onDelete}>
         <Icon name="trash" danger />
       </ActionButton>
