@@ -10,6 +10,8 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import { ViewProps } from 'react-native'
 import colors from '@theme/colors'
 
+const CONTAINER_WIDTH = 80
+
 interface NoteSwipeActionsProps {
   dragX: SharedValue<number>
   onDelete: () => void
@@ -22,8 +24,8 @@ export const NoteSwipeActions: React.FC<NoteSwipeActionsProps> = ({
   const animatedStyle = useAnimatedStyle(() => {
     const translateX = interpolate(
       dragX.value,
-      [-120, 0],
-      [0, 120],
+      [-CONTAINER_WIDTH, 0],
+      [0, CONTAINER_WIDTH],
       Extrapolation.CLAMP,
     )
     return {
@@ -41,7 +43,7 @@ export const NoteSwipeActions: React.FC<NoteSwipeActionsProps> = ({
 }
 
 const StyledContainer = styled.View`
-  width: 120px;
+  width: ${CONTAINER_WIDTH}px;
   flex-direction: row;
 `
 
@@ -53,10 +55,8 @@ const ActionButton = styled.TouchableOpacity<{ danger?: boolean }>`
   flex: 1;
   justify-content: center;
   align-items: center;
-  background-color: ${({ danger }: { danger?: boolean }) =>
-    danger
-      ? colors.lowOpacity.feedback.negative
-      : colors.lowOpacity.feedback.positive};
+  background-color: ${colors.lowOpacity.feedback.negative};
+  border-radius: 8px;
 `
 
 const Icon = styled(FontAwesome).attrs<{
