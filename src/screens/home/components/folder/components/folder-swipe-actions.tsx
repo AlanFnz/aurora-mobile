@@ -10,6 +10,8 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import { ViewProps } from 'react-native'
 import colors from '@theme/colors'
 
+const CONTAINER_WIDTH = 100
+
 interface FolderSwipeActionsProps {
   dragX: SharedValue<number>
   onEdit: () => void
@@ -24,8 +26,8 @@ export const FolderSwipeActions: React.FC<FolderSwipeActionsProps> = ({
   const animatedStyle = useAnimatedStyle(() => {
     const translateX = interpolate(
       dragX.value,
-      [-120, 0],
-      [0, 120],
+      [-CONTAINER_WIDTH, 0],
+      [0, CONTAINER_WIDTH],
       Extrapolate.CLAMP,
     )
     return {
@@ -38,15 +40,15 @@ export const FolderSwipeActions: React.FC<FolderSwipeActionsProps> = ({
       <ActionButton onPress={onEdit}>
         <Icon name="pencil" />
       </ActionButton>
-      <ActionButton onPress={onDelete}>
-        <Icon name="trash" danger />
+      <ActionButton onPress={onDelete} isDelete>
+        <Icon name="trash" />
       </ActionButton>
     </AnimatedActionsContainer>
   )
 }
 
 const StyledContainer = styled.View`
-  width: 120px;
+  width: ${CONTAINER_WIDTH}px;
   flex-direction: row;
 `
 
@@ -54,12 +56,15 @@ const AnimatedActionsContainer = Animated.createAnimatedComponent(
   StyledContainer,
 ) as React.ComponentType<ViewProps & { style?: any }>
 
-const ActionButton = styled.TouchableOpacity<{ danger?: boolean }>`
+const ActionButton = styled.TouchableOpacity<{ isDelete?: boolean }>`
   flex: 1;
   justify-content: center;
   align-items: center;
-  background-color: ${({ danger }: { danger?: boolean }) =>
-    danger
+  padding: 0 10px;
+  margin-bottom: 10px;
+
+  background-color: ${({ isDelete }: { isDelete?: boolean }) =>
+    isDelete
       ? colors.lowOpacity.feedback.negative
       : colors.lowOpacity.feedback.positive};
 `
@@ -70,6 +75,6 @@ interface IconProps {
 }
 
 const Icon = styled(FontAwesome).attrs<IconProps>(() => ({
-  size: 20,
+  size: 16,
   color: '#fff',
 }))<IconProps>``
