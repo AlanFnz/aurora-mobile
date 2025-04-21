@@ -63,6 +63,17 @@ const ActionButton = styled.TouchableOpacity<{ isDelete?: boolean }>`
   padding: 0 10px;
   margin-bottom: 10px;
 
+  ${({ isDelete }: { isDelete?: boolean }) =>
+    isDelete
+      ? `
+          border-top-right-radius: 4px;
+          border-bottom-right-radius: 4px;
+        `
+      : `
+          border-top-left-radius: 4px;
+          border-bottom-left-radius: 4px;
+        `}
+
   background-color: ${({ isDelete }: { isDelete?: boolean }) =>
     isDelete
       ? colors.lowOpacity.feedback.negative
