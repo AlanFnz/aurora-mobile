@@ -3,6 +3,7 @@ import React from 'react'
 import Swipeable from 'react-native-gesture-handler/ReanimatedSwipeable'
 import styled from 'styled-components/native'
 
+import { useNoteDetailsScreen } from '@screens/note-details/hooks/use-note-details-screen'
 import { Divider } from '@components/divider'
 import { NoteDetailScreenNavigationProp } from '@navigation/types'
 import { formatTimestampToDate } from '@root/src/utils'
@@ -26,13 +27,13 @@ const NoteItem: React.FC<NoteProps> = ({
 }) => {
   const navigation = useNavigation<NoteDetailScreenNavigationProp>()
 
+  const { handleDelete } = useNoteDetailsScreen({
+    noteId: item.id,
+    isNew: false,
+  })
+
   const navigateToNoteDetail = () => {
     navigation.navigate('NoteDetails', { noteId: item.id })
-  }
-
-  const onDelete = (noteId: number) => {
-    // handle delete action here
-    console.log(`Delete note with ID: ${noteId}`)
   }
 
   return (
@@ -40,7 +41,7 @@ const NoteItem: React.FC<NoteProps> = ({
       friction={2}
       rightThreshold={40}
       renderRightActions={(progress, dragX) => (
-        <NoteSwipeActions dragX={dragX} onDelete={() => onDelete(item.id)} />
+        <NoteSwipeActions dragX={dragX} onDelete={() => handleDelete()} />
       )}>
       <NoteItemContainer
         onPress={navigateToNoteDetail}
