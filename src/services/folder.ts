@@ -7,7 +7,7 @@ export interface Folder {
   notes: NoteListItem[]
 }
 
-export const fetchFolders = async () => {
+export const fetchFolders = async (): Promise<Folder[] | undefined> => {
   try {
     const { data } = await axiosInstance.get('/folders')
     return data
@@ -16,7 +16,9 @@ export const fetchFolders = async () => {
   }
 }
 
-export const createFolder = async (folderName: string) => {
+export const createFolder = async (
+  folderName: string,
+): Promise<Folder | undefined> => {
   try {
     const { data } = await axiosInstance.post('/folders', { folderName })
     return data
@@ -25,9 +27,28 @@ export const createFolder = async (folderName: string) => {
   }
 }
 
-export const deleteFolder = async (folderId: number) => {
+export const updateFolder = async (
+  folderId: number,
+  folderName: string,
+): Promise<Folder | undefined> => {
   try {
-    await axiosInstance.delete(`/folders/${folderId}`)
+    const { data } = await axiosInstance.put(`/folders/${folderId}`, {
+      folderName,
+    })
+    return data
+  } catch (error) {
+    return handleApiError(error)
+  }
+}
+
+export const deleteFolder = async (
+  folderId: number,
+  cascadeDelete = false,
+): Promise<{ success: true } | undefined> => {
+  try {
+    await axiosInstance.delete(`/folders/${folderId}`, {
+      params: { cascadeDelete },
+    })
     return { success: true }
   } catch (error) {
     return handleApiError(error)
