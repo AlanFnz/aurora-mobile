@@ -12,6 +12,7 @@ import { FolderList } from './components/folder-list'
 import { SearchBox } from './components/search-box'
 import { NotesResultsList } from './components/notes-results-list'
 import { CreateNoteButton } from './components/create-note-button'
+import { NoteListItem } from './components/folder/folder.types'
 
 export const Home: React.FC = () => {
   const insets = useSafeAreaInsets()
@@ -28,10 +29,21 @@ export const Home: React.FC = () => {
     })
   }
 
-  const allNotes = folders.flatMap((folder: Folder) => folder.notes)
-  const filteredNotes = allNotes.filter((note: Note) =>
-    note.title.toLowerCase().includes(searchQuery.toLowerCase()),
+  const allNotes: Note[] = folders.flatMap(
+    (folder: Folder) =>
+      folder.notes.map((note: NoteListItem) => ({
+        ...note,
+        folderId: folder.id,
+      })) as Note[],
   )
+  const filteredNotes = allNotes
+    .filter((note: Note) =>
+      note.title.toLowerCase().includes(searchQuery.toLowerCase()),
+    )
+    .map((note: Note) => ({
+      ...note,
+      snippet: note.content?.substring(0, 100) || '',
+    }))
 
   return (
     <>
