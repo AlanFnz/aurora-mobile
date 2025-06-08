@@ -95,7 +95,7 @@ export const useNoteDetailsScreen = ({
         }
       },
       {
-        message: 'Are you sure you want to delete this note?',
+        title: 'Are you sure you want to delete this note?',
         confirmText: 'Delete',
         cancelText: 'Cancel',
       },

@@ -1,10 +1,5 @@
+import { DialogOptions } from '@context/dialog'
 import { useState } from 'react'
-
-interface DialogOptions {
-  confirmText?: string
-  cancelText?: string
-  message?: string
-}
 
 interface ConfirmationDialogProps {
   visible: boolean
@@ -32,7 +27,7 @@ export const useConfirmationDialog = () => {
     setDialogProps({
       ...dialogProps,
       visible: true,
-      title: options.message || 'Are you sure?',
+      title: options.title || 'Are you sure?',
       message: options.message,
       confirmText: options.confirmText || 'Confirm',
       cancelText: options.cancelText || 'Cancel',

@@ -27,10 +27,11 @@ interface DialogArgs {
   newFolderName?: string
 }
 
-interface DialogOptions {
+export interface DialogOptions {
   allowTitleEdit?: boolean
   confirmText?: string
   cancelText?: string
+  title?: string
   message?: string
 }
 

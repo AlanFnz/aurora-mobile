@@ -32,7 +32,7 @@ describe('useConfirmationDialog', () => {
     expect(result.current.isDialogVisible).toBe(true)
     expect(result.current.dialogProps).toMatchObject({
       visible: true,
-      title: 'Test Message',
+      title: 'Are you sure?',
       message: 'Test Message',
       confirmText: 'Yes',
       cancelText: 'No',
